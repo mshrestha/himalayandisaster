@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="author" content="smjrifle" />
+    <meta name="author" content="Kazi Studios" />
 	<META name="description" content="Save Nepal, Himalayan disaster, earthquake, prayfornepal, nepalquakerelief" />
 	<META name="keywords" content="Nepal, prayfornepal, savenepal, earthquake, earthquakerelief", "himalayan disaster", "nepalquakerelief" />
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/icon" />
