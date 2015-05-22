@@ -1,0 +1,151 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+.topBar {
+	position: relative;
+	height: 100px;
+	/*background-color: #52A2C5;	*/
+	font-size: 22px;
+	text-align: center;
+	font-weight: bold;
+	color: #000;
+}
+.topBar p, .topBarBottom .row1 p, .topBarBottom .row2 p{
+	position: relative;
+	top: 50%;
+}
+.topBarBottom {
+	position: relative;
+	/*height: 300px;*/
+	/*background-color: #52A2C5;	*/
+	font-size: 48px;
+	text-align: center;
+	font-weight: bold;
+	color: #FFF;
+}
+.topBarBottom .row1{
+	/*background-color: #C55282;*/
+	color: #F00;
+	margin-top: 50px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	border: 1px Solid #000;
+	height: 30%;
+}
+.topBarBottom .row2{
+	/*background-color: #52C57B;*/
+	height: 30%;
+	color: #F00;
+	margin-top: 50px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	border: 1px Solid #000;
+}
+.homemenu {
+	position: absolute;
+	height: 50px;
+	background-color: #000;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #FFF;
+	left: 0;
+	top: 0;
+	z-index: 9;
+}
+.homemenu a {
+	color: #FFF;
+}
+.topbox {
+	position: relative;
+	height: 50px;
+	/*background-color: #52A2C5;	*/
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+	color: #FFF;
+}
+.midrow {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.helprow {
+	/*background-color: #BE9047;*/
+	text-align: center;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	color:#000;
+	min-height: 700px;
+	letter-spacing: 1.12px;
+	height: 100%;
+	border-right: 1px solid #CCC;
+}
+.datacenterrow {
+	/*background-color: #6F2337;*/
+	text-align: center;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	color:#000;
+	min-height: 1 00px;
+	letter-spacing: 1.12px;
+	height: 100%;
+	border-right: 1px solid #CCC;
+}
+.menu {
+	/*background-color: #1F170C;*/
+	text-align: center;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	color:#FFF;
+	min-height: 1 00px;
+	letter-spacing: 1.12px;
+	height: 100%;
+}
+.menu a {
+	color:#FFF;
+}
+.rows {
+	/*border-bottom: 1px #F4D9D9 Solid;*/
+	margin-bottom: 20px;
+	margin-top: 30px;
+	text-align: left;
+}
+.nobullets {
+	list-style-type: none;
+	margin-left:-35px;
+}
+.golden {
+	/*background-color: #E5A147;*/
+	border-right: 1px #CCC Solid;
+	border-bottom: 1px #CCC Solid;
+	color: #000;
+	letter-spacing: 1.12px;
+	padding:20px;
+}
+.green {
+	/*background-color: #52C57B;*/
+	border-right: 1px #CCC Solid;
+	border-bottom: 1px #CCC Solid;
+	color: #000;
+	letter-spacing: 1.12px;
+	padding:20px;
+}
+.red {
+	/*background-color: #C55282;*/
+	border-right: 1px #CCC Solid;
+	border-bottom: 1px #CCC Solid;
+	color: #000;
+	letter-spacing: 1.12px;
+	padding:20px;
+}
+.centerize {
+	text-align: center;
+	margin-top: 50px;
+}
+.centerize form input, .centerize form select, .centerize form textarea {
+	margin-bottom: 10px;
+}
+.banner {
+	background-image: url('images/banner.png');
+}

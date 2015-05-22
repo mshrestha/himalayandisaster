@@ -1,0 +1,46 @@
+<?php
+error_reporting(0);
+$host = 'localhost';
+$usernam = 'root';
+$password = 'toor';
+$dbName = 'savenepal';
+
+$connecton=mysql_connect($host,$usernam,$password);
+$con=mysql_select_db($dbName,$connecton) or die("Server is up for maintainance...");
+
+//Config Variables
+$config = array();
+$tableName = array();
+$user_salt = 'kazi';
+
+$config['homeUrl'] = "http://localhost/savenepal";
+$config['adminUrl'] = $config['homeUrl'] . "/admin";
+$config['controller'] = $config['homeUrl'] . "/controller";
+$config['adminController'] = $config['homeUrl'] . "/controller/admin";
+
+$tableName['admin_login'] = 'users';
+$tableName['userrole'] = 'user_role';
+$tableName['warehouse'] ='warehouse';
+
+$tableName['helpCall'] = 'help_call'; // This the table that registers "I need help". The entry is done from the front end
+$tableName['agent'] ='agent';  //These are the table that registers "I want to help". These are the volunteers we can deploy
+$tableName['agentDetail'] = 'agent_detail';
+
+
+$tableName['item'] = 'item'; // Contains information about items 
+$tableName['itemCategory'] ='item_category'; //The category of item i.e. 1 > Food 2> Medicine
+$tableName['itemAccount'] ='item_account'; 
+
+$tableName['districtTable'] = 'district_table';
+
+$tableName['affected_zone'] = 'affected_zone';
+
+$user_salt = 'kazi';
+
+$tableName['package'] = "package";
+$tableName['vdc'] = "vdc";
+$tableName['itemCluster'] = "item_cluster";
+
+$tableName['affectedZone'] = 'affected_zone';
+
+?>
