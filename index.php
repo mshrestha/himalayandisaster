@@ -84,7 +84,7 @@ include("includes/header.php");
                             </li>
                             
                         </ul><!-- End of list-justified ul -->
-                        <?php displayMsg(); ?>
+                        <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
                         
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
@@ -160,14 +160,12 @@ include("includes/header.php");
 					<label><input type="checkbox" name="vehicle[]" value="car" class="form-group"> Car / कार</label>
 					<label><input type="checkbox" name="vehicle[]" value="truck" class="form-group"> Truck / ट्रक</label>
 					<input type="hidden" name="help-type" value="volunteer-registration">
-
-					<input type="submit" value="SUBMIT" class="blackbtn form-control">
+                    <br /><br />
+					<input type="submit" value="SUBMIT" class="btn btn-default">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      
     </div>
   </div>
 </div>
