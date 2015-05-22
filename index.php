@@ -161,7 +161,7 @@ include("includes/header.php");
 					<label><input type="checkbox" name="vehicle[]" value="truck" class="form-group"> Truck / ट्रक</label>
 					<input type="hidden" name="help-type" value="volunteer-registration">
                     <br /><br />
-					<input type="submit" value="SUBMIT" class="btn btn-default">
+					<input type="submit" value="SUBMIT" class="btn btn-success">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</form>
       </div>
