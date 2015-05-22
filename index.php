@@ -265,7 +265,14 @@ map.on('move', onmove);
         $("#mission-detail-div").fadeIn();
         return false;
         
-});
+    });
+    $('#coordinates').on('click', 'a', function() {
+        
+        $("#mission-detail-div").load($(this).attr('href'));
+        $("#mission-detail-div").fadeIn();
+        return false;
+        
+    });
     $( document ).ready(function() {
     $("#contact-link").click(function(){ 
         $('#about-details').hide('fade');
