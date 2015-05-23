@@ -74,7 +74,7 @@ include("includes/header.php");
                             </li>
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
-                                <p class="text-muted">सम्पर्क गर्नुहोस</p>
+                                <p class="text-muted">हाम्रो बारेमा</p>
                                 
                             </li>
                             <li class="btn" id="contact-link">
