@@ -48,6 +48,8 @@ include("includes/header.php");
                 
                 }
             }
+             // echo( $addressPoints ); 
+             // die();
           
             ?>
 
@@ -206,7 +208,7 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
         var date= a[4];
 
         
-        // console.log(date);
+        // console.log(a);
 
 
         if(

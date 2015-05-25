@@ -3,13 +3,13 @@
 session_start();
 include("system/config.php");
 include("system/functions.php");
-//include("includes/header.php");
+// include("includes/header.php");
 
 
-//$_SESSION['page'] = "listpackage";
+// $_SESSION['page'] = "listpackage";
 
 
-//Body Begins
+// Body Begins
 ?>
 <div class="wrapper-mission">
 	<?php 
