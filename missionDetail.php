@@ -54,7 +54,7 @@ include("system/functions.php");
             </tr>
             <tr>
                 <th>Mission Name</th>
-                <td><?php echo $row["pkg_id"]; ?></td>
+                <td><?php echo parseName( $row["pkg_id"] ); ?></td>
             </tr>
             <tr>
                 <th>Group/Organization</th>
