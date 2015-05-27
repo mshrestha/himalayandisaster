@@ -21,6 +21,7 @@
 			$qur = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c 
 					where $where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
+            // die($qur);
             $addressPoints = '';
 			$result= mysql_query($qur);
 			$count = 1;

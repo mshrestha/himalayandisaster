@@ -58,11 +58,11 @@ include("system/functions.php");
             </tr>
             <tr>
                 <th>Group/Organization</th>
-                <td><?php echo ucfirst($row["w_name"]);?></td>
+                <td><?php echo parseName($row["w_name"]);?></td>
             </tr>
             <tr>
                 <th>Volunteer Name</th>
-                <td><?php echo ucfirst($row["agent_name"]);?></td>
+                <td><?php echo parseName($row["agent_name"]);?></td>
             </tr>
             <tr>
                 <th>Volunteer Phone</th>
