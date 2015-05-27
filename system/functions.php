@@ -17,6 +17,17 @@ function logMsg($msg,$status){
   $_SESSION['logs'] = $logs;
 }
 
+function parseName($item){
+  $itemName = '';
+  $itemNameParts = explode(' ', $item);
+  if(count($itemNameParts)>0){
+    foreach ($itemNameParts as $itemNamePart ) {
+      $itemName .= ucfirst($itemNamePart) . ' ';
+    }
+  }
+  return $itemName;
+}
+
  function parseDate($date)
  {
     $data = explode('-', $date);

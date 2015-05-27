@@ -126,7 +126,7 @@ debug_data($qur);
 							?>
 						<tr>
 							<td> <?php echo $row[0]; ?> </td>
-							<td><?php echo ucfirst($row["agent_name"]); ?></td>
+							<td><?php echo parseName($row["agent_name"]); ?></td>
 							<td><?php echo $row["agent_phone"]; ?></td>
 							<td><?php echo $row["agent_address"]; ?></td>
 							<td><?php echo $row["agent_email"]; ?></td>

@@ -34,7 +34,7 @@ $_SESSION['page'] = "listpackage";
             <?php endif; ?>
         </div>
         <div class="panel-body">
-            <?php $packageQry = "select a.pkg_id,a.pkg_approval,a.pkg_timestamp,a.help_call_latlng,b.vdc_name,b.district,c.agent_name,c.agent_email,c.agent_phone from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and a.pkg_count='".$packageId."'";
+            <?php $packageQry = "select a.pkg_count,a.pkg_id,a.pkg_approval,a.pkg_timestamp,a.help_call_latlng,b.vdc_name,b.district,c.agent_name,c.agent_email,c.agent_phone from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and a.pkg_count='".$packageId."'";
 				$packageResult= mysql_query($packageQry);
 				if(mysql_num_rows($packageResult) >=1){
 					while ($row = mysql_fetch_array($packageResult)):
@@ -42,8 +42,9 @@ $_SESSION['page'] = "listpackage";
 					    $approveStatus=$row["pkg_approval"];
                         $latlng = $row["help_call_latlng"];
 					?>
-            
-            <a href="editPackage.php?id=<?php echo $row["pkg_id"];?>"><button type="button" class="btn btn-xs btn-default">Edit</button></a>
+            <?php if($row['pkg_approval']!=1): ?>
+                <a href="editPackage.php?id=<?php echo $row["pkg_count"];?>"><button type="button" class="btn btn-xs btn-default">Edit</button></a>
+            <?php endif; ?>
             
             <h2><?php echo $row["vdc_name"];?>, <?php echo $row["district"];?></h2>
             <table class="record_properties">
@@ -56,11 +57,11 @@ $_SESSION['page'] = "listpackage";
             </tr>
             <tr>
                 <th>Mission Name</th>
-                <td><?php echo $row["pkg_id"]; ?></td>
+                <td><?php echo parseName($row["pkg_id"]); ?></td>
             </tr>
             <tr>
                 <th>Volunteer Name</th>
-                <td><?php echo ucfirst($row["agent_name"]);?></td>
+                <td><?php echo parseName($row["agent_name"]);?></td>
             </tr>
             <tr>
                 <th>Volunteer Phone</th>
@@ -94,7 +95,7 @@ $_SESSION['page'] = "listpackage";
 					while ($row = mysql_fetch_array($itemResult)):
 						?>
 						<tr>
-							<td><?php echo ucfirst($row["item_name"]); 
+							<td><?php echo parseName($row["item_name"]); 
                     $result = mysql_query("select item_unit from ".$tableName['item']." where  item_name='".$row["item_name"]."'");
                     $res = mysql_fetch_array($result);
                                 ?></td>

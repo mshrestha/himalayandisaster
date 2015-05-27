@@ -15,11 +15,11 @@
 	}
 	echo count($emptyPackage)." packages don't have any items recorded </br> ";
 	$count = 0;
+	echo "[";
 	foreach ($emptyPackage as $packageId) {
-		echo ++$count . ') '. $packageId . '<br>';
-	
+		echo '"'.$packageId . '",';
 	}
-	
+	echo "]";
 		
 	
 	}

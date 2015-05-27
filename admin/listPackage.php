@@ -10,6 +10,7 @@ $_SESSION['page'] = "listpackage";
 $page = ($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = " OFFSET " . intval((($page - 1 ) * 50));
 
+
 //Body Begins
 ?>
 <div class="wrapper">
@@ -26,30 +27,35 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
             $searchPart ='';
             $anoOrWhere='';
 			$whereCondition = "and a.pkg_approval='1'";
-            $ware_which = 'w.w_id=a.w_id';
+            $ware_which = '';
 			$anotherWhere = 'and a.pkg_status!=-1';
             if(isset($_GET)){
 				if(trim($_GET['status']) == "0")
 	            {
 					$whereCondition = "and a.pkg_approval='0'";
 				}
-				if(trim($_GET['searchWarehouse'])){
-					$ware_which=$_GET['searchWarehouse'];
-					if($ware_which>0)
-						$ware_which = "w.w_id=$ware_which";
-				
-				}
-				}
-				
-				$qry2 = mysql_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
-				$ary  = mysql_fetch_array($qry2);
-				if(!empty($ary[0]) ){
-					$where="a.w_id=$ary[0] and";
-					$ware_which ='';
-					}
-					else{
-						$where="";
 
+				if( $_SESSION['userrole']==2 && isset($_GET['searchWarehouse']) )
+				{
+					$qry2 = mysql_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
+					$ary  = mysql_fetch_array($qry2);
+						if(!empty($ary[0]))
+						{
+							$where="a.w_id=$ary[0] and";
+							$ware_which='';
+							}
+							else
+								$where="";
+				}
+				else
+				{
+
+					$ware_which=trim($_GET['searchWarehouse']);
+					if($ware_which>0)
+						$ware_which = " and a.w_id=$ware_which";
+				}
+				
+				
 				if(isset($_GET['searchName'])){
 
 					$keyword = mysql_real_escape_string($_GET['searchName'] );
@@ -59,15 +65,16 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 				}
 				if($searchPart)
 					$anoOrWhere='and';
-		}
-			$qur = "select a.pkg_count,w.w_name,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
-					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c,
-					  ".$tableName['warehouse']." w where $searchPart $where $anoOrWhere a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and $ware_which  $whereCondition  $anotherWhere order by a.pkg_count DESC LIMIT 50" . $offset;
+			}
+			$qur = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
+					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c
+					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id $ware_which and a.help_call_id=b.vdc_code $whereCondition  $anotherWhere order by a.pkg_count DESC LIMIT 50" . $offset;
+			// die($qur);
 			$result= mysql_query($qur);
-			$count = 1;
-    		$totalQuery = "select a.pkg_count,w.w_name,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
-					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c,
-					  ".$tableName['warehouse']." w where $searchPart $where $anoOrWhere a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and $ware_which  $whereCondition  $anotherWhere order by a.pkg_count DESC";
+
+    		$totalQuery = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
+					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c
+					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and $ware_which  $whereCondition  $anotherWhere order by a.pkg_count DESC ";
 
 			$res= mysql_query($totalQuery);
 			$total = mysql_num_rows($res);
@@ -138,8 +145,20 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 
 					
 					<td><?php echo $row["vdc_name"] . ", " . $row["district"];?></td>
-					<td><?php echo ucfirst($row["agent_name"]);?></td>
-					<td><?php echo $row["w_name"];?></td>
+					<td>
+					<?php 
+						echo parseName($row["agent_name"]);
+					?>
+					</td>
+					<td>
+						<?php 
+							$w_idGet = mysql_query("Select w_id from ".$tableName['package']. " where pkg_count=".$row["pkg_count"]) or die(mysql_error());
+							$w_idGet = mysql_fetch_array($w_idGet);
+							$resy = mysql_query("Select w_name from ".$tableName['warehouse'] .' where w_id='.$w_idGet[0]) or die(mysql_error());
+							$warehouseName = mysql_fetch_array($resy);
+							echo $warehouseName[0];
+						?>
+					</td>
 					<td><?php echo $row["agent_phone"];?></td>
 					<td>
 						<?php

@@ -22,7 +22,7 @@ $offset=" OFFSET " . intval(($page - 1 ) * 50);
                 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="GET">
                     <input type="text" placeholder="Name" name="searchName" />
                     <select name="qtySearch">
-                        <option value="">Qty Search</option>
+                        <option value="">Quantity Search</option>
                         <option value="1">Expired</option>
                         <option value="2">Expiring</option>
                         <option value="3">In Stock</option>
@@ -33,7 +33,14 @@ $offset=" OFFSET " . intval(($page - 1 ) * 50);
                     </select>
                     <select name="searchWarehouse" class="">
                         <option value="">Warehouse</option>
-                        <?php getSegment( 'warehouse'); ?>
+                         <?php 
+                            $selected = trim($_GET['searchWarehouse']);
+                            $res = mysql_query("Select * from ".$tableName['warehouse']);
+                            while ($row = mysql_fetch_array($res)) : ?>
+                            <option <?php if($row['w_id']==$selected) echo"selected";?>
+                            value="<?php echo $row['w_id'];?>"><?php echo $row['w_name'];?></option>    
+                            <?php endwhile ;?>
+                        ?>
                     </select>
                     <input class="" type="submit" Value="Search" />
                 </form>
@@ -121,7 +128,7 @@ $offset=" OFFSET " . intval(($page - 1 ) * 50);
                             while ($row = mysql_fetch_array($result)): ?>
                         <tr>
                             <td>
-                                <?php echo ucfirst($row[ "item_name"]); ?>
+                                <?php echo parseName($row[ "item_name"]); ?>
                             </td>
                         <td>
                             <input type="text" value="<?php echo $row['item_qty'];?>" size="4" id="type<?php echo $row[0];?>" />&nbsp;
@@ -153,7 +160,7 @@ $offset=" OFFSET " . intval(($page - 1 ) * 50);
                         </td>
 
                         <td>
-                            <?php echo $row[ 'item_unit']; ?>
+                            <?php echo parseName($row[ 'item_unit']); ?>
                         </td>
                         <td>
                             <?php
@@ -164,7 +171,7 @@ $offset=" OFFSET " . intval(($page - 1 ) * 50);
                             <?php 
                             $qry2=mysql_query( "Select item_cat_name from " . 
                             $tableName['itemCategory'] . " where item_cat_id = " . $row[ 'item_cat_id']);                                                       $row2=mysql_fetch_array($qry2);
-                            echo $row2['item_cat_name'];
+                            echo parseName($row2['item_cat_name']);
                             ?>
                         </td>
                         <td>
