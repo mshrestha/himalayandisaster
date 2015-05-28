@@ -67,7 +67,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 				if($searchPart)
 					$anoOrWhere='and';
 			}
-			$qur = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
+			$qur = "select a.pkg_count,a.help_location,a.help_call_id,a.pkg_id,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c
 					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id $ware_which and a.help_call_id=b.vdc_code $whereCondition  $anotherWhere order by a.pkg_count DESC LIMIT 50" . $offset;
 			// die($qur);
@@ -145,7 +145,10 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 					<td><?php echo $row["pkg_timestamp"]; ?> </td>
 
 					
-					<td><?php echo $row["vdc_name"] . ", " . $row["district"];?></td>
+					<td><?php 
+					if($row['help_call_id']!=-1) echo $row["vdc_name"] . ", " . $row["district"]; 
+					else echo $row['help_location'];
+					?></td>
 					<td>
 					<?php 
 						echo parseName($row["agent_name"]);

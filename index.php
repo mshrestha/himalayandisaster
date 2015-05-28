@@ -25,7 +25,7 @@ include("includes/header.php");
 			else{
 				$where="";
 			}
-			$qur = "select w.w_name,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
+			$qur = "select w.w_name,a.help_location,a.help_call_id,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c, ". $tableName['warehouse'] . " w " .
 					"where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
             // die($qur);
@@ -43,7 +43,17 @@ include("includes/header.php");
                     $time = explode(' ', $row['pkg_timestamp']);
                     $time = parseDate($time[0]);
 
-                    $addressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/missionDetail.php?id='.$row['pkg_count'].'>'.$row['vdc_name'].', '.$row['district'].' </a>","'. $row['w_name'].'","'. $time. '"]';
+                     if($row['help_call_id']!=-1)
+                        $location = $row['vdc_name'].', '.$row['district'];
+                    else {
+                        if(!empty($row['help_location']))
+                            $location = $row['help_location'];
+                        else 
+                            $location = 'Location #'.$count;
+                    }   
+
+
+                    $addressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/missionDetail.php?id='.$row['pkg_count'].'>'.$location.' </a>","'. $row['w_name'].'","'. $time. '"]';
                     $count++;
                 
                 }

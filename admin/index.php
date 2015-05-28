@@ -18,7 +18,7 @@
 			else{
 				$where="";
 			}
-			$qur = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone
+			$qur = "select a.pkg_count,a.help_location,a.help_call_id,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c 
 					where $where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
             // die($qur);
@@ -32,7 +32,12 @@
                     if($count >1){
                         $addressPoints .=",\n";
                     }
-                    $addressPoints .= '['.$row['help_call_latlng'].', "<a href=\"packageDetail.php?id='.$row['pkg_count'].'\">'.$row['vdc_name'].', '.$row['district'].'</a><br />"]';
+                    if($row['help_call_id']!=-1)
+                        $location = $row['vdc_name'].', '.$row['district'];
+                    else 
+                        $location = $row['help_location'];
+
+                    $addressPoints .= '['.$row['help_call_latlng'].', "<a href=\"packageDetail.php?id='.$row['pkg_count'].'\">'.$location.'</a><br />"]';
                     $count++;
                 
                 }
