@@ -71,11 +71,7 @@ $_SESSION['page'] = "listpackage";
         </tbody>
     </table>
             <br />
-            <?php if($approveStatus=='0'): ?>
-   <a href="<?php echo $config['adminController'].'/itemAccountController.php?action=approve&pkg_id='.$packageId;?>"><button type="button" class="btn btn-xs btn-success btn-lg"><i class="fa fa-plus"></i>Approve</button> </a> 
-						<a href="<?php echo $config['adminController'].'/itemAccountController.php?action=remove&pkg_id='.$packageId;?>"><button type="button" class="btn btn-xs btn-warning btn-lg"><i class="fa fa-minus"></i>   Delete</button> </a>
-          
-            <?php endif; ?>
+     
             <?php endwhile; ?>
             <br />
             <hr />

@@ -8,6 +8,7 @@ include("../system/config.php");
 include("../system/functions.php");
 $_SESSION['page'] = "listpackage";
 $page = ($_GET['page']) ? intval($_GET['page']) : 1;
+
 $offset = " OFFSET " . intval((($page - 1 ) * 50));
 
 
@@ -74,7 +75,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 
     		$totalQuery = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c
-					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and $ware_which  $whereCondition  $anotherWhere order by a.pkg_count DESC ";
+					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id $ware_which and a.help_call_id=b.vdc_code $whereCondition  $anotherWhere order by a.pkg_count DESC";
 
 			$res= mysql_query($totalQuery);
 			$total = mysql_num_rows($res);

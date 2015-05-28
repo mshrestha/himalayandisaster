@@ -29,7 +29,7 @@ include "../../system/config.php";
 //					mysql_query($qur) or logMsg($qur . " ".mysql_error(),0);  
             
             //Don't delete from the cluster because we might need it in the future for reference
-				$qur = "Update ". $tableName['package'] . " SET pkg_status=-1 where pkg_id='".$packageId."'";
+				$qur = "Update ". $tableName['package'] . " SET pkg_status=-1 where pkg_count='".$packageId."'";
 					mysql_query($qur) or logMsg($qur . " ".mysql_error(),0); 
               
                 return redirectPage($_SERVER['HTTP_REFERER']);
@@ -37,7 +37,7 @@ include "../../system/config.php";
 		}
 		else if($action=="approve") // Approve the package from the order page
 		{
-			$qur="select * from ". $tableName['package']." where pkg_id='".$packageId."'";
+			$qur="select * from ". $tableName['package']." where pkg_count='".$packageId."'";
 			$result = mysql_query($qur) or die($qur . " ".mysql_error()); 
 
 			if( mysql_num_rows($result) ){

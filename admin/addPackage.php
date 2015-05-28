@@ -14,10 +14,11 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 ?>
 <div class="wrapper">
 	<?php getSegment("topbar"); ?>
-	<div class=" col-md-4">
-		<div class="row">
+	<div class=" col-md-12">
+		<div class="row col-md-4">
 			<?php 
 			$newPackageID = generatePackageId();
+			$suggestLocation = '28.4719709,84.9678058';
 			?>
 
 			<h1>Add Mission</h1>
@@ -35,9 +36,9 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 					<?php getSegment('warehouse'); ?>
 				</select>
 				
-				<input class="form-control" type='text' id='victimzoneAutocomplete' name='victims_zone	' placeholder='Type affected Place name'>
+				<input class="form-control" type='text' id='victimzoneAutocomplete' name='victims_zone' placeholder='Type affected Place name'>
 				<input type='hidden' name="victim_zone_id"  id="victim_zone_id" class="form-control">	
-				<input type='text' name="lat_lng"  id="lat_lng" class="form-control" placeholder="Latitude, Longitude">	
+				<input type='text' required name="lat_lng" readonly id="lat_lng" class="form-control" placeholder="Latitude, Longitude">	
 				
 				<div id="itemField" class="hidden row nopadding">
 					
@@ -52,8 +53,14 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 				<input class="form-control" type="submit" Value="Create Mission" />
 
 			</form>
+</div>			
+
+			   <div class="col-md-8">
+        		
+        		<div id="side-map"></div>
+                
+    		</div>
 		
-</div>
 </div>
 </div>
 
@@ -61,4 +68,41 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 //Includes
 include("../includes/adminfooter.php");
 ?>
+
+<script>
+    
+// Provide your access token
+L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
+var map = L.mapbox.map('side-map', 'shrestha.m3i2pn4f')
+    .setView([<?php echo $suggestLocation; ?>], 13);
+
+// L.marker is a low-level marker constructor in Leaflet.
+var marker = L.marker([<?php echo $suggestLocation; ?>], {
+    icon: L.mapbox.marker.icon(
+	    {
+	        'marker-size': 'medium',
+	        'marker-symbol': 'golf',
+	        'marker-color': '#1087bf'
+	    }),
+    draggable: true
+    
+}).addTo(map);
+
+var coordinates = document.getElementById('lat_lng');
+
+marker.on('dragend', ondragend);
+
+// Set the initial marker coordinate on load.
+ondragend();
+
+function ondragend() {
+    var m = marker.getLatLng();
+    console.log(m);
+	coordinates.value =  m.lat.toFixed(7) + ',' + m.lng.toFixed(7);
+}
+
+
+    
+</script>
+
 
