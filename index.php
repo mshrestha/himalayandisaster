@@ -49,7 +49,7 @@ include("includes/header.php");
                         if(!empty($row['help_location']))
                             $location = $row['help_location'];
                         else 
-                            $location = 'Location #'.$count;
+                            $location = 'Location #'.$row['pkg_count'];
                     }   
 
 
