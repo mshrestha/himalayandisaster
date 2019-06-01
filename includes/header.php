@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Himalayan Disaster</title>
+	<title>Latrines listing</title>
 	<script type="text/javascript" src="js/html5shiv.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css' />
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="author" content="Kazi Studios" />
-	<META name="description" content="Save Nepal, Himalayan disaster, earthquake, prayfornepal, nepalquakerelief" />
+	<META name="description" content="Listing of laterines and their suppliers" />
 	<META name="keywords" content="Nepal, prayfornepal, savenepal, earthquake, earthquakerelief", "himalayan disaster", "nepalquakerelief" />
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/icon" />
 	<link rel="icon" href="images/favicon.ico" type="image/icon" />
