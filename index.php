@@ -82,22 +82,15 @@ foreach($db->query('SELECT * FROM latrines') as $row) {
                     </div>
                     <div class="list-justified-container" id="wcontainer">
                         <ul class="list-justified text-center">
-                            <li class="btn" data-toggle="modal" data-target="#myModal">
-                                <p class="size-h3">WANT TO HELP</p>
-                                <p class="text-muted">म सहायता गर्न चाहन्छु</p>
-                            </li>
-                            <li>
-                                <p class="size-h3"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">NEED HELP</a></p>
-                                <p class="text-muted"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">सहायता चाहिन्छ</a></p>
-                            </li>
+
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
-                                <p class="text-muted">हाम्रो बारेमा</p>
+
 
                             </li>
                             <li class="btn" id="contact-link">
                                 <p class="size-h3">CONTACT US</p>
-                                <p class="text-muted">सम्पर्क गर्नुहोस</p>
+
 
                             </li>
 
@@ -107,19 +100,22 @@ foreach($db->query('SELECT * FROM latrines') as $row) {
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
                         <h1>About Us</h1>
-                        <p>On the aftermath of the deadly earthquake disaster in Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
+                        <p>
+													Since 1984, iDE has created business opportunities for the private sector with the goal of improving income, livelihood, and well-being for low-income and marginalized communities.
+												</p>
+												<p>
+													<h3>WATER, SANITATION & HYGIENE</h3>
+													<p>While the public and development sectors have made tremendous progress in promoting hygienic water and sanitation practices in recent years, iDE focuses on catalyzing the country’s private sector to lead the delivery of sustainable WASH solutions for low-income consumers. To do so, we work with national companies that supply toilets and water filters to reconsider low-income people as viable, long-term customers.
+													</p>
+													<p>In parallel, we support over 1,000 entrepreneurs across the country in becoming more effective and profitable providers of affordable, aspirational, and effective WASH products and services.
+												</p>
 
-<p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
-
-<p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking to volunteer, please do sign up as a volunteer through our 'WANT TO HELP' link above.</p>
 
                     </div>
                     <div class="panel-body" id="contact-details">
 
                         <h1>Contact Details</h1>
-                        <p>If you are an an organization or volunteer group who want to add your data to our list, please feel free to contact us at the address below. Also if you are looking to get more information about our coordination platform and our efforts, do feel free to contact us.</p>
-                        <p>Kazi Studios <br /><a href="mailto:disaster@kazistudios.com">disaster@kazistudios.com</a><br />
-                            (977) 1 5000520<br />(977) 9851122092</p>
+                        <address><p><strong class="redactor-inline-converted"><strong class="redactor-inline-converted">Main Office<br></strong><strong class="redactor-inline-converted">—</strong></strong></p><p>House NEO 1/B (Level 4)<br>Road 90<br>Gulshan 2<br>Dhaka 1212, Bangladesh</p><p>p: +880 9678 333 777 (Ext. 100)<br>e: bangladesh@ideglobal.org</p></address>
                     </div>
                 </div><!-- End of panel class -->
             </div><!-- End of col-md-6 class-->
