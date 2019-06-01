@@ -2,16 +2,18 @@
 	/* font-family: Helvetica, Arial; */
 }
 
-#map { 
+#map {
     position: fixed;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
+  
   background: #eee url(img/canvas.png);
   overflow: hidden;
   transform: translate3d(0,0,0);
-  -webkit-transform: translate3d(0,0,0)
+  -webkit-transform: translate3d(0,0,0);
+
 }
 span.ui-coordinates {
   background:rgba(0,0,0,0.5);
@@ -425,7 +427,7 @@ a {
 a:hover, a:focus {
   color: #767676;
   text-decoration: none;
-    
+
 }
 a:focus {
   outline: thin dotted;
@@ -9976,7 +9978,7 @@ table.responsive {
       }
     }
     .on-canvas #content {
-      
+
     }
 
     @media (min-width: 768px) {
@@ -10251,7 +10253,7 @@ table.responsive {
       #content {
         top: 50px;
         width: auto;
-        
+
       }
     }
 
@@ -10285,7 +10287,7 @@ table.responsive {
      margin:0;
      padding:0 0 0 15px;
      list-style:none;
-     
+
    }
    .panel .listclass li{
      margin:0 0 5px;

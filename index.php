@@ -1,24 +1,30 @@
 <?php
-//Includes
 session_start();
 include("system/config.php");
 include("system/functions.php");
 include("includes/header.php");
 
+
 //Body Begins
 ?>
+
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
+<?php
 
-<?php 
+$latrines = array();
+foreach($db->query('SELECT * FROM latrines') as $row) {
+	array_push($latrines, $row);
+}
+
 			$whereCondition = "and a.pkg_approval='1'";
 			if(trim($_GET['status']) == "0"){
 				$whereCondition = "and a.pkg_approval='0'";
 			}
-			$qry2 = mysql_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
-			$ary  = mysql_fetch_array($qry2);
+			$qry2 = mysqli_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
+			$ary  = mysqli_fetch_array($qry2);
 			if(!empty($ary[0])){
 				$where="a.w_id=$ary[0] and";
 			}
@@ -30,11 +36,11 @@ include("includes/header.php");
 					"where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
             // die($qur);
             $addressPoints = '';
-			$result= mysql_query($qur);
+			$result= mysqli_query($qur);
 			$count = 1;
-			if(mysql_num_rows($result) >=1) { 
-                                                
-                while ($row = mysql_fetch_array($result)){
+			if(mysqli_num_rows($result) >=1) {
+
+                while ($row = mysqli_fetch_array($result)){
                     //echo $row['vdc_name'];
 
                     if($count >1){
@@ -48,19 +54,19 @@ include("includes/header.php");
                     else {
                         if(!empty($row['help_location']))
                             $location = $row['help_location'];
-                        else 
+                        else
                             $location = 'Location #'.$row['pkg_count'];
-                    }   
+                    }
 
 
                     $addressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/missionDetail.php?id='.$row['pkg_count'].'>'.$location.' </a>","'. $row['w_name'].'","'. $time. '"]';
                     $count++;
-                
+
                 }
             }
-             // echo( $addressPoints ); 
+             // echo( $addressPoints );
              // die();
-          
+
             ?>
 
 <div class="wrapper">
@@ -71,8 +77,8 @@ include("includes/header.php");
             <div class="col-md-6">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding"><a href="#" id="title-link">Himalayan Disaster</a></h3>
-                        
+                        <h3 class="ng-binding"><a href="#" id="title-link">Laterine Distributer Information</a></h3>
+
                     </div>
                     <div class="list-justified-container" id="wcontainer">
                         <ul class="list-justified text-center">
@@ -87,17 +93,17 @@ include("includes/header.php");
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
                                 <p class="text-muted">हाम्रो बारेमा</p>
-                                
+
                             </li>
                             <li class="btn" id="contact-link">
                                 <p class="size-h3">CONTACT US</p>
                                 <p class="text-muted">सम्पर्क गर्नुहोस</p>
-                                
+
                             </li>
-                            
+
                         </ul><!-- End of list-justified ul -->
                         <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
-                        
+
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
                         <h1>About Us</h1>
@@ -106,10 +112,10 @@ include("includes/header.php");
 <p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
 
 <p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking to volunteer, please do sign up as a volunteer through our 'WANT TO HELP' link above.</p>
-                       
+
                     </div>
                     <div class="panel-body" id="contact-details">
-                        
+
                         <h1>Contact Details</h1>
                         <p>If you are an an organization or volunteer group who want to add your data to our list, please feel free to contact us at the address below. Also if you are looking to get more information about our coordination platform and our efforts, do feel free to contact us.</p>
                         <p>Kazi Studios <br /><a href="mailto:disaster@kazistudios.com">disaster@kazistudios.com</a><br />
@@ -177,7 +183,7 @@ include("includes/header.php");
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</form>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -186,9 +192,9 @@ include("includes/header.php");
 <!-- End volunteer Form -->
 <!-- Begin Mission Display Div -->
 <div id="mission-detail-div" style="position:fixed; top:0px; right:0px;">
-  
-  
-</div> 
+
+
+</div>
 <!-- End Mission Display Div -->
 
 <?php
@@ -198,13 +204,13 @@ include("includes/footer.php");
 
 <script type="text/javascript">
     var addressPoints = [
-    <?php                                              
-       echo $addressPoints; 
+    <?php
+       echo $addressPoints;
     ?>];
 // Provide your access token
-L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 85.31574726104736], 10);
-
+//L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
+L.mapbox.accessToken = 'pk.eyJ1Ijoia2F6aXN0dWRpb3MiLCJhIjoiY2luZnA2bjNhMTIyOXYwa3Z0djlhOXAwdiJ9.Vj88y39TP7LtFJ4uozO_bQ'
+var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([21.647142, 91.924089], 11);
  var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
 
@@ -217,9 +223,10 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
         var warehouse= a[3];
         var date= a[4];
 
-        
+
         // console.log(a);
 
+				//Test Until here
 
         if(
             ($.trim(lat) != "" && $.trim(lng) != "")
@@ -229,7 +236,7 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
         {
             var marker = L.marker(new L.LatLng(lat, lng),  {
                 icon: L.mapbox.marker.icon({'marker-size':'medium', 'marker-symbol': 'golf', 'marker-color': '1087bf'}),
-                title: title 
+                title: title
             });
             marker.bindPopup(title+ '<br>By ' + warehouse + '<br> On ' + date);
             markers.addLayer(marker);
@@ -237,7 +244,7 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
                 $("#mission-detail-div").fadeOut();
             });
         }
-    }   
+    }
     map.addLayer(markers);
 
    function onmove() {
@@ -251,9 +258,9 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
             inBounds.push(marker.options.title);
         }
     });
-       
-       
-       
+
+
+
        $("#mission-detail-div").fadeOut();
     // Display a list of markers.
     document.getElementById('coordinates').innerHTML = inBounds.join('<br>');
@@ -263,50 +270,61 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
        $( "#heading-bar" ).animate({
             'margin-top': '-72px',
             'width': '523px'
-    
+
         }, 1000, function() {
     // Animation complete.
   });
 }
 //onmove();
 map.on('move', onmove);
-    
+
     $('#map').on('click', 'a', function() {
-        
+
         $("#mission-detail-div").load($(this).attr('href'));
         $("#mission-detail-div").fadeIn();
         return false;
-        
+
     });
     $('#coordinates').on('click', 'a', function() {
-        
+
         $("#mission-detail-div").load($(this).attr('href'));
         $("#mission-detail-div").fadeIn();
         return false;
-        
+
     });
     $( document ).ready(function() {
-    $("#contact-link").click(function(){ 
+			onmove();
+			<?php foreach($latrines as $latrine): ?>
+			var marker = L.marker(new L.LatLng(<?php echo $latrine['lat']; ?>, <?php echo $latrine['lng']; ?>),  {
+					icon: L.mapbox.marker.icon({'marker-size':'medium', 'marker-symbol': 'golf', 'marker-color': '1087bf'}),
+					title: "<?php echo $latrine['business']; ?>"
+			});
+			marker.bindPopup("<?php echo $latrine['person']. ' <br />'. $latrine['business'] . '<br />'. $latrine['u_union'].', '.$latrine['upazila'].'<br />'.$latrine['phone']; ?>");
+			markers.addLayer(marker);
+			markers.on("click", function(e){
+					$("#mission-detail-div").fadeOut();
+			});
+			<?php endforeach; ?>
+    $("#contact-link").click(function(){
         $('#about-details').hide('fade');
         $('#contact-details').toggle('fade');
     });
-    $("#about-link").click(function(){ 
+    $("#about-link").click(function(){
         $('#contact-details').hide('fade');
         $('#about-details').toggle('fade');
     });
+
     $('#title-link').click(function(){
-        
+
         $( "#heading-bar" ).animate({
             'margin-top': '0px',
             'width': '100%'
-    
+
         }, 1000, function() {
     // Animation complete.
             $("#wcontainer").fadeIn('slow');
   });
     });
 });
-    
+
 </script>
-
-

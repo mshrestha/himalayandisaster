@@ -76,7 +76,7 @@ function parseName($item){
         break;
     }
 
-    
+
     switch ($day) {
       case 1:
         $day = '1st';
@@ -106,7 +106,7 @@ function getPasswordHash($password) {
 
 
 function redirectPage($page) {
-  if (!empty($page)) { 
+  if (!empty($page)) {
     $redirectTime = 0;
     echo "<meta http-equiv='refresh' content='".$redirectTime.";url=". $page ."'>";
 
@@ -155,9 +155,9 @@ return $array;
 //Report page
 function get_item_category(){
   global $tableName;
-  $qry = mysql_query("Select * from " . $tableName['itemCategory']);
-  $stock = array(); 
-  while($row = mysql_fetch_assoc($qry)) {
+  $qry = mysqli_query("Select * from " . $tableName['itemCategory']);
+  $stock = array();
+  while($row = mysqli_fetch_assoc($qry)) {
     array_push($stock, $row);
   }
   return $stock;
@@ -165,17 +165,17 @@ function get_item_category(){
 //Report page
 function get_item_incoming_outgoing( $item_cat_id ){
   global $tableName;
-  $qry = mysql_query("Select * from ". $tableName['itemAccount']. " as itemAccount
+  $qry = mysqli_query("Select * from ". $tableName['itemAccount']. " as itemAccount
     JOIN ". $tableName['item']." as item
-    ON itemAccount.item_id = item.item_id 
+    ON itemAccount.item_id = item.item_id
     WHERE item.item_cat_id= ". $item_cat_id );
-  
+
   $incoming = NULL;
   $outgoing = NULL;
-  while( $row = mysql_fetch_assoc( $qry )){
+  while( $row = mysqli_fetch_assoc( $qry )){
 
     switch( $row['item_direction']){
-      case 'ins': 
+      case 'ins':
       $incoming+= $row['delta_qty'];
       break;
       case 'in':
@@ -190,9 +190,9 @@ function get_item_incoming_outgoing( $item_cat_id ){
       $outgoing ='N/A';
       $incoming = 'N/A'; break;
     }
-    
+
   }
-  
+
   if( empty( $incoming ) ){
     $incoming = 'N/A';
   }
@@ -201,20 +201,20 @@ function get_item_incoming_outgoing( $item_cat_id ){
     $outgoing = 'N/A';
   }
   $stockRate = array('incoming'=>$incoming, 'outgoing'=>$outgoing );
-  
+
   return $stockRate;
 }
 
 
 
 function debug_data( $data ) {
-  //echo "<pre class='hidden'>"; print_r( $data ); echo "</pre>"; 
+  //echo "<pre class='hidden'>"; print_r( $data ); echo "</pre>";
 }
 function get_warehouses(){
   global $tableName;
-  $qry = mysql_query("Select * from " . $tableName['warehouse']);
-  $warehouse = array(); 
-  while($row = mysql_fetch_assoc($qry)) {
+  $qry = mysqli_query("Select * from " . $tableName['warehouse']);
+  $warehouse = array();
+  while($row = mysqli_fetch_assoc($qry)) {
     array_push($warehouse, $row);
   }
   return $warehouse;
@@ -222,17 +222,17 @@ function get_warehouses(){
 
 function get_warehouse_stocks( $warehouse_id ){
   global $tableName;
-  $qur = "SELECT * from ". $tableName['item']. " as items 
+  $qur = "SELECT * from ". $tableName['item']. " as items
     JOIN ".$tableName['itemCategory']. " itemCategory
-    ON items.item_cat_id = itemCategory.item_cat_id 
+    ON items.item_cat_id = itemCategory.item_cat_id
     JOIN ( select * from ". $tableName['itemAccount']. " ORDER by item_account_id ASC) as itemAccount
     ON items.item_id = itemAccount.item_id
     WHERE items.w_id =".$warehouse_id;
-  $qry = mysql_query($qur);
+  $qry = mysqli_query($qur);
   // die();
   $warelists = array();
 
-  while( $row = mysql_fetch_assoc( $qry ) ) {
+  while( $row = mysqli_fetch_assoc( $qry ) ) {
 // debug_data($row);
 
     if( empty( $warelists[ $row['item_cat_name'] ]) ){
@@ -259,9 +259,9 @@ function checkPhoneNumber( $phone_number ) {
 
 
 /*
-  if(strlen($phone_number)>6 && is_numeric($phone_number) ) 
+  if(strlen($phone_number)>6 && is_numeric($phone_number) )
     return 1;
-  else 
+  else
     return 0;
   */
 
@@ -271,22 +271,22 @@ function checkPhoneNumber( $phone_number ) {
 
     switch( $stock['item_direction'] ){
 
-      case 'ins': 
+      case 'ins':
       $adding+= $stock['delta_qty'];
 
       return '<li>' .$adding.' '.$stock['item_unit'].' <strong>'.$stock['item_name']. '</strong> Added on <span>'. date('F j, Y', strtotime($stock['item_account_date'])).'</strong></li>';
       break;
-      
+
       case 'in':
       $incoming += $stock['delta_qty'];
       return '<li>' .$incoming.' '.$stock['item_unit'].' <strong>'.$stock['item_name']. '</strong> Added on <span>'. date('F j, Y', strtotime($stock['item_account_date'])).'</strong></li>';
       break;
-      
+
       case 'out':
       $outgoing += abs($stock['delta_qty']);
       return '<li>' .$outgoing.' '.$stock['item_unit'].' <strong>'.$stock['item_name']. '</strong> Dispatched on <span>'. date('F j, Y', strtotime($stock['item_account_date'])).'</strong></li>';
       break;
-      
+
       case 'dl':
       return '<li><strong>'.$stock['item_name']. '</strong> Removed <span> on '. date('F j, Y', strtotime($stock['item_account_date'])).'</strong></li>';
       break;
@@ -325,8 +325,8 @@ function generatePackageId() {
   while(!$unique) {
     $a = mt_rand(10000,99999);
     $pkgid = crypt($a . date('Ymdhis'),"pk");
-    $qur = mysql_query("Select * from " . $tableName['package'] . " where pkg_id = '$pkgid'");
-    if(mysql_num_rows($qur) == 0)
+    $qur = mysqli_query("Select * from " . $tableName['package'] . " where pkg_id = '$pkgid'");
+    if(mysqli_num_rows($qur) == 0)
       $unique = 1;
   }
   return $pkgid;
@@ -339,8 +339,8 @@ function paginate($total, $pagenum, $tableName, $whereCondition) {
   if(!$total){
   $qur ="select * from ". $tableName . " ". $whereCondition;
 //  die($qur);
-  $qur = mysql_query($qur) or die($qur . " " .mysql_error());
-  $total = mysql_num_rows($qur);
+  $qur = mysqli_query($qur) or die($qur . " " .mysqli_error());
+  $total = mysqli_num_rows($qur);
   }
   if($pagenum > 1) {
     $prevPage .= '<span class="pull-left"><a href="' . $getPage . $separator . 'page=' . intval($pagenum - 1) . '">Prev</a></span>';
@@ -353,8 +353,8 @@ function paginate($total, $pagenum, $tableName, $whereCondition) {
 
 function enqueueScripts(){
   ob_start(); ?>
-  
-  <?php 
+
+  <?php
   echo ob_get_clean();
 }
 function displayMsg() {
@@ -363,7 +363,7 @@ function displayMsg() {
       echo '<div class="alert alert-success alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>'
       .nl2br($_SESSION['logs']['msg']).'</div>';
-    
+
   }
 
   unset($_SESSION['logs']['msg']);

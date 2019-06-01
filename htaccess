@@ -1,2 +1,2 @@
-php_value session.save_path /home/samarpan
+php_value session.save_path /Users/shrestha/Sites/mapping
 php_value session.save_handler files
