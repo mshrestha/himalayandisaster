@@ -1,0 +1,238 @@
+.resultPair{                
+    heigh:200px;                
+    display: inline;
+}
+.resultPair .head {                
+    font-size: 40px;
+    font-weight: normal;
+}
+.info-box-number{
+    font-size: 36px;
+    font-weight: normal;
+}
+.resultPair .para {
+    font-size: 15px;
+}
+.info-box {
+    display: block;
+    min-height: 85px;
+    background: #fff;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 2px;
+    margin-bottom: 0px;
+    padding:0px;
+}
+.info-box-icon {
+    height:75px;
+    padding:5px;
+    background: #fff;
+    line-height: 75px;
+    font-size: 0px;
+    border-bottom:0px;
+    width:90px;
+}
+.info-box-icon > img {
+    max-width: 100%;
+    height: 60px;
+}
+.info-box{
+    height:60px;
+}
+.buttontype{
+    width:100%;
+    background-color: #fff;
+    color: #086CB1 !important;
+    font-family: Arial;
+}
+.info-box-number {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+}
+.info-box-content .info-box-number{
+    margin-top: -2px;
+}
+.info-box-content p{
+    margin-top:-7px;
+    font-weight: normal;
+    font-size: 16px;
+}
+.info-box-content {
+    padding: 5px 10px;
+    margin-left: 60px;
+}
+.tbl1{
+    width:100%;
+}
+.tbl2{
+    width:100%;
+}
+.tbl1 .fst_cell1{
+    background-color: #fff;
+    padding:5px 5px;
+}
+.tbl2 .fst_cell2{
+    border-bottom:2px solid #086CB1;
+    background-color: #EBD7E1;
+    padding:5px 5px;
+}
+.tbl .sec_cell{
+    border-top:2px solid #086CB1;
+    border-bottom:2px solid #086CB1;
+    padding-left: 15px;
+}
+.main_head{
+    font-family:Arial;
+    color:#086CB1;
+    font-weight:bold;
+    margin-top:-8px;
+    font-size:18px;
+}  
+.main_foot{
+    font-family:Arial;
+    color:#000;
+    font-weight:bold;
+    margin-top:-8px;
+    font-size:22px;
+}
+.main_date{
+    font-family:Arial;
+    color:#000;
+    font-weight:bold;
+    margin-top:-10px;
+    font-size:15px;
+}
+.custom_box{
+    position:relative;
+    height:auto;
+    font-size: 18px;
+}    
+.box_head{
+    height:30px;           
+    padding: 0px 5px 5px 5px;
+    background-color: #086CB1;
+    font-size:18px;
+    line-height: 30px;
+    text-align: center;
+    width:100%;
+    color:#fff;
+}
+.box_head_green{
+    height:30px;           
+    padding: 0px 5px 5px 5px;
+    background-color: #276696;
+    font-size:18px;
+    line-height: 30px;
+    text-align: center;
+    width:100%;
+    color:#fff;
+}
+.box_body{
+    width:100%;
+    height:auto;
+    border:2px solid #086CB1;
+    color:#000;
+}
+.box_body_green{
+    width:100%;
+    height:auto;
+    border:2px solid #276696;
+    color:#000;
+}
+.box_body_without_border{
+    width:100%;
+    height:auto;
+    color:#000;
+}
+.row{
+    margin-bottom: 5px;
+}
+.logos ul li{
+    list-style: none;
+    display:inline;
+    padding:2px 5px;
+}
+.logos ul li img{
+    height:20px;
+    width:20px;
+}
+.table_tr_sec{
+    text-align: center;
+    background-color: #FFDA66;
+    font-weight: bold;
+    font-size:22px;
+    color:#0070C0;
+    height:24px;
+}
+.table_tr_thrd{
+    text-align: center;
+    background-color: #fff5cc;
+    font-weight: bold;
+    font-size:20px;
+    color:#C0051E;
+    height:10px;
+}
+.table_tr_frth{
+    text-align: center;
+    /*background-color: #FFDA66;*/
+    background-color: #FFFFFF;
+    font-size:15px;
+    color:#000;
+}
+.table{
+    margin-bottom: 0px;
+}
+.table-responsive {
+    min-height: .01%;
+    overflow-y: hidden;
+}
+@media screen and (max-width: 800px) {
+    .main_foot{
+        font-family:Arial;
+        color:#C00000;
+        font-weight:bold;
+        margin-top:-8px;
+        font-size:10px;
+    }
+    .custom_input{
+        width:65px;
+    }
+    .custom_label{
+        display: none;
+    }
+}
+@media print {
+    .img{
+        position: fixed;
+        top:-920px;
+        left:420px;
+        height:320px;
+        width:390px;
+    }
+    .fst_cell .main_head, .sec_cell .main_head{
+        font-size:22px;
+    }
+    .chart{
+        position: fixed;
+        top:515px;
+        left:50px;
+    }
+    .hide_source{
+        display: none;
+    }
+    .hide_foot{
+        display:none;
+    }
+    .ex_br{
+        font-size: 10px;
+    }
+    @page { margin: 0; }
+    body { margin: .1cm;}
+
+
+}       ge { margin: 0; }
+    body { margin: .1cm;}
+
+
+}       

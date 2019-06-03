@@ -18,56 +18,7 @@ $latrines = array();
 foreach($db->query('SELECT * FROM latrines') as $row) {
 	array_push($latrines, $row);
 }
-
-			$whereCondition = "and a.pkg_approval='1'";
-			if(trim($_GET['status']) == "0"){
-				$whereCondition = "and a.pkg_approval='0'";
-			}
-			$qry2 = mysqli_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
-			$ary  = mysqli_fetch_array($qry2);
-			if(!empty($ary[0])){
-				$where="a.w_id=$ary[0] and";
-			}
-			else{
-				$where="";
-			}
-			$qur = "select w.w_name,a.help_location,a.help_call_id,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
-					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c, ". $tableName['warehouse'] . " w " .
-					"where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
-            // die($qur);
-            $addressPoints = '';
-			$result= mysqli_query($qur);
-			$count = 1;
-			if(mysqli_num_rows($result) >=1) {
-
-                while ($row = mysqli_fetch_array($result)){
-                    //echo $row['vdc_name'];
-
-                    if($count >1){
-                        $addressPoints .=",\n";
-                    }
-                    $time = explode(' ', $row['pkg_timestamp']);
-                    $time = parseDate($time[0]);
-
-                     if($row['help_call_id']!=-1)
-                        $location = $row['vdc_name'].', '.$row['district'];
-                    else {
-                        if(!empty($row['help_location']))
-                            $location = $row['help_location'];
-                        else
-                            $location = 'Location #'.$row['pkg_count'];
-                    }
-
-
-                    $addressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/missionDetail.php?id='.$row['pkg_count'].'>'.$location.' </a>","'. $row['w_name'].'","'. $time. '"]';
-                    $count++;
-
-                }
-            }
-             // echo( $addressPoints );
-             // die();
-
-            ?>
+?>
 
 <div class="wrapper">
 	<div  id="map"></div>
@@ -218,9 +169,6 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([21.647142, 91.924089
         var lng = a[1];
         var warehouse= a[3];
         var date= a[4];
-
-
-        // console.log(a);
 
 				//Test Until here
 
