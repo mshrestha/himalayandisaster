@@ -21,7 +21,7 @@ include("includes/header.php");
 			$qry2 = $mysqli->query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
 			
             //$ary  = mysqli_fetch_array($qry2);
-            $ary = $qry2->fetch_array(MYSQLI_ASSOC);
+            $ary = $qry2->fetch_array(MYSQLI_NUM);
             
 			if(!empty($ary[0])){
 				$where="a.w_id=$ary[0] and";
