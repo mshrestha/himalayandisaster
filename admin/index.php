@@ -1,4 +1,5 @@
 	<?php
+    error_reporting(1);
     include("../includes/adminIncludes.php");
     include("../system/config.php");
     include("../system/functions.php");
@@ -10,24 +11,24 @@
 			if(trim($_GET['status']) == "0"){
 				$whereCondition = "and a.pkg_approval='0'";
 			}
-			$qry2 = mysql_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
-			$ary  = mysql_fetch_array($qry2);
+			$qry2 = mysqli_query($mysqli, "Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
+			$ary  = $qry2->fetch_array(MYSQLI_NUM);
 			if(!empty($ary[0])){
 				$where="a.w_id=$ary[0] and";
 			}
 			else{
 				$where="";
 			}
-			$qur = "select a.pkg_count,a.help_location,a.help_call_id,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone
+			$qur = "select a.pkg_count,a.help_call_latlng,a.help_call_id,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c 
 					where $where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
             // die($qur);
             $addressPoints = '';
-			$result= mysql_query($qur);
+			$result= mysqli_query($mysqli, $qur);
 			$count = 1;
-			if(mysql_num_rows($result) >=1) { 
+			if(mysqli_num_rows($result) >=1) { 
                                                 
-                while ($row = mysql_fetch_array($result)){
+                while ($row = $result->fetch_array(MYSQLI_NUM)){
                     //echo $row['vdc_name'];
                     if($count >1){
                         $addressPoints .=",\n";
@@ -94,8 +95,8 @@
             <div class="box-info">
                 <?php 
                 $qur = "select distinct(help_call_location) from ".$tableName['helpCall'] . "   ";
-                $result = mysql_query($qur);
-                $cityCount = mysql_num_rows($result)? mysql_num_rows($result):0 ;
+                $result = mysqli_query($mysqli, $qur);
+                $cityCount = mysqli_num_rows($mysqli, $result)? mysqli_num_rows($mysqli, $result):0 ;
 		$cc = 1;
                 ?>
                 <p class="size-h2"><?php echo $cityCount;?></p>
@@ -116,8 +117,8 @@
             <span class="box-icon bg-warning">
                 <i class="fa fa-camera"></i>
             </span>
-            <?php $qry = mysql_query("Select distinct(item_name) from " . $tableName['item'] . " where item_qty <= 0");
-            $count = mysql_num_rows($qry);
+            <?php $qry = mysqli_query($mysqli, "Select distinct(item_name) from " . $tableName['item'] . " where item_qty <= 0");
+            $count = mysqli_num_rows($mysqli, $qry);
 		$cc = 1;
             ?>
             <div class="box-info">
@@ -125,7 +126,7 @@
                 <p class="text-muted">
                  item(s) are out of stock
                  <ul class="listclass">
-                     <?php while($ary = mysql_fetch_array($qry)) 
+                     <?php while($ary = mysqli_fetch_array($mysqli, $qry)) 
                 	if($cc++  <6)     echo "<li>$ary[0]</li>";
                      ?>
                  </ul>
@@ -143,15 +144,15 @@
                 <i class="fa fa-bookmark-o"></i>
             </span>
             <div class="box-info">
-                <?php $qry = mysql_query("Select distinct(item_name) from " . $tableName['item'] . " where item_qty between 1 and 10");
-                $count = mysql_num_rows($qry);
+                <?php $qry = mysqli_query($mysqli, "Select distinct(item_name) from " . $tableName['item'] . " where item_qty between 1 and 10");
+                $count = mysqli_num_rows($mysqli, $qry);
 		$cc = 1;
                 ?>
                 <p class="size-h2"><?php echo $count;?></p>
                 <p class="text-muted">
                  item(s) are going be out of stock
                  <ul class="listclass">
-                     <?php while($ary = mysql_fetch_array($qry)) 
+                     <?php while($ary = mysqli_fetch_array($mysqli, $qry)) 
                      if($cc++ < 6) echo "<li>$ary[0]</li>";
                      ?>
                  </ul>
@@ -170,10 +171,10 @@
                 <?php $now = date('Y-m-d');
                 $fromDate = $now . " 00:00:00";
                 $toDate = $now . " 11:59:59";
-                $qry = mysql_query("Select sum(delta_qty) from " . $tableName['itemAccount'] . " where item_account_date between '$fromDate' and '$toDate' and item_direction in( 'in', 'ins')");
-                $qry2 = mysql_query("Select sum(delta_qty) from " . $tableName['itemAccount'] . " where item_account_date between '$fromDate' and '$toDate' and item_direction in( 'dl', 'out')");
-                $ary = mysql_fetch_array($qry);
-                $ary2 = mysql_fetch_array($qry2);
+                $qry = mysqli_query($mysqli, "Select sum(delta_qty) from " . $tableName['itemAccount'] . " where item_account_date between '$fromDate' and '$toDate' and item_direction in( 'in', 'ins')");
+                $qry2 = mysqli_query($mysqli, "Select sum(delta_qty) from " . $tableName['itemAccount'] . " where item_account_date between '$fromDate' and '$toDate' and item_direction in( 'dl', 'out')");
+                $ary = mysqli_fetch_array($mysqli, $qry);
+                $ary2 = mysqli_fetch_array($mysqli, $qry2);
                 ?>
                 <p class="size-h2"><?php echo abs($ary[0]);?></p>
                 <p class="text-muted">

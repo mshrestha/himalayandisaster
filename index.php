@@ -11,30 +11,34 @@ include("includes/header.php");
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
-
+<h2>Himalayan Disaster</h2>
 <?php 
 			$whereCondition = "and a.pkg_approval='1'";
 			if(trim($_GET['status']) == "0"){
 				$whereCondition = "and a.pkg_approval='0'";
 			}
-			$qry2 = mysql_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
-			$ary  = mysql_fetch_array($qry2);
+
+			$qry2 = $mysqli->query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
+			
+            //$ary  = mysqli_fetch_array($qry2);
+            $ary = $qry2->fetch_array(MYSQLI_ASSOC);
+            
 			if(!empty($ary[0])){
 				$where="a.w_id=$ary[0] and";
 			}
 			else{
 				$where="";
 			}
-			$qur = "select w.w_name,a.help_location,a.help_call_id,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
+			$qur = "select w.w_name,a.help_call_latlng,a.help_call_id,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c, ". $tableName['warehouse'] . " w " .
 					"where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
             // die($qur);
             $addressPoints = '';
-			$result= mysql_query($qur);
+			$result= mysqli_query($mysqli, $qur);
 			$count = 1;
-			if(mysql_num_rows($result) >=1) { 
+			if(mysqli_num_rows($result) >=1) { 
                                                 
-                while ($row = mysql_fetch_array($result)){
+                while ($row = mysqli_fetch_array($result)){
                     //echo $row['vdc_name'];
 
                     if($count >1){
@@ -80,10 +84,10 @@ include("includes/header.php");
                                 <p class="size-h3">WANT TO HELP</p>
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
                             </li>
-                            <li>
+                            <!--li>
                                 <p class="size-h3"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">NEED HELP</a></p>
                                 <p class="text-muted"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">सहायता चाहिन्छ</a></p>
-                            </li>
+                            </li -->
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
                                 <p class="text-muted">हाम्रो बारेमा</p>
@@ -203,7 +207,7 @@ include("includes/footer.php");
     ?>];
 // Provide your access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 85.31574726104736], 10);
+var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.707809112357083, 85.31574726104736], 10);
 
  var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
@@ -228,7 +232,7 @@ var map = L.mapbox.map('map', 'shrestha.m3i2pn4f').setView([27.707809112357083, 
           )
         {
             var marker = L.marker(new L.LatLng(lat, lng),  {
-                icon: L.mapbox.marker.icon({'marker-size':'medium', 'marker-symbol': 'golf', 'marker-color': '1087bf'}),
+                icon: L.mapbox.marker.icon({'marker-size':'medium',  'marker-color': '1087bf'}),
                 title: title 
             });
             marker.bindPopup(title+ '<br>By ' + warehouse + '<br> On ' + date);
