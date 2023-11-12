@@ -52,6 +52,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Admin <span class="caret"></span>
         </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     
                     <ul class="" >
                         <li><a href="addEditWareHouse.php" <?php if($page=='warehouse' ) echo 'class="active"';?>>WareHouses</a>
@@ -66,6 +67,7 @@
                         </li>
 
                     </ul>
+                </div>
                 </li>
 
                 <?php endif; ?>
