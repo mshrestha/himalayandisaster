@@ -50,10 +50,7 @@ if( isset($_POST["type"]) )
   	if(userNameExists($name)){
     
   	$hash = getPasswordHash($password);
-echo $_SERVER['HTTP_REFERER'];
-echo '<br>';
-echo $_SESSION['name'];
-exit();
+
   	if(checkUsernameAndPass($name,$hash)){     
       logMsg("Logged in sucessfully",1);
       $_SESSION['name'] = $name;
