@@ -67,7 +67,8 @@ if( isset($_POST["type"]) )
     logMsg("User doesn't exist", 0);
 
 }
-  redirectPage($_SERVER['HTTP_REFERER']);
+  //redirectPage($_SERVER['HTTP_REFERER']);
+  redirectPage('admin/listPackage.php')
 }
 elseif(isset($_GET["action"]) ){
   $action = mysql_real_escape_string($_GET["action"]);
