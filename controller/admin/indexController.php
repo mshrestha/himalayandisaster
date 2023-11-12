@@ -68,7 +68,7 @@ if( isset($_POST["type"]) )
 
 }
   //redirectPage($_SERVER['HTTP_REFERER']);
-  redirectPage($config['homeUrl'].'/admin/listPackage.php')
+  redirectPage($config['homeUrl'] . '/admin/listPackage.php');
 }
 elseif(isset($_GET["action"]) ){
   $action = mysql_real_escape_string($_GET["action"]);
