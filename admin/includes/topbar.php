@@ -27,14 +27,18 @@
                 <?php if($role !=2 ): ?>
 
                 <li class="dropdown">
-                    <a href="listPackage.php" class="dropdown-toggle" data-toggle="dropdown">Missions <span class="caret"></span></a>
-
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="listPackage.php" <?php if($page=='listpackage' ) echo 'class="active"';?>>List Missions</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Missions <span class="caret"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          
+          <ul class="">
+                        <li><a href="/admin/listPackage.php" <?php if($page=='listpackage' ) echo 'class="active"';?>>List Missions</a>
                         </li>
-                        <li><a href="addPackage.php" <?php if($page=='addpackage' ) echo 'class="active"';?>>Create Missions</a>
+                        <li><a href="/admin/addPackage.php" <?php if($page=='addpackage' ) echo 'class="active"';?>>Create Missions</a>
                         </li>
                     </ul>
+        </div>
                 </li>
 
                 <?php endif; ?>
@@ -45,8 +49,11 @@
 
                 <?php if($role !=2 ): ?>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin <span class="caret"></span>
+        </a>
+                    
+                    <ul class="" >
                         <li><a href="addEditWareHouse.php" <?php if($page=='warehouse' ) echo 'class="active"';?>>WareHouses</a>
                         </li>
                         <li><a href="addEditStockType.php" <?php if($page=='stock' ) echo 'class="active"';?>>Stock Categories</a>
