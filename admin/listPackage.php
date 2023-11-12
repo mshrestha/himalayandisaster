@@ -67,20 +67,20 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 				if($searchPart)
 					$anoOrWhere='and';
 			}
-			$qur = "select a.pkg_count,a.help_location,a.help_call_id,a.pkg_id,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
+			$qur = "select a.pkg_count,a.help_call_latlng,a.help_call_id,a.pkg_id,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c
 					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id $ware_which and a.help_call_id=b.vdc_code $whereCondition  $anotherWhere order by a.pkg_count DESC LIMIT 50" . $offset;
 			// die($qur);
-			$result= mysql_query($qur);
+			$result= mysqli_query($mysqli, $qur);
 
     		$totalQuery = "select a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,b.vdc_name, b.district,c.agent_name,c.agent_email,c.agent_phone
 					from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c
 					  " ." where $searchPart $where $anoOrWhere a.agent_id=c.agent_id $ware_which and a.help_call_id=b.vdc_code $whereCondition  $anotherWhere order by a.pkg_count DESC";
 
-			$res= mysql_query($totalQuery);
-			$total = mysql_num_rows($res);
+			$res= mysqli_query($mysqli, $totalQuery);
+			$total = mysqli_num_rows($res);
 
-			if(mysql_num_rows($result) >=1) { ?>
+			if(mysqli_num_rows($result) >=1) { ?>
 
 			
             <div class="row">
@@ -110,7 +110,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
                         <?php 
                         	$selected = trim($_GET['searchWarehouse']);
                         	$res = mysql_query("Select * from ".$tableName['warehouse']);
-                        	while ($row = mysql_fetch_array($res)) : ?>
+                        	while ($row = $res->fetch_array(MYSQLI_NUM)) : ?>
                         	<option <?php if($row['w_id']==$selected) echo"selected";?>
                         	value="<?php echo $row['w_id'];?>"><?php echo $row['w_name'];?></option>	
                         	<?php endwhile ;?>
@@ -156,9 +156,9 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 					</td>
 					<td>
 						<?php 
-							$w_idGet = mysql_query("Select w_id from ".$tableName['package']. " where pkg_count=".$row["pkg_count"]) or die(mysql_error());
-							$w_idGet = mysql_fetch_array($w_idGet);
-							$resy = mysql_query("Select w_name from ".$tableName['warehouse'] .' where w_id='.$w_idGet[0]) or die(mysql_error());
+							$w_idGet = mysqli_query($mysqli, "Select w_id from ".$tableName['package']. " where pkg_count=".$row["pkg_count"]) or die(mysql_error());
+							$w_idGet = $w_idGet->fetch_array(MYSQLI_NUM);
+							$resy = mysqli_query($mysqli, "Select w_name from ".$tableName['warehouse'] .' where w_id='.$w_idGet[0]) or die(mysql_error());
 							$warehouseName = mysql_fetch_array($resy);
 							echo $warehouseName[0];
 						?>

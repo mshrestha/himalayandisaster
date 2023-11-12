@@ -96,7 +96,7 @@
                 <?php 
                 $qur = "select distinct(help_call_location) from ".$tableName['helpCall'] . "   ";
                 $result = mysqli_query($mysqli, $qur);
-                $cityCount = mysqli_num_rows($mysqli, $result)? mysqli_num_rows($mysqli, $result):0 ;
+                $cityCount = mysqli_num_rows($result)? mysqli_num_rows($result):0 ;
 		$cc = 1;
                 ?>
                 <p class="size-h2"><?php echo $cityCount;?></p>
@@ -118,7 +118,7 @@
                 <i class="fa fa-camera"></i>
             </span>
             <?php $qry = mysqli_query($mysqli, "Select distinct(item_name) from " . $tableName['item'] . " where item_qty <= 0");
-            $count = mysqli_num_rows($mysqli, $qry);
+            $count = mysqli_num_rows($qry);
 		$cc = 1;
             ?>
             <div class="box-info">
@@ -126,7 +126,7 @@
                 <p class="text-muted">
                  item(s) are out of stock
                  <ul class="listclass">
-                     <?php while($ary = mysqli_fetch_array($mysqli, $qry)) 
+                     <?php while($ary = $qry->fetch_array(MYSQLI_NUM)) 
                 	if($cc++  <6)     echo "<li>$ary[0]</li>";
                      ?>
                  </ul>
@@ -145,14 +145,14 @@
             </span>
             <div class="box-info">
                 <?php $qry = mysqli_query($mysqli, "Select distinct(item_name) from " . $tableName['item'] . " where item_qty between 1 and 10");
-                $count = mysqli_num_rows($mysqli, $qry);
+                $count = mysqli_num_rows($qry);
 		$cc = 1;
                 ?>
                 <p class="size-h2"><?php echo $count;?></p>
                 <p class="text-muted">
                  item(s) are going be out of stock
                  <ul class="listclass">
-                     <?php while($ary = mysqli_fetch_array($mysqli, $qry)) 
+                     <?php while($ary = $qry->fetch_array(MYSQLI_NUM)) 
                      if($cc++ < 6) echo "<li>$ary[0]</li>";
                      ?>
                  </ul>
@@ -173,8 +173,8 @@
                 $toDate = $now . " 11:59:59";
                 $qry = mysqli_query($mysqli, "Select sum(delta_qty) from " . $tableName['itemAccount'] . " where item_account_date between '$fromDate' and '$toDate' and item_direction in( 'in', 'ins')");
                 $qry2 = mysqli_query($mysqli, "Select sum(delta_qty) from " . $tableName['itemAccount'] . " where item_account_date between '$fromDate' and '$toDate' and item_direction in( 'dl', 'out')");
-                $ary = mysqli_fetch_array($mysqli, $qry);
-                $ary2 = mysqli_fetch_array($mysqli, $qry2);
+                $ary = $qry->fetch_array(MYSQLI_NUM);
+                $ary2 = $qry2->fetch_array(MYSQLI_NUM);
                 ?>
                 <p class="size-h2"><?php echo abs($ary[0]);?></p>
                 <p class="text-muted">
@@ -207,7 +207,7 @@ include("../includes/adminfooter.php");
 // Provide your access token
     console.log(addressPoints);
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('map', 'shrestha.hi0gmh3p').setView([27.707809112357083, 85.31574726104736], 9);
+var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.707809112357083, 85.31574726104736], 9);
 
 var markers = new L.MarkerClusterGroup();
 var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;

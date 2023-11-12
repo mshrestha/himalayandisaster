@@ -71,8 +71,8 @@ if( isset($_POST["type"]) )
   redirectPage($config['homeUrl'] . '/admin/listPackage.php');
 }
 elseif(isset($_GET["action"]) ){
-  $action = mysql_real_escape_string($_GET["action"]);
-  $userid = mysql_real_escape_string($_GET["id"]);
+  $action = mysqli_real_escape_string($mysqli, $_GET["action"]);
+  $userid = mysqli_real_escape_string($mysqli, $_GET["id"]);
 
 
 
