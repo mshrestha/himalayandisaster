@@ -7,7 +7,7 @@ if(isset($_POST['term']))
 {	
 	
 	$keyword = $_POST['term'];
-	$qur = "SELECT agent_id, agent_name FROM ".$tableName['agent']." WHERE agent_name LIKE '%". $keyword ."%' and agent_status = 0 ORDER BY agent_name ASC LIMIT 0, 20";
+	$qur = "SELECT agent_id, agent_name FROM ".$tableName['agent']." WHERE agent_name LIKE '%". $keyword ."%' and agent_status = 0 ORDER BY agent_name ASC LIMIT 0, 30";
 	
 	$result = mysqli_query($GLOBALS['mysqli'], $qur) or die(mysqli_errno());
 	if(mysqli_num_rows($result)){
