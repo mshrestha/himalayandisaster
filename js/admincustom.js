@@ -1,5 +1,8 @@
 var warehouse_id;
 var itemsArray = [];
+var random = new Date();
+var randomValue = random.getTime();
+
 function showAddItem(){
 	var val=document.getElementById("warehouse").selectedIndex;
 	if(val == ""){
@@ -12,7 +15,8 @@ function showAddItem(){
 		warehouse_id = $('#warehouse').val();
         $('#itemField').html('<div style="clear:both;"><span id="formloc1" ><input class="form-group form-control packageName" id="name-1" type="text" name="itemName[]" placeholder="Item Name" style="width:335px;" /><input class="form-group packageQty" id="qty1" type="number" name="itemQty[]" placeholder="Qty" size="4"  style="width:70px;" /><input class="form-group packageID" id="itemid1" type="hidden" value="" name="itemId[]" required="required" /><span style="cursor:pointer;" onclick="removeItem(1)" ><button type="button" class="btn btn-xs btn-danger btn-lg"><i class="fa fa-times"></i>   </button></span></span></div>');
         formid = 1;
-        jautocomplete('name-1','itemid1', 'qty1', '../controller/admin/ajax/autoComplete.php'); //package add, item autocomplete
+        
+        jautocomplete('name-1','itemid1', 'qty1', '../controller/admin/ajax/autoComplete.php?random='+randomValue); //package add, item autocomplete
         jQuery("#name-1").keydown(function(e){
             var keycode =  e.keyCode ? e.keyCode : e.which;
     if(keycode == 8 || keycode == 46){ // delete
@@ -29,7 +33,7 @@ var formid = 1;
 function addField() {
     formid++;
     $('#itemField').append('<div style="clear:both;"><span id="formloc' + formid + '" ><input id="name-' + formid + '" class="form-group packageName" type="text" name="itemName[]" placeholder="Item Name" style="width:335px;" /><input id="qty' + formid + '" class="form-group form-control packageQty" type="number" name="itemQty[]" placeholder="Qty" size="4" style="width:70px;" /><input id="itemid' + formid + '" class="form-group packageID" type="hidden" value="" name="itemId[]" /><span style="cursor:pointer;" onclick="removeItem(' + formid + ')" ><button type="button" class="btn btn-xs btn-danger btn-lg"><i class="fa fa-times"></i>   </button></span></span></div>');
-    jautocomplete('name-' + formid,'itemid' + formid, 'qty' + formid, '../controller/admin/ajax/autoComplete.php');
+    jautocomplete('name-' + formid,'itemid' + formid, 'qty' + formid, '../controller/admin/ajax/autoComplete.php?random='+randomValue);
     jQuery("#name-" + formid).bind('keydown',function(e){
         var id = this.id;
         id = id.substring(id.indexOf('-') + 1);

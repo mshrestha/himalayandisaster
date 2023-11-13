@@ -89,7 +89,7 @@ if($_GET["action"]=="create"){
     
 
 	$result = mysql_query($qur) or die($qur . " " .mysql_error());
-    $pkg_insert_id = mysqli_insert_id();
+    $pkg_insert_id = mysqli_insert_id($mysqli);
 	if($result)
     {
 		for($i=0;$i<$itemCount;$i++){
