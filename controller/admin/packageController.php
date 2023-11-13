@@ -72,8 +72,7 @@ if($_GET["action"]=="create"){
 		$count++;
 
 	}
-	echo "Select vdc_name,district from vdc where vdc_code=$zoneId";
-	exit();
+	
     $res = mysql_query("Select vdc_name,district from vdc where vdc_code=$zoneId") or die(mysql_error());
     $result = $res->fetch_array(MYSQLI_ASSOC);
 
