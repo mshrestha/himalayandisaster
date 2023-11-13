@@ -17,16 +17,12 @@ if(isset($_POST['term'])){
 			$ary["item_qty"] = $row["item_qty"];
 			array_push($mainAry, $ary);
 		}
-		var_dump($mainAry);
-		exit();
+		
 		$mainAry = json_encode($mainAry);
 		echo $mainAry;
 
 	}
 
-}else{
-	echo "Hello There";
-	
 }
 
 ?>
