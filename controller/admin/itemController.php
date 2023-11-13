@@ -40,7 +40,7 @@ if(isset($_POST["itemQty"])){
 			else{
 				logMsg("Duplicate Item name",0);
 			}
-			return redirectPage($_SERVER['HTTP_REFERER']);
+			return redirectPage($config['homeUrl'].'/admin/addEditItems.php');
 		}
 		else if($action=="create")
         {
@@ -62,9 +62,9 @@ if(isset($_POST["itemQty"])){
                       if( mysql_query($qur) )
                           logMsg("Entry sucessfully added!",1);
                       else
-                         echo "Error : " . mysql_error();
+                         echo "Error : " . mysqli_error();
 
-                      $lastEntryId = mysqli_insert_id();
+                      $lastEntryId = mysqli_insert_id($mysqli);
 
                       $qur = "Insert into ". $tableName["itemAccount"]." values (null,now(),'$lastEntryId','ins',$qty)";
                        mysql_query($qur) or die($qur . mysql_error());
@@ -74,7 +74,7 @@ if(isset($_POST["itemQty"])){
 
             }
 
-            redirectPage($_SERVER['HTTP_REFERER']);
+            redirectPage($config['homeUrl'].'/admin/addEditItems.php');
                 }
             }
         }
@@ -103,7 +103,7 @@ elseif(isset($_GET["action"]) ){
 			$prevQty = mysql_real_escape_string($_GET["prevQty"]);
 			if(!is_numeric($qty)){
 				logMsg("Quantiy cannot contain letters",0);
-				return redirectPage($_SERVER['HTTP_REFERER']);
+				return redirectPage($config['homeUrl'].'/admin/addEditItems.php');
 			}
 			if($prevQty>$qty)
 				$dir = "out";
@@ -120,7 +120,7 @@ elseif(isset($_GET["action"]) ){
 			mysql_query($qur) or die($qur . " " . mysql_error());
 			logMsg("Stock updated sucessfully",1);
 		}
-		redirectPage($_SERVER['HTTP_REFERER']);
+		redirectPage($config['homeUrl'].'/admin/addEditItems.php');
 	}
 
 	function itemExists($itemName,$warehouseNo){
