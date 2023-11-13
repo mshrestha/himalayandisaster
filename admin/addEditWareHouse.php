@@ -44,7 +44,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 				$result= mysql_query($qur);
 
 				$count = 1;
-				if(mysql_num_rows($result) >=1){
+				if(mysqli_num_rows($result) >=1){
 					while ($row = mysql_fetch_array($result)):
 						?>
 					<tr>

@@ -375,4 +375,17 @@ function mysql_query($query){
   return mysqli_query($GLOBALS['mysqli'], $query);
 }
 
+function mysql_fetch_array($result){
+  return $result->fetch_array();
+}
+
+function mysql_fetch_assoc($result){
+  return $result->fetch_array(MYSQLI_ASSOC);
+}
+function mysql_num_rows($result){
+  return mysqli_num_rows($result);
+}
+function mysql_real_escape_string($string){
+  return mysqli_real_escape_string($GLOBALS[mysqli], $string);
+}
 ?>

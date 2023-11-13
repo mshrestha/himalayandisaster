@@ -18,7 +18,7 @@ if( isset($_POST["name"]) )
 	
 	$qur = "select * from ". $tableName['warehouse']. " where w_name='$name'";
 	$result = mysql_query($qur);
-	if(mysql_num_rows($result)>0)
+	if(mysqli_num_rows($result)>0)
 		return logMsg("Warehouse already exists",0);
 	$qur = "Insert into ".$tableName['warehouse'] ." values (null,'$name','$address','$email', '$phone')";
 	if( mysql_query($qur) )
@@ -40,7 +40,7 @@ elseif(isset($_GET["action"])){
 		else
 			logMsg( "Error : " . mysql_error(),0);
 	}
-	redirectPage($_SERVER['HTTP_REFERER']);
+	redirectPage($config['homeUrl'] . '/admin/addEditStockType.php');
 }
 ?>
 

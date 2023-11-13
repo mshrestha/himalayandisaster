@@ -31,7 +31,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 				$result= mysql_query($qur);
 
 				$count = 1;
-				if(mysql_num_rows($result) >=1){
+				if(mysqli_num_rows($result) >=1){
 				while ($row = mysql_fetch_array($result)):
 				?>
 				<tr><td><?php echo $count++; ?> </td><td><?php echo $row["item_cat_name"]; ?></td><td><a href="<?php echo $config['adminController']. '/stockTypeController.php?id='. $row['item_cat_id'] . '&action=delete';?>">Delete</a></td></tr>
