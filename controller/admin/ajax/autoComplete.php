@@ -21,12 +21,8 @@ if(isset($_POST['term'])){
 		$mainAry = json_encode($mainAry);
 		echo $mainAry;
 
-	}else{
-		echo "NUM ROWS NOT WORKING";
 	}
 
-}else{
-	echo "THE WHOLE PAGE NOT WORKING";
 }
 
 ?>

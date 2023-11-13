@@ -204,7 +204,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
         
 		
 
-	<?php paginate($total, $page, $tableName['package'], '1=1'); ?>
+	<?php paginate($total, $page, $tableName['package'], $where); ?>
 
 </div>
 </div>

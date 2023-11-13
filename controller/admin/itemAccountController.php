@@ -37,10 +37,12 @@ include "../../system/config.php";
 		}
 		else if($action=="approve") // Approve the package from the order page
 		{
-			$qur="select * from ". $tableName['package']." where pkg_count='".$packageId."'";
-			$result = mysql_query($qur) or die($qur . " ".mysql_error()); 
+			
 
-			if( mysql_num_rows($result) ){
+			$qur="select * from ". $tableName['package']." where pkg_count='".$packageId."'";
+			$result = mysql_query($qur) or die($qur . " ".mysqli_error()); 
+
+			if( mysqli_num_rows($result) ){
 				while( $row = mysql_fetch_array($result) ){
 					if($row["pkg_approval"]!="1"){
 						logMsg("Package Already Approved",0);
@@ -49,7 +51,8 @@ include "../../system/config.php";
 				}
 			}
 			$qur = "select a.cluster_item_qty,b.item_qty from ". $tableName['itemCluster']." a,". $tableName['item'] ." b where a.pkg_id='".$packageId."' and a.item_id=b.item_id";
-			$result = mysql_query($qur) or die($qur . " ".mysql_error()); 
+			
+			$result = mysql_query($qur) or die($qur . " ".mysqli_error()); 
 			if( mysql_num_rows($result) ){
 				while( $row = mysql_fetch_array($result) ){
 					$itemClusterQty=$row["cluster_item_qty"];
@@ -60,9 +63,12 @@ include "../../system/config.php";
 					}
 				}
 			}
-				$qur="update ". $tableName['package']." set pkg_approval='1' where pkg_id='".$packageId."'";
+				$qur="update ". $tableName['package']." set pkg_approval='1' where pkg_count='".$packageId."'";
+				
 				mysql_query($qur) or die($qur . " ".mysql_error()); 
+			
 				$qur = "select a.item_id,a.cluster_item_qty,b.item_qty from ". $tableName['itemCluster']." a,". $tableName['item'] ." b where a.pkg_id='".$packageId."' and a.item_id=b.item_id";
+				
 				$result = mysql_query($qur) or die($qur . " ".mysql_error()); 
 				if( mysql_num_rows($result) ){
 				while( $row = mysql_fetch_array($result) ){
@@ -84,7 +90,7 @@ include "../../system/config.php";
 				}
 			}
 		}
-
+	
 		redirectPage($_SERVER['HTTP_REFERER']);
 
 	}

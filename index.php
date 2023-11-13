@@ -33,6 +33,7 @@ include("includes/header.php");
 					"where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
             // die($qur);
             $addressPoints = '';
+           
 			$result= mysqli_query($mysqli, $qur);
 			$count = 1;
 			if(mysqli_num_rows($result) >=1) { 
