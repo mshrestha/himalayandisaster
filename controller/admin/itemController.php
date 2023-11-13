@@ -64,7 +64,7 @@ if(isset($_POST["itemQty"])){
                       else
                          echo "Error : " . mysql_error();
 
-                      $lastEntryId = mysql_insert_id();
+                      $lastEntryId = mysqli_insert_id();
 
                       $qur = "Insert into ". $tableName["itemAccount"]." values (null,now(),'$lastEntryId','ins',$qty)";
                        mysql_query($qur) or die($qur . mysql_error());
