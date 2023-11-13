@@ -59,7 +59,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 				
 				if(isset($_GET['searchName'])){
 
-					$keyword = mysqli_real_escape_string($_GET['searchName'] );
+					$keyword = mysqli_real_escape_string($mysqli, $_GET['searchName'] );
 					$searchPart = "b.vdc_name like '%".$keyword."%'";
 					if(trim($keyword) && $where)
 						$searchPart .= " and ";
