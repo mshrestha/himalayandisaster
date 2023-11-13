@@ -53,9 +53,11 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 						case 3: $role = 'Super Volunteer';break;
 						default: $role = '';
 					}
+					if($row['centerid'] != ''){
 					$qry2 = mysql_query("Select * from " . $tableName['warehouse'] . " where w_id = " . $row['centerid']);
 					$row2 = mysql_fetch_array($qry2);
 					echo (empty($row2['w_name']) )? 'N/A': $row2['w_name'];
+					}
 					?>
 				</td><td><?php echo $role;?></td><td><a href='<?php echo $config["adminController"]?>/indexController.php?id=<?php echo $row["id"]?>&action=delete'>Delete</a></td></tr>
 			<?php endwhile;?>
