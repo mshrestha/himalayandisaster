@@ -169,7 +169,7 @@ $_SESSION['page'] = "listpackage";
     
 // Provide your access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('side-map', 'shrestha.m3i2pn4f')
+var map = L.mapbox.map('side-map', 'mapbox.satellite')
     .setView([<?php echo $latlng; ?>], 13);
 
 // L.marker is a low-level marker constructor in Leaflet.
@@ -183,6 +183,7 @@ L.marker([<?php echo $latlng; ?>], {
 
     
 </script>
-
-
-</script>
+<?php
+//Includes
+include("../includes/adminfooter.php");
+?>
