@@ -7,12 +7,7 @@
 
             <a class="navbar-brand" href="<?php echo $config['homeUrl']  ?>/admin"><i class="fa fa-heart"></i> Himalayan Disaster</a>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
+   
 
         </div>
         <div class="navbar-collapse collapse" id="navbar-collapse">

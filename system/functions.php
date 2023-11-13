@@ -155,9 +155,9 @@ return $array;
 //Report page
 function get_item_category(){
   global $tableName;
-  $qry = mysql_query("Select * from " . $tableName['itemCategory']);
+  $qry = mysqli_query($GLOBALS['mysqli'], "Select * from " . $tableName['itemCategory']);
   $stock = array(); 
-  while($row = mysql_fetch_assoc($qry)) {
+  while($row = $qry->fetch_array(MYSQLI_ASSOC)) {
     array_push($stock, $row);
   }
   return $stock;
@@ -165,14 +165,14 @@ function get_item_category(){
 //Report page
 function get_item_incoming_outgoing( $item_cat_id ){
   global $tableName;
-  $qry = mysql_query("Select * from ". $tableName['itemAccount']. " as itemAccount
+  $qry = mysqli_query($GLOBALS['mysqli'], "Select * from ". $tableName['itemAccount']. " as itemAccount
     JOIN ". $tableName['item']." as item
     ON itemAccount.item_id = item.item_id 
     WHERE item.item_cat_id= ". $item_cat_id );
   
   $incoming = NULL;
   $outgoing = NULL;
-  while( $row = mysql_fetch_assoc( $qry )){
+  while( $row = $qry->fetch_array( MYSQLI_ASSOC )){
 
     switch( $row['item_direction']){
       case 'ins': 
@@ -212,9 +212,9 @@ function debug_data( $data ) {
 }
 function get_warehouses(){
   global $tableName;
-  $qry = mysql_query("Select * from " . $tableName['warehouse']);
+  $qry = mysqli_query($GLOBALS['mysqli'], "Select * from " . $tableName['warehouse']);
   $warehouse = array(); 
-  while($row = mysql_fetch_assoc($qry)) {
+  while($row = $qry->fetch_array(MYSQLI_ASSOC)) {
     array_push($warehouse, $row);
   }
   return $warehouse;
@@ -228,11 +228,11 @@ function get_warehouse_stocks( $warehouse_id ){
     JOIN ( select * from ". $tableName['itemAccount']. " ORDER by item_account_id ASC) as itemAccount
     ON items.item_id = itemAccount.item_id
     WHERE items.w_id =".$warehouse_id;
-  $qry = mysql_query($qur);
+  $qry = mysqli_query($GLOBALS['mysqli'], $qur);
   // die();
   $warelists = array();
 
-  while( $row = mysql_fetch_assoc( $qry ) ) {
+  while( $row = $qry->fetch_array( MYSQLI_ASSOC ) ) {
 // debug_data($row);
 
     if( empty( $warelists[ $row['item_cat_name'] ]) ){
@@ -325,8 +325,9 @@ function generatePackageId() {
   while(!$unique) {
     $a = mt_rand(10000,99999);
     $pkgid = crypt($a . date('Ymdhis'),"pk");
-    $qur = mysql_query("Select * from " . $tableName['package'] . " where pkg_id = '$pkgid'");
-    if(mysql_num_rows($qur) == 0)
+    //$pkgid= mysqli_real_escape_string($mysqli, $pkgid);
+    $qur = mysqli_query($GLOBALS['mysqli'], "SELECT * FROM package WHERE pkg_id = '$pkgid'");
+    if(mysqli_num_rows($qur) == 0)
       $unique = 1;
   }
   return $pkgid;
@@ -339,8 +340,8 @@ function paginate($total, $pagenum, $tableName, $whereCondition) {
   if(!$total){
   $qur ="select * from ". $tableName . " ". $whereCondition;
 //  die($qur);
-  $qur = mysql_query($qur) or die($qur . " " .mysql_error());
-  $total = mysql_num_rows($qur);
+  $qur = mysqli_query($GLOBALS['mysqli'], $qur) or die($qur . " " .mysqli_error());
+  $total = mysqli_num_rows($qur);
   }
   if($pagenum > 1) {
     $prevPage .= '<span class="pull-left"><a href="' . $getPage . $separator . 'page=' . intval($pagenum - 1) . '">Prev</a></span>';
@@ -370,4 +371,8 @@ function displayMsg() {
   unset($_SESSION['logs']['status']);
   unset($_SESSION['logs']['msgLoc']);
 }
+function mysql_query($query){
+  return mysqli_query($GLOBALS['mysqli'], $query);
+}
+
 ?>

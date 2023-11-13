@@ -120,9 +120,9 @@ debug_data($qur);
 					$result= mysql_query($qur);
 
 
-					if(mysql_num_rows($result) >=1){
+					if(mysqli_num_rows($result) >=1){
 						$count = 1;
-						while ($row = mysql_fetch_array($result)):
+						while ($row = $result->fetch_array()):
 							?>
 						<tr>
 							<td> <?php echo $row[0]; ?> </td>

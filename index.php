@@ -11,7 +11,6 @@ include("includes/header.php");
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
-<h2>Himalayan Disaster</h2>
 <?php 
 			$whereCondition = "and a.pkg_approval='1'";
 			if(trim($_GET['status']) == "0"){
@@ -75,7 +74,7 @@ include("includes/header.php");
             <div class="col-md-6">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding"><a href="#" id="title-link">Himalayan Disaster</a></h3>
+                        <h3 class="ng-binding"><a href="#" id="title-link">Jajarkot Earthquake Response</a></h3>
                         
                     </div>
                     <div class="list-justified-container" id="wcontainer">

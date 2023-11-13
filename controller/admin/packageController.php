@@ -8,9 +8,9 @@ include '../../system/functions.php' ;
 if(isset($_GET["action"]))
 {	
 	if($_GET["action"]=="append"){
-		$volunteerId = mysql_real_escape_string($_POST["volunteerid"]);
-		$warehouseId = mysql_real_escape_string($_POST["warehouseId"]);
-		$zoneId = mysql_real_escape_string($_POST["victim_zone_id"]);
+		$volunteerId = mysqli_real_escape_string($mysqli, $_POST["volunteerid"]);
+		$warehouseId = mysqli_real_escape_string($mysqli, $_POST["warehouseId"]);
+		$zoneId = mysql_reali_escape_string($mysqli, $_POST["victim_zone_id"]);
 		if(empty($volunteerId) || empty($zoneId)){
 
 			$errorMsg = (empty($volunteerId)) ? "Volunteer" : "Zone"; 
@@ -18,7 +18,7 @@ if(isset($_GET["action"]))
 			return redirectPage($_SERVER['HTTP_REFERER']);
 		}
 
-		$packageId = mysql_real_escape_string($_POST["packageID"]);
+		$packageId = mysqli_real_escape_string($mysqli, $_POST["packageID"]);
 		$itemName = $_POST["itemName"];
 		$itemQty = $_POST["itemQty"];
 		$itemId = $_POST["itemId"];
@@ -44,12 +44,12 @@ logMsg("Package Updated",1);
 }
 if($_GET["action"]=="create"){
 
-	$volunteerId = mysql_real_escape_string($_POST["volunteerid"]);
+	$volunteerId = mysqli_real_escape_string($mysqli, $_POST["volunteerid"]);
 
-	$warehouseId = mysql_real_escape_string($_POST["warehouseId"]);
-	$zoneId = mysql_real_escape_string($_POST["victim_zone_id"]);
+	$warehouseId = mysqli_real_escape_string($mysqli, $_POST["warehouseId"]);
+	$zoneId = mysqli_real_escape_string($mysqli, $_POST["victim_zone_id"]);
 
-	$latlng = mysql_real_escape_string($_POST["lat_lng"]);
+	$latlng = mysqli_real_escape_string($mysqli, $_POST["lat_lng"]);
 
 
 	if(empty($volunteerId) || empty($zoneId)){
@@ -58,7 +58,7 @@ if($_GET["action"]=="create"){
 		return redirectPage($_SERVER['HTTP_REFERER']);
 	}
 
-	$packageId = mysql_real_escape_string($_POST["randPackageID"]);
+	$packageId = mysqli_real_escape_string($mysqli, $_POST["randPackageID"]);
 	$itemName = $_POST["itemName"];
 	$itemQty = $_POST["itemQty"];
 	$itemId = $_POST["itemId"];
@@ -72,8 +72,10 @@ if($_GET["action"]=="create"){
 		$count++;
 
 	}
+	echo "Select vdc_name,district from vdc where vdc_code=$zoneId";
+	exit();
     $res = mysql_query("Select vdc_name,district from vdc where vdc_code=$zoneId") or die(mysql_error());
-    $result = mysql_fetch_assoc($res);
+    $result = $res->fetch_array(MYSQLI_ASSOC);
 
 //    $latlng = lookup( $result['vdc_name'].','.$result['district'] );
 //    if($latlng){
@@ -88,7 +90,7 @@ if($_GET["action"]=="create"){
     
 
 	$result = mysql_query($qur) or die($qur . " " .mysql_error());
-    $pkg_insert_id = mysql_insert_id();
+    $pkg_insert_id = mysqli_insert_id();
 	if($result)
     {
 		for($i=0;$i<$itemCount;$i++){
@@ -102,17 +104,17 @@ if($_GET["action"]=="create"){
 
 }
 else if($_GET["action"]=="update"){
-	$itemClusterId = mysql_real_escape_string($_POST["itemClusterId"]);
-	$itemQty = mysql_real_escape_string($_POST["itemQty"]);
+	$itemClusterId = mysqli_real_escape_string($mysqli, $_POST["itemClusterId"]);
+	$itemQty = mysqli_real_escape_string($mysqli, $_POST["itemQty"]);
 	$qur = "update ". $tableName['itemCluster'] . " set cluster_item_qty='".$itemQty."' where item_cluster_id='".$itemClusterId."'";
 
 	if( mysql_query($qur) )
 		logMsg("Entry sucessfully updated",1);
 	else
-		logMsg( "Error : " . mysql_error(),0);
+		logMsg( "Error : " . mysqli_error(),0);
 }
 else if($_GET["action"]=="delete"){
-	$itemClusterId = mysql_real_escape_string($_GET["itemClusterId"]);
+	$itemClusterId = mysqli_real_escape_string($mysqli, $_GET["itemClusterId"]);
 	$qur = "Delete from ". $tableName['itemCluster'] . " where item_cluster_id='$itemClusterId'";
 	if( mysql_query($qur) )
 		logMsg("Entry sucessfully deleted",1);

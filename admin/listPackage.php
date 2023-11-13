@@ -38,8 +38,8 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 
 				if( $_SESSION['userrole']==2 && isset($_GET['searchWarehouse']) )
 				{
-					$qry2 = mysql_query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
-					$ary  = mysql_fetch_array($qry2);
+					$qry2 = mysqli_query($mysqli, "Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
+					$ary  = $qry2->fetch_array(MYSQLI_NUM);
 						if(!empty($ary[0]))
 						{
 							$where="a.w_id=$ary[0] and";
@@ -59,7 +59,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 				
 				if(isset($_GET['searchName'])){
 
-					$keyword = mysql_real_escape_string($_GET['searchName'] );
+					$keyword = mysqli_real_escape_string($_GET['searchName'] );
 					$searchPart = "b.vdc_name like '%".$keyword."%'";
 					if(trim($keyword) && $where)
 						$searchPart .= " and ";
@@ -109,7 +109,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
                         	<option value="">Warehouse</option>
                         <?php 
                         	$selected = trim($_GET['searchWarehouse']);
-                        	$res = mysql_query("Select * from ".$tableName['warehouse']);
+                        	$res = mysqli_query($mysqli, "Select * from ".$tableName['warehouse']);
                         	while ($row = $res->fetch_array(MYSQLI_NUM)) : ?>
                         	<option <?php if($row['w_id']==$selected) echo"selected";?>
                         	value="<?php echo $row['w_id'];?>"><?php echo $row['w_name'];?></option>	
@@ -138,7 +138,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 				</tr>
                     </thead>
 
-				<?php while ($row = mysql_fetch_array($result)):
+				<?php while ($row = $result->fetch_array(MYSQLI_ASSOC)):
 				?>
 				<tr>
 					<td><?php echo $row["pkg_count"] ?> </td>
@@ -156,10 +156,10 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
 					</td>
 					<td>
 						<?php 
-							$w_idGet = mysqli_query($mysqli, "Select w_id from ".$tableName['package']. " where pkg_count=".$row["pkg_count"]) or die(mysql_error());
+							$w_idGet = mysqli_query($mysqli, "SELECT w_id from ".$tableName['package']. " where pkg_count=".$row["pkg_count"]) or die(mysqli_error());
 							$w_idGet = $w_idGet->fetch_array(MYSQLI_NUM);
-							$resy = mysqli_query($mysqli, "Select w_name from ".$tableName['warehouse'] .' where w_id='.$w_idGet[0]) or die(mysql_error());
-							$warehouseName = mysql_fetch_array($resy);
+							$resy = mysqli_query($mysqli, "Select w_name from ".$tableName['warehouse'] .' where w_id='.$w_idGet[0]) or die(mysqli_error());
+							$warehouseName = $resy->fetch_array(MYSQLI_NUM);
 							echo $warehouseName[0];
 						?>
 					</td>
@@ -204,7 +204,7 @@ $offset = " OFFSET " . intval((($page - 1 ) * 50));
         
 		
 
-	<?php paginate($total, $page, $tableName['package']); ?>
+	<?php paginate($total, $page, $tableName['package'], '1=1'); ?>
 
 </div>
 </div>
