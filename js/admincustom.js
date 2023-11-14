@@ -146,11 +146,13 @@ function package_location_autocomplete() {
         select: function(event, ui) {
             var value = {'object_name': ui.item.label, object_d: ui.item.item_id};
             
-            setMarker(ui.item.item_latlng)
-            console.log(ui.item.item_latlng);
+            if(ui.item.item_latlng !=null){
+                setMarker(ui.item.item_latlng)
+                $('#lat_lng').val(ui.item.item_latlng);
+            }
             $('#volunterAutocomplete').attr('value', value);
             $('#victim_zone_id').attr('value',ui.item.item_id);
-            $('#lat_lng').val(ui.item.item_latlng);
+            
             return true;
         }
     });
