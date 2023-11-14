@@ -7,6 +7,7 @@ include("includes/header.php");
 
 //Body Begins
 ?>
+
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
@@ -205,9 +206,17 @@ include("includes/footer.php");
     <?php                                              
        echo $addressPoints; 
     ?>];
+/*
+
+LEAFLET STARTS HERE
+
+*/
+
+
+
 // Provide your access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52144,82.23782], 10);
+var map = L.mapbox.map('map', 'mapbox://styles/shrestha/ckpgdxj4f1q3717vxdmi63m01').setView([28.52144,82.23782], 10);
 
  var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
