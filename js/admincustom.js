@@ -135,16 +135,22 @@ function package_location_autocomplete() {
                         return {            
                             label: item.help_call_name + ", " + item.help_call_location + " (" + item.help_call_id + ")",
                             item_id: item.help_call_id,
+                            item_latlng: item.help_call_latlng,
                             // place: item.help_call_location
                         }
+
                     }))
                 }
             })
         },
         select: function(event, ui) {
             var value = {'object_name': ui.item.label, object_d: ui.item.item_id};
+            
+            setMarker(ui.item.item_latlng)
+            console.log(ui.item.item_latlng);
             $('#volunterAutocomplete').attr('value', value);
             $('#victim_zone_id').attr('value',ui.item.item_id);
+            $('#lat_lng').val(ui.item.item_latlng);
             return true;
         }
     });
@@ -153,7 +159,11 @@ $(document).ready(function(){
     volunter_name_autocomplete(); //package add volunter name autocomplete
     package_location_autocomplete(); //package add, location autocomplete
 });
-
+function setMarker(latlng){
+    var locArr = latlng.split(',') 
+    marker.setLatLng(locArr);
+    map.setView(locArr);
+}
 
 function in_array(value, array) {
     var key = 0;

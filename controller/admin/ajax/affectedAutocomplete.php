@@ -7,7 +7,7 @@ if(isset($_POST['term']))
 {	
 	
 	$keyword = $_POST['term'];
-	$qur = "SELECT vdc_name, vdc_code, district FROM ".$tableName['vdc']." WHERE vdc_name LIKE '%". $keyword ."%' ORDER BY vdc_code ASC LIMIT 0, 20";
+	$qur = "SELECT vdc_name, vdc_code, district, latlng FROM ".$tableName['vdc']." WHERE vdc_name LIKE '%". $keyword ."%' ORDER BY vdc_code ASC LIMIT 0, 20";
 
 	$result = mysqli_query($GLOBALS['mysqli'], $qur) or die(mysqli_errno());
 	if(mysqli_num_rows($result)){
@@ -17,6 +17,7 @@ if(isset($_POST['term']))
 			$ary["help_call_id"] = $row["vdc_code"];
 			$ary["help_call_name"] = $row["vdc_name"];
 			$ary["help_call_location"] = $row["district"];
+			$ary["help_call_latlng"] = $row["latlng"];
 			array_push($mainAry, $ary);
 		}
 
