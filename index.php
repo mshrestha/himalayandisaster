@@ -207,7 +207,7 @@ include("includes/footer.php");
     ?>];
 // Provide your access token
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.707809112357083, 85.31574726104736], 10);
+var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52144,82.23782], 10);
 
  var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;

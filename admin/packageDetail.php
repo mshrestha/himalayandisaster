@@ -176,7 +176,7 @@ var map = L.mapbox.map('side-map', 'mapbox.satellite')
 L.marker([<?php echo $latlng; ?>], {
     icon: L.mapbox.marker.icon({
         'marker-size': 'medium',
-        'marker-symbol': 'golf',
+        
         'marker-color': '#1087bf'
     })
 }).addTo(map);
