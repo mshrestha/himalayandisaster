@@ -51,8 +51,8 @@ include("includes/header.php");
                      if($row['help_call_id']!=-1)
                         $location = $row['vdc_name'].', '.$row['district'];
                     else {
-                        if(!empty($row['help_location']))
-                            $location = $row['help_location'];
+                        if(!empty($row['help_call_location']))
+                            $location = $row['help_call_location'];
                         else 
                             $location = 'Location #'.$row['pkg_count'];
                     }   
@@ -79,7 +79,7 @@ include("includes/header.php");
                     
 
                      if($row['help_call_id']!=-1){
-                        $location = $row['address'];
+                        $location = $row['help_call_location'];
                      }
                     else {
                         if(!empty($row['help_call_location'])){
@@ -93,7 +93,7 @@ include("includes/header.php");
                     }   
 
 
-                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$row['help_call_id'].' </a>","'. $row['help_call_name']. '"]';
+                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a>","'. $row['help_call_name']. '"]';
                     $count++;
                 }
             }
@@ -321,7 +321,7 @@ LEAFLET STARTS HERE
                 title: title 
             });
             
-            marker.bindPopup('Help Request<br>By ' + warehouse + '<br> ');
+            marker.bindPopup(title + '<br>By ' + warehouse + '<br> ');
             helpMarkers.addLayer(marker);
             helpMarkers.on("click", function(e){
                 $("#mission-detail-div").fadeOut();
