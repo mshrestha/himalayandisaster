@@ -93,7 +93,7 @@ include("includes/header.php");
                     }   
 
 
-                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'.str_replace(array("\r", "\n"), '', $row['help_call_other_needs']).'","'. $row['help_call_name']. '"]';
+                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '"]';
                     $count++;
                 }
             }

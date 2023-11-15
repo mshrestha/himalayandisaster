@@ -32,7 +32,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 				<input type='hidden' name="volunteerid" id="volunteerid"  class="form-control">
 
 				<select name="warehouseId" id="warehouse" required="required" class="form-control" onChange="showAddItem()">
-					<option value="">Warehouse</option>
+					<option value="">Organization</option>
 					<?php getSegment('warehouse'); ?>
 				</select>
 				

@@ -14,24 +14,11 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 ?>
 <div class="wrapper">
 	<?php getSegment("topbar"); ?>
-	<div class="login-centerize col-sm-4 col-sm-offset-4">
-		<div class="row">
-			<h4>New WareHouse</h4>
-			<p><?php displayMsg();?></p>
-			<form method="POST" action="<?php echo $config['adminController'];?>/wareHouseController.php">
-				<input placeholder="Name" class="form-control"  type="text" name="name" />
-				<input placeholder="Address" class="form-control" type="text" name="address" />
-				<input placeholder="Email" class="form-control"  type="email" name="email" />
-				<input placeholder="Phone Number" class="form-control"  type="text" name="phone" />
-				<!-- <input placeholder="Latitude (26.12467)" class="form-control" required="required" type="text" name="latitude" />
-				<input placeholder="Longitude (86.12441)" class="form-control" required="required" type="text" name="longitude" /> -->
-				<input class="form-control" type="submit" Value="Register" />
-			</form>
-		</div>
-		<div class="row">
-			<h4>Registered WareHouse</h4>
-			<table cellspacing="5" cellpadding="5 ">
-				<tr>
+	<div class="row">
+		<div class="col-md-8">
+			<h1>Registered Organizations</h1>
+			<table cellspacing="5" cellpadding="5 " class="records_list table table-condensed table-hover table-striped">
+				<tr class="success">
 					<th>ID</th>
 					<th>Name</th>
 					<th>Location</th>
@@ -45,31 +32,46 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 
 				$count = 1;
 				if(mysqli_num_rows($result) >=1){
-					while ($row = mysql_fetch_array($result)):
-						?>
-					<tr>
-						<td><?php echo $row['w_id'] ?> </td>
-						<td><?php echo ucfirst($row["w_name"]); ?></td>
-						<td><?php echo $row["w_address"];?></td>
-						<td><?php echo $row["w_email"];?></td>
-						<td><?php echo $row["w_phone"];?></td>
-						<td>
-							<a href="<?php echo $config['adminController']. '/wareHouseController.php?id='. $row['w_id'] . '&action=delete';?>">Delete</a>
-						</td>
-					</tr>
-				<?php endwhile; ?> 
+					while ($row = mysql_fetch_array($result)): ?>
+						<tr>
+							<td><?php echo $row['w_id'] ?> </td>
+							<td><?php echo ucfirst($row["w_name"]); ?></td>
+							<td><?php echo $row["w_address"];?></td>
+							<td><?php echo $row["w_email"];?></td>
+							<td><?php echo $row["w_phone"];?></td>
+							<td>
+								<a href="<?php echo $config['adminController']. '/wareHouseController.php?id='. $row['w_id'] . '&action=delete';?>">Delete</a>
+							</td>
+						</tr>
+					<?php endwhile; ?> 
 				<?php 
-			}
-			else {
+				}
+				else {
 				echo "No entries yet";
-			}
-
-			?>
-		</table>
-		<?php paginate($total, $page, $tableName['warehouse'], $whereCondition); ?>
+				} ?>
+			</table>
+			<?php paginate($total, $page, $tableName['warehouse'], $whereCondition); ?>
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-2">
+			<h3>Add New Organization</h3>
+			<p><?php displayMsg();?></p>
+			<form method="POST" action="<?php echo $config['adminController'];?>/wareHouseController.php">
+				<input placeholder="Name" class="form-control"  type="text" name="name" />
+				<input placeholder="Address" class="form-control" type="text" name="address" />
+				<input placeholder="Email" class="form-control"  type="email" name="email" />
+				<input placeholder="Phone Number" class="form-control"  type="text" name="phone" />
+				<!-- <input placeholder="Latitude (26.12467)" class="form-control" required="required" type="text" name="latitude" />
+				<input placeholder="Longitude (86.12441)" class="form-control" required="required" type="text" name="longitude" /> -->
+				<input class="form-control" type="submit" Value="Register" />
+			</form>
+		</div>
+		
 	</div>
+		
 </div>
-</div>
+
 <?php
 //Includes
 include("../includes/adminfooter.php");

@@ -37,11 +37,11 @@
                 </li>
 
                 <?php endif; ?>
-                <li><a href="registeredVolunteers.php" <?php if($page=='volunteer-reg' ) echo 'class="active"';?>> Volunteer</a>
-                </li>
+                
                 <li><a href="helpRequests.php" <?php if($page=='helprequest' ) echo 'class="active"';?>>Help Requests</a>
                 </li>
-
+                <li><a href="registeredVolunteers.php" <?php if($page=='volunteer-reg' ) echo 'class="active"';?>> Volunteer</a>
+                </li>
                 <?php if($role !=2 ): ?>
                 <li class="dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,7 +50,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     
                     <ul class="" >
-                        <li><a href="addEditWareHouse.php" <?php if($page=='warehouse' ) echo 'class="active"';?>>WareHouses</a>
+                        <li><a href="addEditWareHouse.php" <?php if($page=='warehouse' ) echo 'class="active"';?>>Organizations</a>
                         </li>
                         <li><a href="addEditStockType.php" <?php if($page=='stock' ) echo 'class="active"';?>>Stock Categories</a>
                         </li>
