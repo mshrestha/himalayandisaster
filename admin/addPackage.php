@@ -2,7 +2,7 @@
 <?php
 //Includes
 include("../includes/adminIncludes.php");
-if(!$_SESSION['name'] || $_SESSION['userrole'] == 2) {
+if(!$_SESSION['name'] ) {
 	header('Location:index.php');
 }
 include("../system/config.php");
@@ -14,7 +14,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 ?>
 <div class="wrapper">
 	<?php getSegment("topbar"); ?>
-	<div class=" col-md-12">
+	<div class="col-md-12">
 		<div class="row col-md-4">
 			<?php 
 			$newPackageID = generatePackageId();

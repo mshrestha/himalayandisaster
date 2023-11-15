@@ -13,16 +13,24 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 ?>
 <div class="wrapper">
 	<?php getSegment("topbar"); ?>
-	<div "col-lg-12">
-		<div class="">
+	<div class="row">
+		<div class="col-lg-12">
+		<?php 
+			$newPackageID = generatePackageId();
+			$suggestLocation = '28.4719709,84.9678058';
+			?>
 			<h1>Help Required</h1>
 			<p><?php displayMsg();?></p>
 			<?php if($_SESSION['userrole'] != 2): ?>
-				<div class="row col-lg-6 ">
+				<div class="row col-lg-4 ">
 					<form method="POST" action="<?php echo $config['controller'];?>/helpController.php ">
 						<input type="text" placeholder="Name"name="name" class="form-control" />
 						<input type="text" placeholder="Phone number" name="phonenumber" class="form-control" />
-						<input type="text" placeholder="Address" name="location" class="form-control" />
+						
+						<input class="form-control" type='text' id='victimzoneAutocomplete' name='victims_zone' placeholder='Type affected Place name'>
+						<input type='hidden' name="victim_zone_id"  id="victim_zone_id" class="form-control">	
+						<input type='text' required name="lat_lng" readonly id="lat_lng" class="form-control" placeholder="Latitude, Longitude">	
+						<input type="text" placeholder="Address Note" name="location" class="form-control" />
 						<p>Need Type</p>
 						<label><input name="needType[]" type="checkbox" class="form-group" value="water" /> Water </label>
 						<label><input name="needType[]" type="checkbox" class="form-group" value="food" /> Food </label>
@@ -39,6 +47,9 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 							</p>
 							<input type="submit" value="SUBMIT"  />
 						</form>
+					</div>
+					<div class="col-lg-8">
+						<div id="side-map"></div>
 					</div>
 				<?php endif; ?>
 				<div class="row col-sm-6 col-sm-offset-3">
@@ -138,5 +149,39 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 //Includes
 	include("../includes/adminfooter.php");
 	?>
-
+<script>
+    
+	// Provide your access token
+	L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
+	var map = L.mapbox.map('side-map', 'mapbox.satellite')
+		.setView([<?php echo $suggestLocation; ?>], 13);
+	
+	// L.marker is a low-level marker constructor in Leaflet.
+	var marker = L.marker([<?php echo $suggestLocation; ?>], {
+		icon: L.mapbox.marker.icon(
+			{
+				'marker-size': 'medium',
+				'marker-symbol': '',
+				'marker-color': '#ff0000'
+			}),
+		draggable: true
+		
+	}).addTo(map);
+	
+	var coordinates = document.getElementById('lat_lng');
+	
+	marker.on('dragend', ondragend);
+	
+	// Set the initial marker coordinate on load.
+	ondragend();
+	
+	function ondragend() {
+		var m = marker.getLatLng();
+		console.log(m);
+		coordinates.value =  m.lat.toFixed(7) + ',' + m.lng.toFixed(7);
+	}
+	
+	
+		
+	</script>
 

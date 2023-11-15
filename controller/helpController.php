@@ -28,6 +28,7 @@ if(isset($_POST["help-type"])){
 
 		$qur = "Insert into " . $tableName['helpCall'] . " values(null,'$name', '$needString','$phone','$address','$desc','$status','')";
 
+		
 		$result = mysqli_query($mysqli, $qur) or die($qur. " " . mysqli_error());
 
 
