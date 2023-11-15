@@ -63,9 +63,44 @@ include("includes/header.php");
                 
                 }
             }
-             // echo( $addressPoints ); 
-             // die();
-          
+
+            //List for Help Requests starts here
+            $whereConditionHelp ='';
+            $qur2 = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
+            $resultHelp= mysql_query($qur2);
+            $helpAddressPoints = '';
+            
+            if(mysqli_num_rows($resultHelp) >=1){
+                $count = 1;
+                while ($row = mysql_fetch_array($resultHelp)){
+                    if($count >1){
+                        $helpAddressPoints .=",\n";
+                    }
+                    
+
+                     if($row['help_call_id']!=-1){
+                        $location = $row['address'];
+                     }
+                    else {
+                        if(!empty($row['help_call_location'])){
+                            $location = $row['help_call_location'];
+                            echo "GETS INSIDE IF";
+                        }else{
+                            echo "GETS OUTSIDE IF";
+                            $location = 'Location #'.$row['help_call_id'];
+                        } 
+                            
+                    }   
+
+
+                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$row['help_call_id'].' </a>","'. $row['help_call_name']. '"]';
+                    $count++;
+                }
+            }
+            
+                
+                    
+            //End of Help Requests
             ?>
 
 <div class="wrapper">
@@ -206,6 +241,11 @@ include("includes/footer.php");
     <?php                                              
        echo $addressPoints; 
     ?>];
+
+var helpAddressPoints = [
+    <?php                                              
+       echo $helpAddressPoints; 
+    ?>];
 /*
 
 LEAFLET STARTS HERE
@@ -214,15 +254,17 @@ LEAFLET STARTS HERE
 
 
 
-// Provide your access token
-L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52144,82.23782], 10);
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
+    var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52144,82.23782], 10);
 
- var markers = new L.MarkerClusterGroup();
+    var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
-
+    
     for (var i = 0; i < addressPoints.length; i++) {
+        
         var a = addressPoints[i];
+        
         // console.log(a);
         var title = a[2];
         var lat = a[0];
@@ -251,7 +293,44 @@ var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52144,82.23782], 1
             });
         }
     }   
+    
+
+    //For Help Markers
+    var helpMarkers = new L.MarkerClusterGroup();
+    for (var i = 0; i < helpAddressPoints.length; i++) {
+        var b = helpAddressPoints[i];
+
+        //console.log(b);
+        var title = b[2];
+        var lat = b[0];
+        var lng = b[1];
+        var warehouse= b[3];
+        //var date= b[4];
+
+        
+        
+
+        if(
+            ($.trim(lat) != "" && $.trim(lng) != "")
+            &&
+            (decimal.test(lat) && decimal.test(lng) )
+          )
+        {
+            var marker = L.marker(new L.LatLng(lat, lng),  {
+                icon: L.mapbox.marker.icon({'marker-size':'medium',  'marker-color': 'ff0000'}),
+                title: title 
+            });
+            
+            marker.bindPopup(title+ '<br>By ' + warehouse + '<br> ');
+            helpMarkers.addLayer(marker);
+            helpMarkers.on("click", function(e){
+                $("#mission-detail-div").fadeOut();
+            });
+        }
+    }
+    
     map.addLayer(markers);
+    map.addLayer(helpMarkers);
 
    function onmove() {
     // Get the map bounds - the top-left and bottom-right locations.

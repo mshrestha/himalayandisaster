@@ -4,7 +4,7 @@ require '../system/functions.php';
 require '../system/config.php';
 ?>
 <?php
-$sender = "sudomksandwich@gmail.com";
+$sender = "info@kazistudios.com";
 if(isset($_POST["help-type"])){
 	
 	$needs = $_POST["needType"];	
@@ -12,12 +12,16 @@ if(isset($_POST["help-type"])){
 	$name = mysqli_real_escape_string($mysqli, $_POST['name']);
 	$address = mysqli_real_escape_string($mysqli, $_POST['location']);
 	$phone = mysqli_real_escape_string($mysqli, $_POST['phonenumber']);
+	$latlng = mysqli_real_escape_string($mysqli, $_POST['lat_lng']);
 
 	$error = 0;
 	if($help_type=="help-want-guest" || $help_type=="help-want-admin"){   // Handles registarion of help calls from front end and back end
 
 		$desc = mysqli_real_escape_string($mysqli, $_POST["description"] );
-		$needString = arrayToString($needs) ;
+		if($needs != null){
+			$needString = arrayToString($needs) ;
+		}
+		
 		
 		if($help_type=="help-want-guest"){
 			$status="Not verified";
@@ -26,7 +30,7 @@ if(isset($_POST["help-type"])){
 			$status="Verified";
 		}
 
-		$qur = "Insert into " . $tableName['helpCall'] . " values(null,'$name', '$needString','$phone','$address','$desc','$status','')";
+		$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng')";
 
 		
 		$result = mysqli_query($mysqli, $qur) or die($qur. " " . mysqli_error());
