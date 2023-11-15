@@ -33,7 +33,7 @@ include("system/functions.php");
             <?php endif; ?>
         </div>
         <div class="panel-body">
-            <?php $packageQry = "select a.pkg_id,a.help_location,a.help_call_id,a.pkg_approval,a.pkg_timestamp,w.w_name,a.help_call_latlng,b.vdc_name,b.district,c.agent_name,c.agent_email,c.agent_phone from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent']. " c," .$tableName['warehouse'] ." w where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and w.w_id=a.w_id and a.pkg_count='".$packageId."'";
+            <?php $packageQry = "select a.pkg_id,a.help_call_latlng,a.help_call_id,a.pkg_approval,a.pkg_timestamp,w.w_name,a.help_call_latlng,b.vdc_name,b.district,c.agent_name,c.agent_email,c.agent_phone from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent']. " c," .$tableName['warehouse'] ." w where a.agent_id=c.agent_id and a.help_call_id=b.vdc_code and w.w_id=a.w_id and a.pkg_count='".$packageId."'";
 				$packageResult= mysql_query($packageQry);
 				if(mysql_num_rows($packageResult) >=1){
 					while ($row = mysql_fetch_array($packageResult)):
