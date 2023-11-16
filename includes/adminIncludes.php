@@ -16,7 +16,7 @@ session_start();
 	<link rel="stylesheet" href="../css/adminstyle.css">
     <link rel="stylesheet" href="../css/adminstyle2.css">
     <link rel="stylesheet" href="../css/ui.css">
-    <link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="../css/leaflet.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<META name="description" content="Save Nepal" />
 	<META name="keywords" content="Nepal, prayfornepal, savenepal, earthquake, earthquakerelif" /> 
