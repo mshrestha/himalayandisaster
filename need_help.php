@@ -32,7 +32,7 @@ $_SESSION['page'] = 'ineedhelp';
 						<label><input name="needType[]" type="checkbox" class="form-group" value="volunteer" /> Volunteer Clean up / स्वयंसेवी</label>
 					</div>
 					<div class="col-lg-12">
-						<label><input name="needType[]" type="checkbox" class="form-group" value="other" /> Other Information (please write Location and need information) / अन्य</label><br />
+						<label> Other Information (please write Location and need information) / अन्य</label><br />
 						<textarea style="width: 400px;" name="description" class="form-group leftshift"></textarea>
 					</div>
 					<input type="hidden" name="help-type" value="help-want-guest"/>
