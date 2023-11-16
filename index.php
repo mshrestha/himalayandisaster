@@ -13,6 +13,9 @@ include("includes/header.php");
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
 
 <?php 
+            $newPackageID = generatePackageId();
+            $suggestLocation = '28.4719709,84.9678058';
+
 			$whereCondition = "and a.pkg_approval='1'";
 			if(trim($_GET['status']) == "0"){
 				$whereCondition = "and a.pkg_approval='0'";
@@ -116,14 +119,14 @@ include("includes/header.php");
                     </div>
                     <div class="list-justified-container" id="wcontainer">
                         <ul class="list-justified text-center">
-                            <li class="btn" data-toggle="modal" data-target="#myModal">
+                            <!-- li class="btn" data-toggle="modal" data-target="#myModal">
                                 <p class="size-h3">WANT TO HELP</p>
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
-                            </li>
-                            <!--li>
-                                <p class="size-h3"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">NEED HELP</a></p>
-                                <p class="text-muted"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">सहायता चाहिन्छ</a></p>
                             </li -->
+                            <li id="openHelpBtn" class="btn">
+                                <p class="size-h3">NEED HELP</p>
+                                <p class="text-muted">सहायता चाहिन्छ</p>
+                            </li>
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
                                 <p class="text-muted">हाम्रो बारेमा</p>
@@ -169,53 +172,55 @@ include("includes/header.php");
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h1 class="modal-title" id="myModalLabel">Volunteer Sign up</h1>
+        <h1 class="modal-title" id="myModalLabel">Need Help?</h1>
       </div>
       <div class="modal-body">
-        <form method="POST" action="/controller/helpController.php ">
-					<label>Full Name / पुरा नाम </label>
-					<input type="text" name="name" class="form-group" required="required"><br />
-					<label>Phone Number / फोन नम्बर</label>
-					<input type="text" name="phonenumber" class="form-group"><br />
-					<label>Email / ईमेल</label>
-					<input type="email" name="email" class="form-group"><br />
-					<label>Type of Volunteer / स्वयंसेवक को प्रकार</label><br />
-					<label><input type="radio" name="volunteer-type" value="technical" class="form-group"> Technical Support / डिजिटल</label><br />
-					<label><input type="radio" name="volunteer-type" value="ground" class="form-group"> Field work / भू काम</label><br />
-					<label><input type="radio" name="volunteer-type" value="resources" class="form-group"> Provide Resource / स्रोत</label><br />
+        <div class="row">
+            <div class="col-lg-4">
+                <form method="POST" action="<?php echo $config['adminController'];?>/packageController.php?action=create">
+                    
+                    <input type='text' name="volunteer"  class="form-control" id='volunterAutocomplete' placeholder='Type Volunter Name'>
+                    <input type='hidden' name="volunteerid" id="volunteerid"  class="form-control">
 
-					<label>Current Location / वर्तमान स्थान</label>
-					<input type="text" name="location" class="form-group" required="required"><br />
-					<label>Willing to Travel / यात्रा गर्न इच्छुक</label><br />
-					<label><input type="radio" name="travel" value="yes" class="form-group"> Yes / हो</label>
-					<label><input type="radio" name="travel" value="no" class="form-group"> No / होइन</label><br />
-					<label>Duration Available for? / उपलब्ध अवधि?</label>
-					<input type="text" name="availability" class="form-group"><br />
-					<label>Languages Known (Separate by comma)/ भाषा ज्ञात (अल्पविराम द्वारा अलग)</label>
-					<input type="text" name="languages" class="form-group"><br />
-					<label>Skills / कौशल</label><br />
-					<label><input name="skills[]" type="checkbox" class="form-group" value="computer"> Basic Computer Skills / मूल कम्प्युटरकोक्षमता</label><br />
-					<label><input name="skills[]" type="checkbox" class="form-group" value="analysis"> Data processing &amp; analysis / डाटा प्रोसेसिङ</label><br />
-					<label><input name="skills[]" type="checkbox" class="form-group" value="advanced-medical"> Doctor &amp; Advanced Medical Skills / डाक्टर र विकसित चिकित्सा कौशल</label><br />
-					<label><input name="skills[]" type="checkbox" class="form-group" value="basic-medical"> Basic Medical Training / मूल चिकित्सा प्रशिक्षण</label><br />
-					<label><input name="skills[]" type="checkbox" class="form-group" value="translation"> English-Nepali Translation / अंग्रेजी - नेपाली अनुवाद</label><br />
-					<label><input name="skills[]" type="checkbox" class="form-group" value="engineer"> Engineer &amp; Structure Assessment / इन्जिनियर र संरचना आकलन</label><br />
-					<label>Other Skills / अन्य कौशल</label><br />
-					<textarea name="other-skills" placeholder="Other Skills" class="form-control"></textarea>
-					<label>Vehicle</label>
-					<label><input type="checkbox" name="vehicle[]" value="bike" class="form-group"> Bike / बाइक</label>
-					<label><input type="checkbox" name="vehicle[]" value="car" class="form-group"> Car / कार</label>
-					<label><input type="checkbox" name="vehicle[]" value="truck" class="form-group"> Truck / ट्रक</label>
-					<input type="hidden" name="help-type" value="volunteer-registration">
-                    <br /><br />
-					<input type="submit" value="SUBMIT" class="btn btn-success">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</form>
+                    <select name="warehouseId" id="warehouse" required="required" class="form-control" onChange="showAddItem()">
+                        <option value="">Organization</option>
+
+                        <?php
+                                $query=mysqli_query($mysqli, "Select * from " . $tableName['warehouse']);
+                                while($row = $query->fetch_array()) {
+                                    echo "<option value='" . $row[0] . "'>" . $row[1] . "</option>";
+                                }
+                        ?>
+                        
+                    </select>
+                    
+                    <input class="form-control" type='text' id='victimzoneAutocomplete' name='victims_zone' placeholder='Type affected Place name'>
+                    <input type='hidden' name="victim_zone_id"  id="victim_zone_id" class="form-control">	
+                    <input type='text' required name="lat_lng" readonly id="lat_lng" class="form-control" placeholder="Latitude, Longitude">	
+                    
+                    <div id="itemField" class="hidden row nopadding">
+                        
+                        <input class="form-group packageName" id="name1" type="text" name="itemName[]" placeholder="Item Name"/>					<input class="form-group packageQty" id="qty1" type="number" name="itemQty[]" placeholder="Quantity" size="4"/>
+
+                        <input class="form-group packageID" id="itemid1" type="hidden" value="" name="itemId[]" />
+                    </div>
+                    <span id="addField" class="hidden pull-left">
+                    <button type="button" class="btn btn-xs btn-success btn-lg"><i class="fa fa-plus"></i>   Add More Items</button>
+                    </span><br /><br />
+                    <input type="hidden" name ="randPackageID" value="<?php echo $newPackageID; ?>">
+                    <input class="form-control" type="submit" Value="Create Mission" />
+
+                </form>
+            </div>
+            <div class="col-lg-8">
+                <div id="side-map"></div>
+            </div>
+        </div>
       </div>
       
     </div>
@@ -252,7 +257,11 @@ LEAFLET STARTS HERE
 
 */
 
-
+$('#openHelpBtn').on('click',function(){
+    $('.modal-body').load('need_help.php',function(){
+        $('#myModal').modal({show:true});
+    });
+});
 
     // Provide your access token
     L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
@@ -332,7 +341,16 @@ LEAFLET STARTS HERE
     map.addLayer(markers);
     map.addLayer(helpMarkers);
 
-   function onmove() {
+    //For modal window markers
+
+    
+    
+    var sideMap = L.mapbox.map('side-map', 'mapbox.satellite').setView([28.4719709,84.9678058], 13);
+    var marker = L.marker([28.4719709,84.9678058], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
+   
+
+
+function onmove() {
     // Get the map bounds - the top-left and bottom-right locations.
     var inBounds = [],
         bounds = map.getBounds();
