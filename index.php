@@ -144,11 +144,11 @@ include("includes/header.php");
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
                         <h1>About Us</h1>
-                        <p>On the aftermath of the deadly earthquake disaster in Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
+                        <p>On the aftermath of the deadly earthquake disaster in Jajarkot, Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
 
 <p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
 
-<p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking to volunteer, please do sign up as a volunteer through our 'WANT TO HELP' link above.</p>
+<p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking for help and need relief materials, please do send us a message through our 'NEED HELP' link above.</p>
                        
                     </div>
                     <div class="panel-body" id="contact-details">
