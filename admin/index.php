@@ -28,8 +28,9 @@
 			$count = 1;
 			if(mysqli_num_rows($result) >=1) { 
                                                 
-                while ($row = $result->fetch_array(MYSQLI_NUM)){
-                    //echo $row['vdc_name'];
+                while ($row = $result->fetch_array()){
+
+                    
                     if($count >1){
                         $addressPoints .=",\n";
                     }
@@ -42,7 +43,7 @@
                     $count++;
                 
                 }
-				debug_data($addressPoints);
+				
             }
 
             ?>
@@ -205,7 +206,7 @@ include("../includes/adminfooter.php");
        echo $addressPoints; 
     ?>];
 // Provide your access token
-    console.log(addressPoints);
+    //console.log(addressPoints);
 L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
 var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.707809112357083, 85.31574726104736], 9);
 
@@ -224,7 +225,7 @@ var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
           )
         {
         var marker = L.marker(new L.LatLng(lat, lng), {
-            icon: L.mapbox.marker.icon({'marker-size':'medium', 'marker-symbol': 'golf', 'marker-color': '1087bf'}),
+            icon: L.mapbox.marker.icon({'marker-size':'medium', 'marker-symbol': '', 'marker-color': '1087bf'}),
             title: title
         });
         marker.bindPopup(title);
