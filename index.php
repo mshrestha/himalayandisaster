@@ -84,10 +84,10 @@ include("includes/header.php");
                                 <p class="size-h3">WANT TO HELP</p>
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
                             </li>
-                            <!--li>
+                            <li>
                                 <p class="size-h3"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">NEED HELP</a></p>
                                 <p class="text-muted"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">सहायता चाहिन्छ</a></p>
-                            </li -->
+                            </li>
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
                                 <p class="text-muted">हाम्रो बारेमा</p>
