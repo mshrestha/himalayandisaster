@@ -84,9 +84,9 @@ include("includes/header.php");
                                 <p class="size-h3">WANT TO HELP</p>
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
                             </li>
-                            <li>
-                                <p class="size-h3"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">NEED HELP</a></p>
-                                <p class="text-muted"><a href="http://www.kathmandulivinglabs.org/earthquake/reports/submit" target="_blank">सहायता चाहिन्छ</a></p>
+                            <li class="btn" data-toggle="modal" data-target="#needHelp">
+                                <p class="size-h3">NEED HELP</p>
+                                <p class="text-muted">सहायता चाहिन्छ</p>
                             </li>
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
@@ -181,9 +181,62 @@ include("includes/header.php");
     </div>
   </div>
 </div>
-
-
 <!-- End volunteer Form -->
+
+<!-- NeedHelp Modal -->
+<div class="modal fade" id="needHelp" tabindex="-1" role="dialog" aria-labelledby="needHelpModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h1 class="modal-title" id="needHelpModalLabel">Incident Report</h1>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/controller/helpController.php ">
+					<label>Full Name / पुरा नाम </label>
+					<input type="text" name="name" class="form-group" required="required"><br />
+					<label>Phone Number / फोन नम्बर</label>
+					<input type="text" name="phonenumber" class="form-group"><br />
+					<label>Email / ईमेल</label>
+					<input type="email" name="email" class="form-group"><br />
+					<label>Type of Volunteer / स्वयंसेवक को प्रकार</label><br />
+					<label><input type="radio" name="volunteer-type" value="technical" class="form-group"> Technical Support / डिजिटल</label><br />
+					<label><input type="radio" name="volunteer-type" value="ground" class="form-group"> Field work / भू काम</label><br />
+					<label><input type="radio" name="volunteer-type" value="resources" class="form-group"> Provide Resource / स्रोत</label><br />
+
+					<label>Current Location / वर्तमान स्थान</label>
+					<input type="text" name="location" class="form-group" required="required"><br />
+					<label>Willing to Travel / यात्रा गर्न इच्छुक</label><br />
+					<label><input type="radio" name="travel" value="yes" class="form-group"> Yes / हो</label>
+					<label><input type="radio" name="travel" value="no" class="form-group"> No / होइन</label><br />
+					<label>Duration Available for? / उपलब्ध अवधि?</label>
+					<input type="text" name="availability" class="form-group"><br />
+					<label>Languages Known (Separate by comma)/ भाषा ज्ञात (अल्पविराम द्वारा अलग)</label>
+					<input type="text" name="languages" class="form-group"><br />
+					<label>Skills / कौशल</label><br />
+					<label><input name="skills[]" type="checkbox" class="form-group" value="computer"> Basic Computer Skills / मूल कम्प्युटरकोक्षमता</label><br />
+					<label><input name="skills[]" type="checkbox" class="form-group" value="analysis"> Data processing &amp; analysis / डाटा प्रोसेसिङ</label><br />
+					<label><input name="skills[]" type="checkbox" class="form-group" value="advanced-medical"> Doctor &amp; Advanced Medical Skills / डाक्टर र विकसित चिकित्सा कौशल</label><br />
+					<label><input name="skills[]" type="checkbox" class="form-group" value="basic-medical"> Basic Medical Training / मूल चिकित्सा प्रशिक्षण</label><br />
+					<label><input name="skills[]" type="checkbox" class="form-group" value="translation"> English-Nepali Translation / अंग्रेजी - नेपाली अनुवाद</label><br />
+					<label><input name="skills[]" type="checkbox" class="form-group" value="engineer"> Engineer &amp; Structure Assessment / इन्जिनियर र संरचना आकलन</label><br />
+					<label>Other Skills / अन्य कौशल</label><br />
+					<textarea name="other-skills" placeholder="Other Skills" class="form-control"></textarea>
+					<label>Vehicle</label>
+					<label><input type="checkbox" name="vehicle[]" value="bike" class="form-group"> Bike / बाइक</label>
+					<label><input type="checkbox" name="vehicle[]" value="car" class="form-group"> Car / कार</label>
+					<label><input type="checkbox" name="vehicle[]" value="truck" class="form-group"> Truck / ट्रक</label>
+					<input type="hidden" name="help-type" value="volunteer-registration">
+                    <br /><br />
+					<input type="submit" value="SUBMIT" class="btn btn-success">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- End of NeedHelp Modal -->
 <!-- Begin Mission Display Div -->
 <div id="mission-detail-div" style="position:fixed; top:0px; right:0px;">
   
