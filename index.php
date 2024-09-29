@@ -114,7 +114,7 @@ include("includes/header.php");
             <div class="col-md-6">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding"><a href="#" id="title-link">Jajarkot Earthquake Response</a></h3>
+                        <h3 class="ng-binding"><a href="#" id="title-link">Kathmandu Flood Response</a></h3>
                         
                     </div>
                     <div class="list-justified-container" id="wcontainer">
@@ -124,7 +124,7 @@ include("includes/header.php");
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
                             </li -->
                             <li id="openHelpBtn" class="btn">
-                                <p class="size-h3">NEED HELP</p>
+                                <p class="size-h3">Help Needed</p>
                                 <p class="text-muted">सहायता चाहिन्छ</p>
                             </li>
                             <li class="btn" id="about-link">
@@ -144,11 +144,11 @@ include("includes/header.php");
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
                         <h1>About Us</h1>
-                        <p>On the aftermath of the deadly earthquake disaster in Jajarkot, Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
+                        <p>On the aftermath of the massive flooding  disaster in, Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
 
 <p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
 
-<p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking for help and need relief materials, please do send us a message through our 'NEED HELP' link above.</p>
+<p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking for help and need relief materials, please do send us a message through our 'HELP Needed' link above.</p>
                        
                     </div>
                     <div class="panel-body" id="contact-details">
@@ -265,8 +265,8 @@ $('#openHelpBtn').on('click',function(){
 
     // Provide your access token
     L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
-    var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52872,82.25730], 10);
-
+    //var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52872,82.25730], 10);
+    var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 15);
     var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
     
@@ -274,7 +274,7 @@ $('#openHelpBtn').on('click',function(){
         
         var a = addressPoints[i];
         
-        // console.log(a);
+       //  console.log(a);
         var title = a[2];
         var lat = a[0];
         var lng = a[1];
@@ -314,7 +314,7 @@ $('#openHelpBtn').on('click',function(){
         var lat = b[0];
         var lng = b[1];
         var warehouse= b[3];
-        //var date= b[4];
+        //var rdate= b[4];
 
         
         
@@ -330,7 +330,7 @@ $('#openHelpBtn').on('click',function(){
                 title: title 
             });
             
-            marker.bindPopup(title + '<br>By ' + warehouse + '<br> ');
+            marker.bindPopup(title + '<br>- By ' + warehouse + '<br> ');
             helpMarkers.addLayer(marker);
             helpMarkers.on("click", function(e){
                 $("#mission-detail-div").fadeOut();
