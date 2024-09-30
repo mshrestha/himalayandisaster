@@ -113,7 +113,7 @@ include("includes/header.php");
             <div class="col-md-6">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding"><a href="#" id="title-link">Nepal Situation Report</a></h3>
+                        <h3 class="ng-binding"><a href="#" id="title-link">NepalNow Travel Situation Report</a></h3>
                         
                     </div>
                     <div class="list-justified-container" id="wcontainer">
@@ -123,7 +123,7 @@ include("includes/header.php");
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
                             </li -->
                             <li id="openHelpBtn" class="btn">
-                                <p class="size-h3">Incident Report</p>
+                                <p class="size-h3">Report</p>
                                 <p class="text-muted">रिपोर्त गर्नुहोस</p>
                             </li>
                             <li class="btn" id="about-link">
