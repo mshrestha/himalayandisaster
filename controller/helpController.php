@@ -3,6 +3,7 @@ session_start();
 require '../system/functions.php';
 require '../system/config.php';
 ?>
+
 <?php
 $sender = "info@kazistudios.com";
 if(isset($_POST["help-type"])){
@@ -65,7 +66,8 @@ if(isset($_POST["help-type"])){
 }
 
 
-redirectPage( $_SERVER['HTTP_REFERER'] );
+// redirectPage( $_SERVER['HTTP_REFERER'] );
+redirectPage( $config['homeUrl'] );
 
 
 }
@@ -78,7 +80,8 @@ elseif($_GET["action"]){
 		mysqli_query($mysqli, $qur) or die($qur . " " . mysqli_error());
 		logMsg("Entry Verified",1);
 	}
-	redirectPage( $_SERVER['HTTP_REFERER'] );
+	// redirectPage( $_SERVER['HTTP_REFERER'] );
+	redirectPage( $config['homeUrl'] );
 }
 function arrayToString($ary){
 	$string = "";

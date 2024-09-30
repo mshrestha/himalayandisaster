@@ -7,7 +7,12 @@ include("includes/header.php");
 
 //Body Begins
 ?>
-
+<style>
+    .form-label-control {
+        margin: 0;
+        margin-bottom: 5px;
+    }
+</style>
 <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
@@ -146,10 +151,9 @@ include("includes/header.php");
                         <h1>About Us</h1>
                         <p>On the aftermath of the massive flooding  disaster in, Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
 
-<p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
+                        <p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
 
-<p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking for help and need relief materials, please do send us a message through our 'HELP Needed' link above.</p>
-                       
+                        <p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking for help and need relief materials, please do send us a message through our 'HELP Needed' link above.</p>  
                     </div>
                     <div class="panel-body" id="contact-details">
                         
@@ -181,43 +185,47 @@ include("includes/header.php");
       </div>
       <div class="modal-body">
         <div class="row">
-            <div class="col-lg-4">
-                <form method="POST" action="<?php echo $config['adminController'];?>/packageController.php?action=create">
-                    
-                    <input type='text' name="volunteer"  class="form-control" id='volunterAutocomplete' placeholder='Type Volunter Name'>
-                    <input type='hidden' name="volunteerid" id="volunteerid"  class="form-control">
-
-                    <select name="warehouseId" id="warehouse" required="required" class="form-control" onChange="showAddItem()">
-                        <option value="">Organization</option>
-
-                        <?php
-                                $query=mysqli_query($mysqli, "Select * from " . $tableName['warehouse']);
-                                while($row = $query->fetch_array()) {
-                                    echo "<option value='" . $row[0] . "'>" . $row[1] . "</option>";
-                                }
-                        ?>
-                        
-                    </select>
-                    
-                    <input class="form-control" type='text' id='victimzoneAutocomplete' name='victims_zone' placeholder='Type affected Place name'>
-                    <input type='hidden' name="victim_zone_id"  id="victim_zone_id" class="form-control">	
-                    <input type='text' required name="lat_lng" readonly id="lat_lng" class="form-control" placeholder="Latitude, Longitude">	
-                    
-                    <div id="itemField" class="hidden row nopadding">
-                        
-                        <input class="form-group packageName" id="name1" type="text" name="itemName[]" placeholder="Item Name"/>					<input class="form-group packageQty" id="qty1" type="number" name="itemQty[]" placeholder="Quantity" size="4"/>
-
-                        <input class="form-group packageID" id="itemid1" type="hidden" value="" name="itemId[]" />
+            <div class="col-lg-5">
+                <form method="POST" action="<?php echo $config['controller'];?>/helpController.php ">
+                    <div class="form-group">
+                        <label class="form-label-control">Full Name / पुरा नाम </label>
+                        <input type="text" name="name" class="form-control" />
                     </div>
-                    <span id="addField" class="hidden pull-left">
-                    <button type="button" class="btn btn-xs btn-success btn-lg"><i class="fa fa-plus"></i>   Add More Items</button>
-                    </span><br /><br />
-                    <input type="hidden" name ="randPackageID" value="<?php echo $newPackageID; ?>">
-                    <input class="form-control" type="submit" Value="Create Mission" />
 
+                    <div class="form-group">
+                        <label class="form-label-control">Phone Number / फोन नम्बर</label>
+                        <input type="text" name="phonenumber" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label-control">Location help is needed  / स्थान</label>
+                        <input type="text" name="location" class="form-control" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label-control">What you need / तपाईंलाई के चाहिन्छ चिन्ह लगाउनुहोस </label>
+                        <div>
+                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="water" /> Water / पानी</label></div>    
+                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="medicine" /> Medicine / औखधि </label></div>
+                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="tent" /> Tent / पाल</label></div>
+                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="food" /> Food / खाना</label></div>
+                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="doctors" /> Doctors / डाक्टर</label></div>
+                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="volunteer" /> Volunteer Clean up / स्वयंसेवी</label></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label-control">Other Information (please write details of all information, including links to pictures or more information) / अन्य</label><br />
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                    
+                    <input type="hidden" name="help-type" value="help-want-guest"/>
+                    <input type="hidden" name="lat_lng" id="help_call_latlng" required>
+
+                    <input type="submit" value="SUBMIT" class="blackbtn" />
                 </form>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 <div id="side-map"></div>
             </div>
         </div>
@@ -258,13 +266,13 @@ LEAFLET STARTS HERE
 */
 
 $('#openHelpBtn').on('click',function(){
-    $('.modal-body').load('need_help.php',function(){
+    // $('.modal-body').load('need_help.php',function(){
         $('#myModal').modal({show:true});
-    });
+    // });
 });
 
     // Provide your access token
-    L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoieG8wd2tpWSJ9.mCLCK1UOF0gijrPiU1FB0w';
+    L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoiY2w3ODQ4dm1rMDYydTNvbWNvcXlwMjBmNSJ9.tigRSYQjUwFZE0zSLd7Onw';
     //var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52872,82.25730], 10);
     var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 15);
     var markers = new L.MarkerClusterGroup();
@@ -342,44 +350,39 @@ $('#openHelpBtn').on('click',function(){
     map.addLayer(helpMarkers);
 
     //For modal window markers
-
+    var sideMap = L.mapbox.map('side-map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 14);
+    var marker = L.marker([27.6775995007861, 85.33990859985352], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
     
-    
-    var sideMap = L.mapbox.map('side-map', 'mapbox.satellite').setView([28.4719709,84.9678058], 13);
-    var marker = L.marker([28.4719709,84.9678058], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
-   
-
-
-function onmove() {
-    // Get the map bounds - the top-left and bottom-right locations.
-    var inBounds = [],
-        bounds = map.getBounds();
-    markers.eachLayer(function(marker) {
-        // For each marker, consider whether it is currently visible by comparing
-        // with the current map bounds.
-        if (bounds.contains(marker.getLatLng())) {
-            inBounds.push(marker.options.title);
-        }
+    marker.on('dragend', function(event) {
+        var latlng = event.target.getLatLng();
+        $('#help_call_latlng').val(latlng.lat + ', ' + latlng.lng);
     });
-       
-       
-       
-       $("#mission-detail-div").fadeOut();
-    // Display a list of markers.
-    document.getElementById('coordinates').innerHTML = inBounds.join('<br>');
-       $("#wcontainer").fadeOut('slow');
-       $("#contact-details").hide();
-       $("#about-details").hide();
-       $( "#heading-bar" ).animate({
-            'margin-top': '-72px',
-            'width': '523px'
+
+    function onmove() {
+        // Get the map bounds - the top-left and bottom-right locations.
+        var inBounds = [],
+        bounds = map.getBounds();
+        markers.eachLayer(function(marker) {
+            // For each marker, consider whether it is currently visible by comparing
+            // with the current map bounds.
+            if (bounds.contains(marker.getLatLng())) {
+                inBounds.push(marker.options.title);
+            }
+        });
+        
+        $("#mission-detail-div").fadeOut();
+        // Display a list of markers.
+        document.getElementById('coordinates').innerHTML = inBounds.join('<br>');
+        $("#wcontainer").fadeOut('slow');
+        $("#contact-details").hide();
+        $("#about-details").hide();
+        $( "#heading-bar" ).animate({ 'margin-top': '-72px', 'width': '523px' }, 1000, function() {
+            // Animation complete.
+        });
+    }
+    //onmove();
     
-        }, 1000, function() {
-    // Animation complete.
-  });
-}
-//onmove();
-map.on('move', onmove);
+    map.on('move', onmove);
     
     $('#map').on('click', 'a', function() {
         

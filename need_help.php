@@ -15,7 +15,7 @@ $_SESSION['page'] = 'ineedhelp';
 				<p>Please  give us the details listed below so we can help.</p>	
 			</span>
 			<div class="form-component">
-				<form method="POST" action="<?php echo $config['controller'];?>/helpController.php ">
+				<form method="POST" action="<?php echo $config['controller'];?>/helpController.php">
 				<label>Full Name / पुरा नाम </label><input type="text" name="name" class="form-group" /><br />
 				<label>Phone Number / फोन नम्बर</label><input type="text" name="phonenumber" class="form-group" /><br />
 				<label>Location help is needed  / स्थान</label><input type="text" name="location" class="form>-group" >
