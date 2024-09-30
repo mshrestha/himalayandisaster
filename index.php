@@ -349,7 +349,7 @@ LEAFLET STARTS HERE
         $('#myModal').modal({show:true});
         //For modal window markers
         var sideMap = L.mapbox.map('side-map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 14);
-        var marker = L.marker([27.6775995007861, 85.33990859985352], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
+        var marker = L.marker([27.68814328468732, 85.3184506743254], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
 
         marker.on('dragend', function(event) {
             var latlng = event.target.getLatLng();
