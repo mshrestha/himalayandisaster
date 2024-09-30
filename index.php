@@ -265,11 +265,7 @@ LEAFLET STARTS HERE
 
 */
 
-$('#openHelpBtn').on('click',function(){
-    // $('.modal-body').load('need_help.php',function(){
-        $('#myModal').modal({show:true});
-    // });
-});
+
 
     // Provide your access token
     L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoiY2w3ODQ4dm1rMDYydTNvbWNvcXlwMjBmNSJ9.tigRSYQjUwFZE0zSLd7Onw';
@@ -349,14 +345,19 @@ $('#openHelpBtn').on('click',function(){
     map.addLayer(markers);
     map.addLayer(helpMarkers);
 
-    //For modal window markers
-    var sideMap = L.mapbox.map('side-map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 14);
-    var marker = L.marker([27.6775995007861, 85.33990859985352], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
-    
-    marker.on('dragend', function(event) {
-        var latlng = event.target.getLatLng();
-        $('#help_call_latlng').val(latlng.lat + ', ' + latlng.lng);
+    $('#openHelpBtn').on('click',function(){
+        $('#myModal').modal({show:true});
+        //For modal window markers
+        var sideMap = L.mapbox.map('side-map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 14);
+        var marker = L.marker([27.6775995007861, 85.33990859985352], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
+
+        marker.on('dragend', function(event) {
+            var latlng = event.target.getLatLng();
+            $('#help_call_latlng').val(latlng.lat + ', ' + latlng.lng);
+        });
     });
+
+   
 
     function onmove() {
         // Get the map bounds - the top-left and bottom-right locations.
