@@ -129,8 +129,8 @@ include("includes/header.php");
                                 <p class="text-muted">म सहायता गर्न चाहन्छु</p>
                             </li -->
                             <li id="openHelpBtn" class="btn">
-                                <p class="size-h3">Help Needed</p>
-                                <p class="text-muted">सहायता चाहिन्छ</p>
+                                <p class="size-h3">Incident Report</p>
+                                <p class="text-muted">रिपोर्त गर्नुहोस</p>
                             </li>
                             <li class="btn" id="about-link">
                                 <p class="size-h3">ABOUT US</p>
@@ -149,11 +149,11 @@ include("includes/header.php");
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
                         <h1>About Us</h1>
-                        <p>On the aftermath of the massive flooding  disaster in, Nepal, a lot of organizations and small impromptu groups of people have emerged to volunteer and help out in any way they can. The biggest problem everyone is having is coordinating between these different groups of people and resources on how to mobilize them efficiently.</p>
+                        <p>This Situation report is a collection of incident reporting and its mapping collected from a public forum and validated by our team.</p>
 
                         <p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
 
-                        <p>We are also keeping track of volunteers, linking different places where help is required with volunteers. If you are looking for help and need relief materials, please do send us a message through our 'HELP Needed' link above.</p>  
+                        
                     </div>
                     <div class="panel-body" id="contact-details">
                         
