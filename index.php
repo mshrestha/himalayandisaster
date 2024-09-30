@@ -202,7 +202,7 @@ include("includes/header.php");
                         <input type="text" name="location" class="form-control" >
                     </div>
                     
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label class="form-label-control">What you need / तपाईंलाई के चाहिन्छ चिन्ह लगाउनुहोस </label>
                         <div>
                             <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="water" /> Water / पानी</label></div>    
@@ -212,7 +212,7 @@ include("includes/header.php");
                             <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="doctors" /> Doctors / डाक्टर</label></div>
                             <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="volunteer" /> Volunteer Clean up / स्वयंसेवी</label></div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label class="form-label-control">Other Information (please write details of all information, including links to pictures or more information) / अन्य</label><br />
