@@ -14,8 +14,26 @@ if(isset($_POST["help-type"])){
 	$address = mysqli_real_escape_string($mysqli, $_POST['location']);
 	$phone = mysqli_real_escape_string($mysqli, $_POST['phonenumber']);
 	$latlng = mysqli_real_escape_string($mysqli, $_POST['lat_lng']);
-
+	$help_file = null;
 	$error = 0;
+
+	// file upload
+	if (isset($_FILES["file"]) && $_FILES["file"]["error"] == UPLOAD_ERR_OK) {
+		$targetDir = "../uploads/";
+
+		// Get file extension
+        $fileExtension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+        $uniqueFileName = uniqid("file_", true) . '.' . $fileExtension;
+        $targetFile = $targetDir . $uniqueFileName;
+
+		// Move uploaded file
+		if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
+			// echo "The file has been uploaded: " . htmlspecialchars(basename($_FILES["file"]["name"]));
+			
+			$help_file = $uniqueFileName;
+		}
+	}
+
 	if($help_type=="help-want-guest" || $help_type=="help-want-admin"){   // Handles registarion of help calls from front end and back end
 
 		$desc = mysqli_real_escape_string($mysqli, $_POST["description"] );
@@ -31,7 +49,7 @@ if(isset($_POST["help-type"])){
 			$status="Verified";
 		}
 
-		$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng')";
+		$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`, `help_call_file`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng', '$help_file')";
 
 		
 		$result = mysqli_query($mysqli, $qur) or die($qur. " " . mysqli_error());
@@ -41,7 +59,7 @@ if(isset($_POST["help-type"])){
 
 	}
 
-	elseif($help_type == "volunteer-registration"){  //Handles Registration of Volunteers who wants to help (From front end)
+	elseif($help_type == "volunteer-registration") {  //Handles Registration of Volunteers who wants to help (From front end)
 
 		$volunteer_type = mysqli_real_escape_string($mysqli, $_POST["volunteer-type"]);
 		

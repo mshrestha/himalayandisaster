@@ -10339,6 +10339,12 @@ table.responsive {
 #side-map{
     height:300px;
 }
+
+.form-label-control {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
 span.ui-coordinates {
   background:rgba(0,0,0,0.5);
   position:absolute;
