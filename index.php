@@ -270,7 +270,7 @@ LEAFLET STARTS HERE
     // Provide your access token
     L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoiY2w3ODQ4dm1rMDYydTNvbWNvcXlwMjBmNSJ9.tigRSYQjUwFZE0zSLd7Onw';
     //var map = L.mapbox.map('map', 'mapbox.satellite').setView([28.52872,82.25730], 10);
-    var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 15);
+    var map = L.mapbox.map('map', 'mapbox.satellite').setView([27.68814328468732, 85.3184506743254], 8);
     var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
     
