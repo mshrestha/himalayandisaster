@@ -119,7 +119,7 @@ include("includes/header.php");
             <div class="col-md-6">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding"><a href="#" id="title-link">Kathmandu Flood Response</a></h3>
+                        <h3 class="ng-binding"><a href="#" id="title-link">Nepal Situation Report</a></h3>
                         
                     </div>
                     <div class="list-justified-container" id="wcontainer">
