@@ -6,8 +6,8 @@
 	
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="author" content="Kazi Studios" />
-	<meta name="description" content="Save Nepal, Himalayan disaster, earthquake, prayfornepal, nepalquakerelief" />
-	<meta name="keywords" content="Nepal, prayfornepal, savenepal, earthquake, earthquakerelief", "himalayan disaster", "nepalquakerelief" />
+	<meta name="description" content="Save Nepal, Himalayan disaster real-time updates on Nepal floods, travel situation reports, and essential helplines. Navigate safely and stay connected during emergencies." />
+	<meta name="keywords" content="Nepal, prayfornepal, savenepal, flood, himalayan disaster, nepalfloodrelief" />
 
     <script type="text/javascript" src="js/html5shiv.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css' />
