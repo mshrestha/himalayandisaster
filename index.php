@@ -110,7 +110,7 @@ include("includes/header.php");
             <div class="col-md-4">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding page-title-heading"><a href="#" id="title-link">NepalNow Travel Situation Report</a></h3>
+                        <h3 class="ng-binding page-title-heading">NepalNow Travel Situation Report</h3>
                         
                     </div>
                     <div class="list-justified-container" id="wcontainer">

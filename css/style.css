@@ -10385,6 +10385,22 @@ span.ui-coordinates a{
     color:#fff;
 }
 
+.page-title-heading {
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.panel-profile ul.list-justified {
+  margin-bottom: 0;
+}
+
+#wcontainer .btn:active, #wcontainer .btn.active {
+  box-shadow: none;
+}
+
+.btn:hover, .btn:focus {
+  color: #000;
+}
 
 @media (max-width: 480px)  {
   .page-title-heading {
