@@ -317,7 +317,7 @@ include("includes/footer.php");
         // change icon
         if(type == 'Road Network') {
             icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/256/3448/3448677.png',
+                iconUrl: 'images/marker-car.png',
                 iconSize: [50, 50],
             });
         } else if (type == 'Trails') {
@@ -337,7 +337,7 @@ include("includes/footer.php");
             });
         } else if (type == 'Flights') {
             icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/256/9518/9518146.png',
+                iconUrl: 'images/marker-plane.png',
                 iconSize: [50, 50],
             });
         }
