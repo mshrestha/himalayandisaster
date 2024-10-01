@@ -10403,8 +10403,13 @@ span.ui-coordinates a{
 }
 
 @media (max-width: 480px)  {
+  .page { 
+    padding: 0;
+  }
+
   .page-title-heading {
     margin: 0;
+    font-size: 20px;
   }
 
   .list-justified.text-center {

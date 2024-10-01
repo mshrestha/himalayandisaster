@@ -107,43 +107,45 @@ include("includes/header.php");
     <span id='coordinates' class='ui-coordinates'></span>
     <div class="page page-general ng-scope" id="heading-bar">
         <div class="container theme-showcase">
-            <div class="col-md-4">
-                <div class="panel panel-profile">
-                    <div class="panel-heading text-center bg-info" id="panel-heading">
-                        <h3 class="ng-binding page-title-heading">NepalNow Travel Situation Report</h3>
-                        
-                    </div>
-                    <div class="list-justified-container" id="wcontainer">
-                        <ul class="list-justified text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-profile">
+                        <div class="panel-heading text-center bg-info" id="panel-heading">
+                            <h3 class="ng-binding page-title-heading">NepalNow Travel Situation Report</h3>
+                            
+                        </div>
+                        <div class="list-justified-container" id="wcontainer">
+                            <ul class="list-justified text-center">
 
-                            <li id="openHelpBtn" class="btn">
-                                <p class="size-h3">REPORT</p>
-                                <p class="text-muted">रिपोर्त गर्नुहोस</p>
-                            </li>
-                            <li class="btn" id="about-link">
-                                <p class="size-h3">ABOUT</p>
-                                <p class="text-muted">हाम्रो बारेमा</p>
-                                
-                            </li>
-                        </ul><!-- End of list-justified ul -->
-                        <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
-                        
-                    </div><!-- End of list-justified-container class -->
-                    <div class="panel-body" id="about-details">
-                        <p>The NepalNOW Travel Situation Report is a community effort to keep everyone updated about travel conditions in Nepal. Information is gathered from industry professionals, the government, tourism board, police, locals, and travelers. Both verified and unverified reports are shared here, with the help of a small IT team.</p>
-                        <p>Each piece of information is time-stamped and will expire after a while. If you don't see any data on this map, you can assume that everything is okay in those areas.</p>
-                        <p>This is just a quick overview of the travel situation and may not cover everything. For the most accurate updates, it's best to contact local companies, as they have the latest information on the ground.</p>
-                        <p>Safe travels!</p>    
-                    </div>
-                    <div class="panel-body" id="contact-details">
-                        
-                        <h1>Contact Details</h1>
-                        <p>If you are an an organization or volunteer group who want to add your data to our list, please feel free to contact us at the address below. Also if you are looking to get more information about our coordination platform and our efforts, do feel free to contact us.</p>
-                        <p>Kazi Studios <br /><a href="mailto:disaster@kazistudios.com">disaster@kazistudios.com</a><br />
-                            (977) 1 5000520<br />(977) 9851122092</p>
-                    </div>
-                </div><!-- End of panel class -->
-            </div><!-- End of col-md-6 class-->
+                                <li id="openHelpBtn" class="btn">
+                                    <p class="size-h3">REPORT</p>
+                                    <p class="text-muted">रिपोर्त गर्नुहोस</p>
+                                </li>
+                                <li class="btn" id="about-link">
+                                    <p class="size-h3">ABOUT</p>
+                                    <p class="text-muted">हाम्रो बारेमा</p>
+                                    
+                                </li>
+                            </ul><!-- End of list-justified ul -->
+                            <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
+                            
+                        </div><!-- End of list-justified-container class -->
+                        <div class="panel-body" id="about-details">
+                            <p>The NepalNOW Travel Situation Report is a community effort to keep everyone updated about travel conditions in Nepal. Information is gathered from industry professionals, the government, tourism board, police, locals, and travelers. Both verified and unverified reports are shared here, with the help of a small IT team.</p>
+                            <p>Each piece of information is time-stamped and will expire after a while. If you don't see any data on this map, you can assume that everything is okay in those areas.</p>
+                            <p>This is just a quick overview of the travel situation and may not cover everything. For the most accurate updates, it's best to contact local companies, as they have the latest information on the ground.</p>
+                            <p>Safe travels!</p>    
+                        </div>
+                        <div class="panel-body" id="contact-details">
+                            
+                            <h1>Contact Details</h1>
+                            <p>If you are an an organization or volunteer group who want to add your data to our list, please feel free to contact us at the address below. Also if you are looking to get more information about our coordination platform and our efforts, do feel free to contact us.</p>
+                            <p>Kazi Studios <br /><a href="mailto:disaster@kazistudios.com">disaster@kazistudios.com</a><br />
+                                (977) 1 5000520<br />(977) 9851122092</p>
+                        </div>
+                    </div><!-- End of panel class -->
+                </div><!-- End of col-md-6 class-->
+            </div>
         </div><!-- End of container class -->
     </div><!-- End of page class -->
 </div><!-- End of Wrapper class -->
