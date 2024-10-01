@@ -172,7 +172,7 @@ include("includes/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Location & Status / स्थान *</label>
+                        <label class="form-label-control">Location & Status / स्थान र स्थिति *</label>
                         <input type="text" name="location" class="form-control" required />
                     </div>
                     
@@ -437,7 +437,7 @@ include("includes/footer.php");
         $("#wcontainer").hide();
         $("#contact-details").hide();
         $("#about-details").hide();
-        $( "#heading-bar" ).animate({ 'margin-top': '-72px', 'width': '523px' }, 1000, function() {
+        $( "#heading-bar" ).animate({ 'margin-top': '-72px', 'width': '100%' }, 1000, function() {
             // Animation complete.
             $("#wcontainer").hide();
         });
