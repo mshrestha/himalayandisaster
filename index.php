@@ -317,8 +317,8 @@ include("includes/footer.php");
         // change icon
         if(type == 'Road Network') {
             icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/512/4736/4736213.png',
-                iconSize: [25, 25],
+                iconUrl: 'https://cdn-icons-png.flaticon.com/256/3448/3448677.png',
+                iconSize: [50, 50],
             });
         } else if (type == 'Trails') {
             icon = L.icon({
