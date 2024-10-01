@@ -205,7 +205,7 @@ include("includes/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Image</label>
+                        <label class="form-label-control">Image (png, jpg, jpeg, webp)</label>
                         <input type="file" name="file" class="form-control" >
                     </div>
 

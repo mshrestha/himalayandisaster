@@ -23,15 +23,16 @@ if(isset($_POST["help-type"])){
 
 		// Get file extension
         $fileExtension = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
-        $uniqueFileName = uniqid("file_", true) . '.' . $fileExtension;
-        $targetFile = $targetDir . $uniqueFileName;
 
-		// Move uploaded file
-		if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
-			// echo "The file has been uploaded: " . htmlspecialchars(basename($_FILES["file"]["name"]));
-			
-			$help_file = $uniqueFileName;
-		}
+		if (in_array($fileExtension, ['png', 'jpg', 'jpeg', 'webp'])) {
+			$uniqueFileName = uniqid("file_", true) . '.' . $fileExtension;
+			$targetFile = $targetDir . $uniqueFileName;
+
+			// Move uploaded file
+			if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
+				$help_file = $uniqueFileName;
+			}
+		}        
 	}
 
 	if($help_type=="help-want-guest" || $help_type=="help-want-admin"){   // Handles registarion of help calls from front end and back end
