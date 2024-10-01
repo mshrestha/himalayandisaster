@@ -172,7 +172,7 @@ include("includes/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Location / स्थान *</label>
+                        <label class="form-label-control">Location & Status / स्थान *</label>
                         <input type="text" name="location" class="form-control" required />
                     </div>
                     
