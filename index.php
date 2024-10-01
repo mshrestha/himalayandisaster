@@ -124,11 +124,6 @@ include("includes/header.php");
                                 <p class="text-muted">हाम्रो बारेमा</p>
                                 
                             </li>
-                            <li class="btn" id="contact-link">
-                                <p class="size-h3">CONTACT US</p>
-                                <p class="text-muted">सम्पर्क गर्नुहोस</p>
-                            </li>
-                        
                         </ul><!-- End of list-justified ul -->
                         <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
                         
@@ -159,7 +154,7 @@ include("includes/header.php");
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h1 class="modal-title" id="myModalLabel">Need Help?</h1>
+        <h1 class="modal-title" id="myModalLabel">Report</h1>
       </div>
       <div class="modal-body">
         <form method="POST" action="<?php echo $config['controller'];?>/helpController.php" enctype="multipart/form-data">
