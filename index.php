@@ -36,7 +36,7 @@ include("includes/header.php");
     }
     $qur = "select w.w_name,a.help_call_latlng,a.help_call_id,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
             from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c, ". $tableName['warehouse'] . " w " .
-            "where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . " order by a.pkg_count ASC" . $offset;
+            "where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . "order by a.pkg_count ASC" . $offset;
     // die($qur);
     $addressPoints = '';
     
@@ -70,7 +70,7 @@ include("includes/header.php");
     }
 
     //List for Help Requests starts here
-    $whereConditionHelp ='';
+    $whereConditionHelp =' where created_at > DATE_SUB(NOW(), INTERVAL 3 DAY)';
     $qur2 = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
     $resultHelp= mysql_query($qur2);
     $helpAddressPoints = '';
