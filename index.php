@@ -178,8 +178,10 @@ include("includes/header.php");
                     <div class="form-group">
                         <label class="form-label-control">Category *</label>
                         <div>
-                            <div><label class="form-label-control">
-                                <input name="needType[]" type="radio" class="form-group" value="Road Network" required /> Road Network</label>
+                            <div>
+                                <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Road Network" required /> Road Network
+                                </label>
                             </div>    
                             <div>
                                 <label class="form-label-control">
