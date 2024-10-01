@@ -327,23 +327,23 @@ include("includes/footer.php");
             });
         } else if (type == 'Trails') {
             icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/512/4598/4598444.png',
-                iconSize: [25, 25],
+                iconUrl: 'images/marker-trails.png',
+                iconSize: [50, 50],
             });
         } else if (type == 'Attractions') {
             icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/512/275/275918.png',
-                iconSize: [25, 25],
+                iconUrl: 'https://cdn-icons-png.flaticon.com/256/3536/3536102.png',
+                iconSize: [50, 50],
             });
         } else if (type == 'Accomodations') {
             icon = L.icon({
-                iconUrl: 'https://icons.veryicon.com/png/o/miscellaneous/home-icon-1/house-30.png',
-                iconSize: [25, 25],
+                iconUrl: 'https://cdn-icons-png.flaticon.com/256/11790/11790453.png',
+                iconSize: [50, 50],
             });
         } else if (type == 'Flights') {
             icon = L.icon({
-                iconUrl: 'https://static-00.iconduck.com/assets.00/airplane-icon-2048x2048-q1curgv0.png',
-                iconSize: [25, 25],
+                iconUrl: 'https://cdn-icons-png.flaticon.com/256/9518/9518146.png',
+                iconSize: [50, 50],
             });
         }
 
