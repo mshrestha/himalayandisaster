@@ -31,13 +31,14 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 						<input type='hidden' name="victim_zone_id"  id="victim_zone_id" class="form-control">	
 						<input type='text' required name="lat_lng" readonly id="lat_lng" class="form-control" placeholder="Latitude, Longitude">	
 						<input type="text" placeholder="Address Note" name="location" class="form-control" />
-						<p>Need Type</p>
-						<label><input name="needType[]" type="checkbox" class="form-group" value="water" /> Water </label>
-						<label><input name="needType[]" type="checkbox" class="form-group" value="food" /> Food </label>
-						<label><input name="needType[]" type="checkbox" class="form-group" value="medicine" /> Medicine </label>
-						<label><input name="needType[]" type="checkbox" class="form-group" value="tent" /> Tent </label>
-						<label><input name="needType[]" type="checkbox" class="form-group" value="doctors" /> Doctors </label>
-						<label><input name="needType[]" type="checkbox" class="form-group" value="volunteer" /> Volunteer </label>
+						
+						<p>Category</p>
+						<label><input name="needType[]" type="radio" class="form-group" value="Road Network" /> Road Network </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Trails" /> Trails </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Attractions" /> Attractions </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Accomodations" /> Accomodations </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Flights" /> Flights </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Others" /> Others </label>
 						
 						<p>
 							<label>

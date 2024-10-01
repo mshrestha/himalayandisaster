@@ -202,6 +202,11 @@ include("includes/header.php");
                                     <input name="needType[]" type="radio" class="form-group" value="Flights" required /> Flights
                                 </label>
                             </div>
+                            <div>
+                                <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Others" required /> Others
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -343,6 +348,12 @@ include("includes/footer.php");
         } else if (type == 'Flights') {
             icon = L.icon({
                 iconUrl: 'images/marker-plane.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 50]
+            });
+        } else if (type == 'Others') {
+            icon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/256/10036/10036401.png',
                 iconSize: [50, 50],
                 iconAnchor: [25, 50]
             });
