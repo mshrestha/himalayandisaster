@@ -189,6 +189,8 @@ hr {
   height: 0;
 }
 
+
+
 pre {
   overflow: auto;
 }
@@ -10381,4 +10383,23 @@ span.ui-coordinates a{
 }
 .panel-heading a {
     color:#fff;
+}
+
+
+@media (max-width: 480px)  {
+  .page-title-heading {
+    margin: 0;
+  }
+
+  .list-justified.text-center {
+    margin-bottom: 0;
+  }
+
+  .panel-profile .list-justified-container {
+    padding: 0;
+  }
+
+  .size-h3 {
+    font-size: 20px;
+  }
 }
