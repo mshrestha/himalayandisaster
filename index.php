@@ -50,8 +50,8 @@ include("includes/header.php");
             if($count >1){
                 $addressPoints .=",\n";
             }
-            $time = explode(' ', $row['pkg_timestamp']);
-            $time = parseDate($time[0]);
+                $time = explode(' ', $row['pkg_timestamp']);
+                $time = parseDate($time[0]);
 
                 if($row['help_call_id']!=-1)
                 $location = $row['vdc_name'].', '.$row['district'];
@@ -92,9 +92,10 @@ include("includes/header.php");
                     echo "GETS OUTSIDE IF";
                     $location = 'Location #'.$row['help_call_id'];
                 }                     
-            }   
+            } 
+            $timestamp = date('Y-m-d - h:i A', strtotime($row['created_at']));
 
-            $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $row['help_call_status'] .'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
+            $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $timestamp .'<br />'. $row['help_call_status'] .'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
             $count++;
         }
     }
