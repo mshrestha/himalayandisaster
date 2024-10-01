@@ -419,6 +419,7 @@ include("includes/footer.php");
     });
 
     function onmove() {
+        console.log('movinggg');
         // Get the map bounds - the top-left and bottom-right locations.
         var inBounds = [],
         bounds = map.getBounds();
@@ -433,16 +434,7 @@ include("includes/footer.php");
         $("#mission-detail-div").fadeOut();
         // Display a list of markers.
         document.getElementById('coordinates').innerHTML = inBounds.join('<br>');
-        
-        $("#wcontainer").hide();
-        $("#contact-details").hide();
-        $("#about-details").hide();
-        $( "#heading-bar" ).animate({ 'margin-top': '-72px', 'width': '100%' }, 1000, function() {
-            // Animation complete.
-            $("#wcontainer").hide();
-        });
     }
-    //onmove();
     
     map.on('move', onmove);
     
@@ -473,14 +465,23 @@ include("includes/footer.php");
         });
         
         $('#title-link').click(function(){
-            $( "#heading-bar" ).animate({
+            $("#wcontainer").fadeIn('slow');
+            $("#heading-bar" ).animate({
                 'margin-top': '0px',
                 'width': '100%'
-            }, 1000, function() {
-                // Animation complete.
-                $("#wcontainer").fadeIn('slow');
-            });
+            }, 300, function() {});
+
         });
+
+        $('#map').on('click', function() {
+            if (!$(event.target).closest('.panel-profile').length) {
+                $("#wcontainer").hide();
+                $("#contact-details").hide();
+                $("#about-details").hide();
+                $("#wcontainer").hide();
+                $( "#heading-bar" ).animate({ 'margin-top': '-72px', 'width': '100%' }, 300, function() {});
+            }
+        })
     });
     
 </script>
