@@ -130,7 +130,6 @@ include("includes/header.php");
                         
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
-                        <h1>About</h1>
                         <p>The NepalNOW Travel Situation Report is a community effort to keep everyone updated about travel conditions in Nepal. Information is gathered from industry professionals, the government, tourism board, police, locals, and travelers. Both verified and unverified reports are shared here, with the help of a small IT team.</p>
                         <p>Each piece of information is time-stamped and will expire after a while. If you don't see any data on this map, you can assume that everything is okay in those areas.</p>
                         <p>This is just a quick overview of the travel situation and may not cover everything. For the most accurate updates, it's best to contact local companies, as they have the latest information on the ground.</p>
@@ -466,7 +465,7 @@ include("includes/footer.php");
             $('#about-details').toggle('fade');
         });
         
-        $('#title-link').click(function(){
+        $('#panel-heading').click(function(){
             $("#wcontainer").fadeIn('slow');
             $("#heading-bar" ).animate({
                 'margin-top': '0px',
