@@ -81,24 +81,20 @@ include("includes/header.php");
             if($count >1){
                 $helpAddressPoints .=",\n";
             }
-            
 
-                if($row['help_call_id']!=-1){
+            if($row['help_call_id']!=-1){
                 $location = $row['help_call_location'];
-                }
-            else {
+            } else {
                 if(!empty($row['help_call_location'])){
                     $location = $row['help_call_location'];
                     echo "GETS INSIDE IF";
                 }else{
                     echo "GETS OUTSIDE IF";
                     $location = 'Location #'.$row['help_call_id'];
-                } 
-                    
+                }                     
             }   
 
-
-            $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '"]';
+            $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] .'"]';
             $count++;
         }
     }
@@ -171,40 +167,57 @@ include("includes/header.php");
         <h1 class="modal-title" id="myModalLabel">Need Help?</h1>
       </div>
       <div class="modal-body">
-        <div class="row">
-            <div class="col-lg-5">
-                <form method="POST" action="<?php echo $config['controller'];?>/helpController.php" enctype="multipart/form-data">
+        <form method="POST" action="<?php echo $config['controller'];?>/helpController.php" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-5">
                     <div class="form-group">
-                        <label class="form-label-control">Full Name / पुरा नाम </label>
-                        <input type="text" name="name" class="form-control" />
+                        <label class="form-label-control">Full Name / पुरा नाम *</label>
+                        <input type="text" name="name" class="form-control" required />
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Phone Number / फोन नम्बर</label>
-                        <input type="text" name="phonenumber" class="form-control" />
+                        <label class="form-label-control">Phone Number / फोन नम्बर *</label>
+                        <input type="text" name="phonenumber" class="form-control" required />
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Location help is needed  / स्थान</label>
-                        <input type="text" name="location" class="form-control" >
+                        <label class="form-label-control">Location help is needed / स्थान *</label>
+                        <input type="text" name="location" class="form-control" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label-control">Category *</label>
+                        <div>
+                            <div><label class="form-label-control">
+                                <input name="needType[]" type="radio" class="form-group" value="Road Network" required /> Road Network</label>
+                            </div>    
+                            <div>
+                                <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Trails" required /> Trails 
+                                </label>
+                            </div>
+                            <div>
+                                <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Attractions" required /> Attractions
+                                </label>
+                            </div>
+                            <div>
+                                <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Accomodations" required /> Accomodations
+                                </label>
+                            </div>
+                            <div>
+                                <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Flights" required /> Flights
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label-control">Incident Image</label>
                         <input type="file" name="file" class="form-control" >
                     </div>
-                    
-                    <!-- <div class="form-group">
-                        <label class="form-label-control">What you need / तपाईंलाई के चाहिन्छ चिन्ह लगाउनुहोस </label>
-                        <div>
-                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="water" /> Water / पानी</label></div>    
-                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="medicine" /> Medicine / औखधि </label></div>
-                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="tent" /> Tent / पाल</label></div>
-                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="food" /> Food / खाना</label></div>
-                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="doctors" /> Doctors / डाक्टर</label></div>
-                            <div><label class="form-label-control"><input name="needType[]" type="checkbox" class="form-group" value="volunteer" /> Volunteer Clean up / स्वयंसेवी</label></div>
-                        </div>
-                    </div> -->
 
                     <div class="form-group">
                         <label class="form-label-control">Other Information (please write details of all information, including links to pictures or more information) / अन्य</label><br />
@@ -212,15 +225,20 @@ include("includes/header.php");
                     </div>
                     
                     <input type="hidden" name="help-type" value="help-want-guest"/>
-                    <input type="hidden" name="lat_lng" id="help_call_latlng" required>
 
                     <input type="submit" value="SUBMIT" class="blackbtn" />
-                </form>
+                </div>
+                <div class="col-lg-7">
+                    <div id="side-map"></div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label class="form-label-control">Lat Lng *</label>
+                        <input type="text" name="lat_lng" id="help_call_latlng" class="form-control" onkeypress="return false;" placeholder="Select location on map" required>
+                        <small class="text-danger">Select location on map</small>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-7">
-                <div id="side-map"></div>
-            </div>
-        </div>
+        </form>
       </div>
       
     </div>
@@ -299,6 +317,40 @@ include("includes/footer.php");
         var lat = b[0];
         var lng = b[1];
         var warehouse= b[3];
+        var type = b[4];
+
+        var icon = L.mapbox.marker.icon({
+            'marker-size':'medium',  
+            'marker-color': 'orange'
+        });
+
+        // change icon
+        if(type == 'Road Network') {
+            icon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/4736/4736213.png',
+                iconSize: [25, 25],
+            });
+        } else if (type == 'Trails') {
+            icon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/4598/4598444.png',
+                iconSize: [25, 25],
+            });
+        } else if (type == 'Attractions') {
+            icon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/275/275918.png',
+                iconSize: [25, 25],
+            });
+        } else if (type == 'Accomodations') {
+            icon = L.icon({
+                iconUrl: 'https://icons.veryicon.com/png/o/miscellaneous/home-icon-1/house-30.png',
+                iconSize: [25, 25],
+            });
+        } else if (type == 'Flights') {
+            icon = L.icon({
+                iconUrl: 'https://static-00.iconduck.com/assets.00/airplane-icon-2048x2048-q1curgv0.png',
+                iconSize: [25, 25],
+            });
+        }
 
         if(
             ($.trim(lat) != "" && $.trim(lng) != "")
@@ -307,7 +359,7 @@ include("includes/footer.php");
           )
         {
             var marker = L.marker(new L.LatLng(lat, lng),  {
-                icon: L.mapbox.marker.icon({'marker-size':'medium',  'marker-color': 'ff0000'}),
+                icon: icon,
                 title: title 
             });
             

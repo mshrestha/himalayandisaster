@@ -10345,6 +10345,11 @@ table.responsive {
   margin-bottom: 5px;
 }
 
+.leaflet-popup-tip-container {
+  opacity: 0 !important;
+  margin-bottom: -10px !important;
+}
+
 span.ui-coordinates {
   background:rgba(0,0,0,0.5);
   position:absolute;
