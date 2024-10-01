@@ -32,7 +32,7 @@ if(isset($_POST["help-type"])){
 			if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
 				$help_file = $uniqueFileName;
 			}
-		}        
+		}
 	}
 
 	if($help_type=="help-want-guest" || $help_type=="help-want-admin"){   // Handles registarion of help calls from front end and back end
