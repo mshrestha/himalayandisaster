@@ -107,7 +107,7 @@ include("includes/header.php");
     <span id='coordinates' class='ui-coordinates'></span>
     <div class="page page-general ng-scope" id="heading-bar">
         <div class="container theme-showcase">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="panel panel-profile">
                     <div class="panel-heading text-center bg-info" id="panel-heading">
                         <h3 class="ng-binding page-title-heading"><a href="#" id="title-link">NepalNow Travel Situation Report</a></h3>
@@ -468,7 +468,7 @@ include("includes/footer.php");
         });
         
         $('#panel-heading').click(function(){
-            $("#wcontainer").fadeIn('slow');
+            $("#wcontainer").slideDown();
             $("#heading-bar" ).animate({
                 'margin-top': '0px',
                 'width': '100%'
@@ -478,11 +478,10 @@ include("includes/footer.php");
 
         $('#map').on('click', function() {
             if (!$(event.target).closest('.panel-profile').length) {
-                $("#wcontainer").hide();
                 $("#contact-details").hide();
                 $("#about-details").hide();
-                $("#wcontainer").hide();
-                $( "#heading-bar" ).animate({ 'margin-top': '-72px', 'width': '100%' }, 300, function() {});
+                $("#wcontainer").slideUp();
+                $( "#heading-bar" ).animate({ 'margin-top': '-50px', 'width': '100%' }, 300, function() {});
             }
         })
     });
