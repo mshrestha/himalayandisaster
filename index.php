@@ -319,26 +319,31 @@ include("includes/footer.php");
             icon = L.icon({
                 iconUrl: 'images/marker-car.png',
                 iconSize: [50, 50],
+                iconAnchor: [25, 50]
             });
         } else if (type == 'Trails') {
             icon = L.icon({
                 iconUrl: 'images/marker-trails.png',
                 iconSize: [50, 50],
+                iconAnchor: [25, 50]
             });
         } else if (type == 'Attractions') {
             icon = L.icon({
                 iconUrl: 'https://cdn-icons-png.flaticon.com/256/3536/3536102.png',
                 iconSize: [50, 50],
+                iconAnchor: [25, 50]
             });
         } else if (type == 'Accomodations') {
             icon = L.icon({
                 iconUrl: 'https://cdn-icons-png.flaticon.com/256/11790/11790453.png',
                 iconSize: [50, 50],
+                iconAnchor: [25, 50]
             });
         } else if (type == 'Flights') {
             icon = L.icon({
                 iconUrl: 'images/marker-plane.png',
                 iconSize: [50, 50],
+                iconAnchor: [25, 50]
             });
         }
 
