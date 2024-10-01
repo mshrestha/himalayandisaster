@@ -221,8 +221,6 @@ include("includes/header.php");
                     </div>
                     
                     <input type="hidden" name="help-type" value="help-want-guest"/>
-
-                    <input type="submit" value="SUBMIT" class="blackbtn" />
                 </div>
                 <div class="col-lg-7">
                     <div id="side-map"></div>
@@ -234,6 +232,8 @@ include("includes/header.php");
                     </div>
                 </div>
             </div>
+
+            <input type="submit" value="SUBMIT" class="blackbtn" />
         </form>
       </div>
       
