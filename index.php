@@ -171,7 +171,7 @@ include("includes/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Location help is needed / स्थान *</label>
+                        <label class="form-label-control">Location / स्थान *</label>
                         <input type="text" name="location" class="form-control" required />
                     </div>
                     
@@ -205,12 +205,12 @@ include("includes/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Incident Image</label>
+                        <label class="form-label-control">Image</label>
                         <input type="file" name="file" class="form-control" >
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Other Information (please write details of all information, including links to pictures or more information) / अन्य</label><br />
+                        <label class="form-label-control">Useful Information or Tips / उपयोगी जानकारी</label><br />
                         <textarea name="description" class="form-control"></textarea>
                     </div>
                     
