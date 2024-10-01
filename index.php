@@ -233,7 +233,7 @@ include("includes/header.php");
 
                     <div class="form-group" style="margin-top: 20px;">
                         <label class="form-label-control">Lat Lng *</label>
-                        <input type="text" name="lat_lng" id="help_call_latlng" class="form-control" onkeypress="return false;" placeholder="Select location on map" required>
+                        <input type="text" name="lat_lng" id="help_call_latlng" class="form-control" autocomplete="off" onkeydown="return false;" placeholder="Select location on map" required>
                         <small class="text-danger">Select location on map</small>
                     </div>
                 </div>
