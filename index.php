@@ -114,36 +114,31 @@ include("includes/header.php");
                     </div>
                     <div class="list-justified-container" id="wcontainer">
                         <ul class="list-justified text-center">
-                            <!-- li class="btn" data-toggle="modal" data-target="#myModal">
-                                <p class="size-h3">WANT TO HELP</p>
-                                <p class="text-muted">म सहायता गर्न चाहन्छु</p>
-                            </li -->
+
                             <li id="openHelpBtn" class="btn">
-                                <p class="size-h3">Report</p>
+                                <p class="size-h3">REPORT</p>
                                 <p class="text-muted">रिपोर्त गर्नुहोस</p>
                             </li>
                             <li class="btn" id="about-link">
-                                <p class="size-h3">ABOUT US</p>
+                                <p class="size-h3">ABOUT</p>
                                 <p class="text-muted">हाम्रो बारेमा</p>
                                 
                             </li>
                             <li class="btn" id="contact-link">
                                 <p class="size-h3">CONTACT US</p>
                                 <p class="text-muted">सम्पर्क गर्नुहोस</p>
-                                
                             </li>
-                            
+                        
                         </ul><!-- End of list-justified ul -->
                         <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
                         
                     </div><!-- End of list-justified-container class -->
                     <div class="panel-body" id="about-details">
-                        <h1>About Us</h1>
-                        <p>This Situation report is a collection of incident reporting and its mapping collected from a public forum and validated by our team.</p>
-
-                        <p>HimalayanDisaster.org works on keeping track of an inventory of resources, volunteers and information on Who is doing What Where and When. We keep track of whats been done where.</p>
-
-                        
+                        <h1>About</h1>
+                        <p>The NepalNOW Travel Situation Report is a community effort to keep everyone updated about travel conditions in Nepal. Information is gathered from industry professionals, the government, tourism board, police, locals, and travelers. Both verified and unverified reports are shared here, with the help of a small IT team.</p>
+                        <p>Each piece of information is time-stamped and will expire after a while. If you don't see any data on this map, you can assume that everything is okay in those areas.</p>
+                        <p>This is just a quick overview of the travel situation and may not cover everything. For the most accurate updates, it's best to contact local companies, as they have the latest information on the ground.</p>
+                        <p>Safe travels!</p>    
                     </div>
                     <div class="panel-body" id="contact-details">
                         
