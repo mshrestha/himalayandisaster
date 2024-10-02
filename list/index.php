@@ -1,494 +1,195 @@
-<?php
-//Includes
-session_start();
-include("/system/config.php");
-include("/system/functions.php");
-include("/includes/header.php");
-
-//Body Begins
-?>
-
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js"></script>
-<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-
-<?php 
-    $newPackageID = generatePackageId();
-    $suggestLocation = '28.4719709,84.9678058';
-
-    $whereCondition = "and a.pkg_approval='1'";
-    if(trim($_GET['status']) == "0"){
-        $whereCondition = "and a.pkg_approval='0'";
-    }
-
-    $qry2 = $mysqli->query("Select centerid from " . $tableName['admin_login'] . " where username = '$name'");
+<?php include("../system/config.php"); ?>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
-    //$ary  = mysqli_fetch_array($qry2);
-    $ary = $qry2->fetch_array(MYSQLI_NUM);
-    
-    if(!empty($ary[0])){
-        $where="a.w_id=$ary[0] and";
-    }
-    else{
-        $where="";
-    }
-    $qur = "select w.w_name,a.help_call_latlng,a.help_call_id,a.pkg_count,a.pkg_id,a.pkg_count,a.pkg_timestamp,a.pkg_approval,a.help_call_latlng,b.vdc_name, b.district, c.agent_name,c.agent_email,c.agent_phone, a.w_id
-            from ". $tableName['package'] ." a," . $tableName['vdc'] . " b," .$tableName['agent'] ." c, ". $tableName['warehouse'] . " w " .
-            "where $where a.agent_id=c.agent_id and w.w_id = a.w_id and a.help_call_id=b.vdc_code ". $whereCondition . "order by a.pkg_count ASC" . $offset;
-    // die($qur);
-    $addressPoints = '';
-    
-    $result= mysqli_query($mysqli, $qur);
-    $count = 1;
-    if(mysqli_num_rows($result) >=1) { 
-                                        
-        while ($row = mysqli_fetch_array($result)){
-            //echo $row['vdc_name'];
+    <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
 
-            if($count >1){
-                $addressPoints .=",\n";
-            }
-                $time = explode(' ', $row['pkg_timestamp']);
-                $time = parseDate($time[0]);
-
-                if($row['help_call_id']!=-1)
-                $location = $row['vdc_name'].', '.$row['district'];
-            else {
-                if(!empty($row['help_call_location']))
-                    $location = $row['help_call_location'];
-                else 
-                    $location = 'Location #'.$row['pkg_count'];
-            }   
+    <link rel="stylesheet" href="styles.css">
+    <meta name="theme-color" content="#712cf9">
 
 
-            $addressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/missionDetail.php?id='.$row['pkg_count'].'>'.$location.' </a>","'. $row['w_name'].'","'. $time. '"]';
-            $count++;
-        
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
         }
-    }
+      }
 
-    //List for Help Requests starts here
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+  </head>
+  <body>
+  <?php
+        //List for Help Requests starts here
     $whereConditionHelp =' where created_at > DATE_SUB(NOW(), INTERVAL 3 DAY)';
-    $qur2 = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
-    $resultHelp= mysql_query($qur2);
-    $helpAddressPoints = '';
+    $query = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
     
-    if(mysqli_num_rows($resultHelp) >=1){
-        $count = 1;
-        while ($row = mysql_fetch_array($resultHelp)){
-            if($count >1){
-                $helpAddressPoints .=",\n";
-            }
+    $result = $mysqli->query($query);
 
-            if($row['help_call_id']!=-1){
-                $location = $row['help_call_location'];
-            } else {
-                if(!empty($row['help_call_location'])){
-                    $location = $row['help_call_location'];
-                    echo "GETS INSIDE IF";
-                }else{
-                    echo "GETS OUTSIDE IF";
-                    $location = 'Location #'.$row['help_call_id'];
-                }                     
-            } 
-            $timestamp = date('Y-m-d - h:i A', strtotime($row['created_at']));
-
-            $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $timestamp .'<br />'. $row['help_call_status'] .'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
-            $count++;
-        }
-    }
-//End of Help Requests
+    /* associative array */
+    $row = $result->fetch_all(MYSQLI_ASSOC);
+    
 ?>
 
-<div class="wrapper">
-	<div  id="map"></div>
-    <span id='coordinates' class='ui-coordinates'></span>
-    <div class="page page-general ng-scope" id="heading-bar">
-        <div class="container theme-showcase">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-profile">
-                        <div class="panel-heading text-center bg-info" id="panel-heading">
-                            <h3 class="ng-binding page-title-heading">NepalNow Travel Situation Report</h3>
-                            
-                        </div>
-                        <div class="list-justified-container" id="wcontainer">
-                            <ul class="list-justified text-center">
 
-                                <li id="openHelpBtn" class="btn">
-                                    <p class="size-h3">REPORT</p>
-                                    <p class="text-muted">रिपोर्त गर्नुहोस</p>
-                                </li>
-                                <li class="btn" id="about-link">
-                                    <p class="size-h3">ABOUT</p>
-                                    <p class="text-muted">हाम्रो बारेमा</p>
-                                    
-                                </li>
-                            </ul><!-- End of list-justified ul -->
-                            <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
-                            
-                        </div><!-- End of list-justified-container class -->
-                        <div class="panel-body" id="about-details">
-                            <p>The NepalNOW Travel Situation Report is a community effort to keep everyone updated about travel conditions in Nepal. Information is gathered from industry professionals, the government, tourism board, police, locals, and travelers. Both verified and unverified reports are shared here, with the help of a small IT team.</p>
-                            <p>Each piece of information is time-stamped and will expire after a while. If you don't see any data on this map, you can assume that everything is okay in those areas.</p>
-                            <p>This is just a quick overview of the travel situation and may not cover everything. For the most accurate updates, it's best to contact local companies, as they have the latest information on the ground.</p>
-                            <p>Safe travels!</p>    
-                        </div>
-                        <div class="panel-body" id="contact-details">
-                            
-                            <h1>Contact Details</h1>
-                            <p>If you are an an organization or volunteer group who want to add your data to our list, please feel free to contact us at the address below. Also if you are looking to get more information about our coordination platform and our efforts, do feel free to contact us.</p>
-                            <p>Kazi Studios <br /><a href="mailto:disaster@kazistudios.com">disaster@kazistudios.com</a><br />
-                                (977) 1 5000520<br />(977) 9851122092</p>
-                        </div>
-                    </div><!-- End of panel class -->
-                </div><!-- End of col-md-6 class-->
-            </div>
-        </div><!-- End of container class -->
-    </div><!-- End of page class -->
-</div><!-- End of Wrapper class -->
+<div class="container">
+  
 
-<!-- Modal -->
-<div class="modal" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h1 class="modal-title" id="myModalLabel">Report</h1>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="<?php echo $config['controller'];?>/helpController.php" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="form-group">
-                        <label class="form-label-control">Full Name / पुरा नाम *</label>
-                        <input type="text" name="name" class="form-control" required />
-                    </div>
+  <div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline ">
+      <a href="/"><img src="/images/nepalnow.png" height="60px"></a>
 
-                    <div class="form-group">
-                        <label class="form-label-control">Phone Number / फोन नम्बर *</label>
-                        <input type="text" name="phonenumber" class="form-control" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label-control">Location & Status / स्थान र स्थिति *</label>
-                        <input type="text" name="location" class="form-control" required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label-control">Category *</label>
-                        <div>
-                            <div>
-                                <label class="form-label-control">
-                                    <input name="needType[]" type="radio" class="form-group" value="Road Network" required /> Road Network
-                                </label>
-                            </div>    
-                            <div>
-                                <label class="form-label-control">
-                                    <input name="needType[]" type="radio" class="form-group" value="Trails" required /> Trails 
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-label-control">
-                                    <input name="needType[]" type="radio" class="form-group" value="Attractions" required /> Attractions
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-label-control">
-                                    <input name="needType[]" type="radio" class="form-group" value="Accomodations" required /> Accomodations
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-label-control">
-                                    <input name="needType[]" type="radio" class="form-group" value="Flights" required /> Flights
-                                </label>
-                            </div>
-                            <div>
-                                <label class="form-label-control">
-                                    <input name="needType[]" type="radio" class="form-group" value="Others" required /> Others
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label-control">Image (png, jpg, jpeg, webp)</label>
-                        <input type="file" name="file" class="form-control" >
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label-control">Useful Information or Tips / उपयोगी जानकारी</label><br />
-                        <textarea name="description" class="form-control"></textarea>
-                    </div>
-                    
-                    <input type="hidden" name="help-type" value="help-want-guest"/>
-                </div>
-                <div class="col-lg-7">
-                    <div id="side-map"></div>
-
-                    <div class="form-group" style="margin-top: 20px;">
-                        <label class="form-label-control">Lat Lng *</label>
-                        <input type="text" name="lat_lng" id="help_call_latlng" class="form-control" autocomplete="off" onkeydown="return false;" placeholder="Select location on map" required>
-                        <small class="text-danger">Select location on map</small>
-                    </div>
-                </div>
-            </div>
-
-            <input type="submit" value="SUBMIT" class="blackbtn" />
-        </form>
-      </div>
+      <a class="nav-item nav-link link-body-emphasis float-end active" href="#">Report</a>
+      <a class="nav-item nav-link link-body-emphasis float-end" href="#">About</a>
+      <a class="nav-item nav-link link-body-emphasis float-end" href="#">List</a>
       
-    </div>
+    </nav>
   </div>
 </div>
 
+<main class="container">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+      <h1 class="display-4 fst-italic">Travel Situation Report</h1>
+      <p class="lead my-3">The content of this Report is a time bound summary of the individual reports that have been added by the community collective on the interactive map at htt://sitrep.nepalnow.travel . Please come back to to this page from time to time, or visit the map to see the ground situation.</p>
+    </div>
+  </div>
 
-<!-- End volunteer Form -->
-<!-- Begin Mission Display Div -->
-<div id="mission-detail-div" style="position:fixed; top:0px; right:0px;">
   
+
+  <div class="row g-8">
+    <div class="col-md-12">
+      
+
+      <article class="blog-post">
+        <h3 class="display-5 link-body-emphasis mb-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-car-front-fill" viewBox="0 0 16 16">
+            <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17s3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z"/>
+        </svg>    
+        Road Network</h3>
+        <hr>
+        <?php showReport($row, 'Road Network'); ?>
+        <hr>
+        <h3 class="display-5 link-body-emphasis mb-1">Flights</h3>
+        <hr>
+        <?php showReport($row, 'Flights'); ?>
+        <hr>
+        <h3 class="display-5 link-body-emphasis mb-1">Trails</h3>
+        <hr>
+        <?php showReport($row, 'Trails'); ?>
+
+        
+        
+        <?php function showReport($row, $type){ ?>
+        <?php foreach ($row as $report): ?>
+            <?php if($report['help_call_needs'] == $type): ?> 
+                
+                <h6><?php echo date('h:i A  d/m/Y  ', strtotime($report['created_at'])); ?> <span class="badge text-bg-secondary"><?php echo $report['help_call_status']; ?></span></h6>
+                <?php if($report['help_call_file']): ?>
+                    <img src="<?php echo $config['homeUrl'].'/uploads/'.$report['help_call_file']; ?>" width="400px"/>
+                <?php endif; ?>
+                
+                <p> <strong><?php echo $report['help_call_location']; ?> </strong> - 
+                    <?php echo $report['help_call_other_needs']; ?>
+                </p>
+                <p><strong>Reported By:</strong> <?php echo $report['help_call_name']; ?></p>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php } ?>
+      </article>
+
+    </div>
+
+    
+  </div>
+
+</main>
+
+<footer class="py-5 text-center text-body-secondary bg-body-tertiary">
   
-</div> 
-<!-- End Mission Display Div -->
+</footer>
 
-<?php
-//Includes
-include("includes/footer.php");
-?>
-
-<script type="text/javascript">
-    var addressPoints = [
-    <?php                                              
-       echo $addressPoints; 
-    ?>];
-
-    var helpAddressPoints = [
-    <?php                                              
-       echo $helpAddressPoints; 
-    ?>];
-
-
-    /* LEAFLET STARTS HERE */
-
-    // Provide your access token
-    L.mapbox.accessToken = 'pk.eyJ1Ijoic2hyZXN0aGEiLCJhIjoiY2w3ODQ4dm1rMDYydTNvbWNvcXlwMjBmNSJ9.tigRSYQjUwFZE0zSLd7Onw';
-    var map = L.mapbox.map('map', 'mapbox.satellite', { zoomControl: false }).setView([27.68814328468732, 85.3184506743254], 8);
-    const zoomControl = L.control.zoom({
-        position: 'bottomright'
-    }).addTo(map);
-    var markers = new L.MarkerClusterGroup();
-    var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
-    
-    for (var i = 0; i < addressPoints.length; i++) {
-        
-        var a = addressPoints[i];
-        
-        var title = a[2];
-        var lat = a[0];
-        var lng = a[1];
-        var warehouse= a[3];
-        var date= a[4];
-        
-
-        if(
-            ($.trim(lat) != "" && $.trim(lng) != "")
-            &&
-            (decimal.test(lat) && decimal.test(lng) )
-          )
-        {
-            var marker = L.marker(new L.LatLng(lat, lng),  {
-                icon: L.mapbox.marker.icon({'marker-size':'medium',  'marker-color': '1087bf'}),
-                title: title 
-            });
-            marker.bindPopup(title+ '<br>By ' + warehouse + '<br> On ' + date);
-            markers.addLayer(marker);
-            markers.on("click", function(e){
-                $("#mission-detail-div").fadeOut();
-            });
-        }
-    }   
-    
-
-    //For Help Markers
-    var helpMarkers = new L.MarkerClusterGroup();
-    for (var i = 0; i < helpAddressPoints.length; i++) {
-        var b = helpAddressPoints[i];
-
-        var title = b[2];
-        var lat = b[0];
-        var lng = b[1];
-        var warehouse= b[3];
-        var type = b[4];
-        console.log(b);
-        var icon = L.mapbox.marker.icon({
-            'marker-size':'medium',  
-            'marker-color': 'orange'
-        });
-
-        // change icon
-        if(type == 'Road Network') {
-            icon = L.icon({
-                iconUrl: 'images/marker-car.png',
-                iconSize: [50, 50],
-                iconAnchor: [25, 50]
-            });
-        } else if (type == 'Trails') {
-            icon = L.icon({
-                iconUrl: 'images/trail-marker.png',
-                iconSize: [50, 50],
-                iconAnchor: [25, 50]
-            });
-        } else if (type == 'Attractions') {
-            icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/256/3536/3536102.png',
-                iconSize: [50, 50],
-                iconAnchor: [25, 50]
-            });
-        } else if (type == 'Accomodations') {
-            icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/256/11790/11790453.png',
-                iconSize: [50, 50],
-                iconAnchor: [25, 50]
-            });
-        } else if (type == 'Flights') {
-            icon = L.icon({
-                iconUrl: 'images/marker-plane.png',
-                iconSize: [50, 50],
-                iconAnchor: [25, 50]
-            });
-        } else if (type == 'Others') {
-            icon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/256/10036/10036401.png',
-                iconSize: [50, 50],
-                iconAnchor: [25, 50]
-            });
-        }
-
-        if(
-            ($.trim(lat) != "" && $.trim(lng) != "")
-            &&
-            (decimal.test(lat) && decimal.test(lng) )
-          )
-        {
-            var marker = L.marker(new L.LatLng(lat, lng),  {
-                icon: icon,
-                title: title 
-            });
-            
-            marker.bindPopup(title + '<br>- By ' + warehouse + '<br> ');
-            helpMarkers.addLayer(marker);
-            helpMarkers.on("click", function(e){
-                $("#mission-detail-div").fadeOut();
-            });
-        }
-    }
-    
-    map.addLayer(markers);
-    map.addLayer(helpMarkers);
-
-    $('#openHelpBtn').on('click',function(){
-        $('#myModal').modal({show:true});
-        //For modal window markers
-        var sideMap = L.mapbox.map('side-map', 'mapbox.satellite', { zoomControl: false }).setView([27.68814328468732, 85.3184506743254], 14);
-        var marker = L.marker([27.68814328468732, 85.3184506743254], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
-
-        marker.on('dragend', function(event) {
-            var latlng = event.target.getLatLng();
-
-            $('#help_call_latlng').val(latlng.lat + ', ' + latlng.lng);
-        });
-
-        let geoCoderOptions = {
-            collapsed: false,
-            defaultMarkGeocode: false,
-            geocoder: L.Control.Geocoder.nominatim({
-                geocodingQueryParams: {
-                    countrycodes: 'np'
-                }
-            })
-        }
-
-        L.Control.geocoder(geoCoderOptions)
-        .on('markgeocode', function(e) {
-            // Get the location found by the geocoder
-            var latlng = e.geocode.center; // Get the latitude and longitude
-
-            // Move the camera to the found location
-            sideMap.setView(latlng, 13); // Adjust the zoom level as needed
-            
-            marker.setLatLng(latlng);
-
-            $('#help_call_latlng').val(latlng.lat + ', ' + latlng.lng);
-        })
-        .addTo(sideMap);
-    });
-
-    function onmove() {
-        // Get the map bounds - the top-left and bottom-right locations.
-        var inBounds = [],
-        bounds = map.getBounds();
-        markers.eachLayer(function(marker) {
-            // For each marker, consider whether it is currently visible by comparing
-            // with the current map bounds.
-            if (bounds.contains(marker.getLatLng())) {
-                inBounds.push(marker.options.title);
-            }
-        });
-        
-        $("#mission-detail-div").fadeOut();
-        // Display a list of markers.
-        document.getElementById('coordinates').innerHTML = inBounds.join('<br>');
-    }
-    
-    map.on('move', onmove);
-    
-    $('#map').on('click', 'a', function() {
-        
-        $("#mission-detail-div").load($(this).attr('href'));
-        $("#mission-detail-div").fadeIn();
-        return false;
-        
-    });
-
-    $('#coordinates').on('click', 'a', function() {
-        
-        $("#mission-detail-div").load($(this).attr('href'));
-        $("#mission-detail-div").fadeIn();
-        return false;
-        
-    });
-
-    $( document ).ready(function() {
-        $("#contact-link").click(function(){ 
-            $('#about-details').hide('fade');
-            $('#contact-details').toggle('fade');
-        });
-        $("#about-link").click(function(){ 
-            $('#contact-details').hide('fade');
-            $('#about-details').toggle('fade');
-        });
-        
-        $('#panel-heading').click(function(){
-            $("#wcontainer").slideDown();
-            $("#heading-bar" ).animate({
-                'margin-top': '0px',
-                'width': '100%'
-            }, 300, function() {});
-
-        });
-
-        $('#map').on('click', function() {
-            if (!$(event.target).closest('.panel-profile').length) {
-                $("#contact-details").hide();
-                $("#about-details").hide();
-                $("#wcontainer").slideUp();
-                $( "#heading-bar" ).animate({ 'margin-top': '-50px', 'width': '100%' }, 300, function() {});
-            }
-        })
-    });
-    
-</script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
