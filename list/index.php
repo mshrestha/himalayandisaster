@@ -4,9 +4,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>NepalNow List of Reports</title>
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet" href="styles.css">
@@ -86,6 +89,21 @@
       .bd-mode-toggle {
         z-index: 1500;
       }
+      body h1{
+        font-family: 'Frank Ruhl Libre';
+      }
+      body h3{
+        font-weight:bold;
+      }
+      body {
+        font-family: "Noto Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+        
+      }
 
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
@@ -130,7 +148,7 @@
 <a href="/"><img src="/images/nepalnow.png"></a>
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
     <div class="col-lg-6 px-0">
-      <h1 class="display-4 fst-italic">Travel Situation Report</h1>
+      <h1 class="display-4">Travel Situation Report</h1>
       <p class="lead my-3">The content of this Report is a time bound summary of the individual reports that have been added by the community collective on the interactive map at htt://sitrep.nepalnow.travel . Please come back to to this page from time to time, or visit the map to see the ground situation.</p>
     </div>
   </div>
