@@ -133,6 +133,13 @@ include("includes/header.php");
                                     <p class="text-muted">हाम्रो बारेमा</p>
                                     
                                 </li>
+                                <li class="btn" id="about-link">
+                                    
+                                    <p class="size-h3"><a href="/list">List</a></p>
+                                    <p class="text-muted"><a href="/list">सरान्श</a></p>
+            
+                                    
+                                </li>
                             </ul><!-- End of list-justified ul -->
                             <?php  if($_SESSION['logs']['msg'] != null){ displayMsg(); } ?>
                             
