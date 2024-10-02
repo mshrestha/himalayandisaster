@@ -108,6 +108,9 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+      .report-list{
+        padding-top:10px;
+      }
     </style>
 
     
@@ -191,8 +194,12 @@
         <?php function showReport($row, $type){ ?>
         <?php foreach ($row as $report): ?>
             <?php if($report['help_call_needs'] == $type): ?> 
+
                 
-                <h6><?php echo date('h:i A  d/m/Y  ', strtotime($report['created_at'])); ?> <span class="badge text-bg-secondary"><?php echo $report['help_call_status']; ?></span></h6>
+                <div class="border-bottom report-list">
+                <h6><?php echo date('h:i A  d/m/Y  ', strtotime($report['created_at'])); ?> 
+                    <span class="badge <?php if($report['help_call_status'] == 'Verified'):?>  text-bg-success <?php else: ?>text-bg-warning <?php endif; ?>"><?php echo $report['help_call_status']; ?></span>
+                </h6>
                 <?php if($report['help_call_file']): ?>
                     <img src="<?php echo $config['homeUrl'].'/uploads/'.$report['help_call_file']; ?>" width="400px"/>
                 <?php endif; ?>
@@ -201,6 +208,7 @@
                     <?php echo $report['help_call_other_needs']; ?>
                 </p>
                 <p><strong>Reported By:</strong> <?php echo $report['help_call_name']; ?></p>
+                </div>
             <?php endif; ?>
         <?php endforeach; ?>
         <?php } ?>

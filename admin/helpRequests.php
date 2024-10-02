@@ -93,7 +93,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 							<th>Phone</th>
 							<th>Address</th>
 							<th>Status</th>
-							<th>Help status</th>
+							<th>Action</th>
 						</tr>
                         </thead>
 						<?php
@@ -130,7 +130,9 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 							<td><a href="<?php echo $config['controller'].'/helpController.php?id=' .$row['help_call_id'].'&action=verfiy'; ?>">Verify</a></td>
 							<?php } else{echo "<td> Verified </td>";} ?>
 
-							<td><?php echo $row["help_call_deployment_status"]; ?> </td></tr>
+							<td><a href="<?php echo $config['adminUrl']. '/editHelp.php?id='.$row['help_call_id'];?>">
+                        <button type="button" class="btn btn-xs btn-success">Edit</button>
+                        </a> </td></tr>
 						<?php endwhile;?>
 
 						<?php }

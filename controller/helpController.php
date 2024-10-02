@@ -49,9 +49,14 @@ if(isset($_POST["help-type"])){
 		elseif($help_type=="help-want-admin"){
 			$status="Verified";
 		}
-
+		if($action=="update"){
+			$helpCallId = $_POST['help_call_id'];
+		$qur = "UPDATE" . $tableName["helpCall"] . " SET help_call_name='$name',help_call_needs='$needs',help_call_phone='$phone',help_call_location='$address',help_call_other_needs='$desc',help_call_status='Verified',help_call_latlng='$latlng' where help_call_id='$helpCallId'" ;
+		
+		
+		}else{
 		$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`, `help_call_file`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng', '$help_file')";
-
+		}
 		
 		$result = mysqli_query($mysqli, $qur) or die($qur. " " . mysqli_error());
 
