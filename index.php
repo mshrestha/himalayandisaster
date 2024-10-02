@@ -335,7 +335,7 @@ include("includes/footer.php");
             });
         } else if (type == 'Trails') {
             icon = L.icon({
-                iconUrl: 'images/marker-trails.png',
+                iconUrl: 'images/marker-hike.png',
                 iconSize: [50, 50],
                 iconAnchor: [25, 50]
             });
