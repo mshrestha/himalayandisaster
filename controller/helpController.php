@@ -49,9 +49,11 @@ if(isset($_POST["help-type"])){
 		elseif($help_type=="help-want-admin"){
 			$status="Verified";
 		}
+		$action=mysql_real_escape_string($_POST["action"]);
+		
 		if($action=="update"){
 			$helpCallId = $_POST['help_call_id'];
-		$qur = "UPDATE" . $tableName["helpCall"] . " SET help_call_name='$name',help_call_needs='$needs',help_call_phone='$phone',help_call_location='$address',help_call_other_needs='$desc',help_call_status='Verified',help_call_latlng='$latlng' where help_call_id='$helpCallId'" ;
+		$qur = "UPDATE " . $tableName["helpCall"] . " SET help_call_name='$name',help_call_needs='$needs',help_call_phone='$phone',help_call_location='$address',help_call_other_needs='$desc',help_call_status='Verified',help_call_latlng='$latlng' where help_call_id='$helpCallId'" ;
 		
 		
 		}else{
@@ -91,7 +93,12 @@ if(isset($_POST["help-type"])){
 
 
 // redirectPage( $_SERVER['HTTP_REFERER'] );
-redirectPage( $config['homeUrl'] );
+if($help_type=="help-want-guest"){
+	redirectPage( $config['homeUrl'] );
+}else{
+	redirectPage( $config['adminUrl'].'/helpRequests.php' );
+	
+}
 
 
 }
