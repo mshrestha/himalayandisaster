@@ -1,9 +1,9 @@
 <?php
 //Includes
 session_start();
-include("system/config.php");
-include("system/functions.php");
-include("includes/header.php");
+include("/system/config.php");
+include("/system/functions.php");
+include("/includes/header.php");
 
 //Body Begins
 ?>
@@ -94,16 +94,9 @@ include("includes/header.php");
                 }                     
             } 
             $timestamp = date('Y-m-d - h:i A', strtotime($row['created_at']));
-            if ($row['help_call_latlng'] != ''){
-                if($row['help_call_file'] == ''){
-                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $timestamp .'<br />'. $row['help_call_status'] .'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
-                }else{
-                    $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $timestamp .'<br />'. $row['help_call_status'] .'<br /><img src=\"/uploads/'.$row['help_call_file'] .'\" width=\"200px\" />'.'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
-                }
-                
-                $count++;
-            }
-            
+
+            $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $timestamp .'<br />'. $row['help_call_status'] .'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
+            $count++;
         }
     }
 //End of Help Requests
