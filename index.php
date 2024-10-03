@@ -135,7 +135,7 @@ include("includes/header.php");
                                 </li>
                                 <li class="btn" id="about-link">
                                     
-                                    <p class="size-h3"><a href="/list">List</a></p>
+                                    <p class="size-h3"><a href="/list">Summary</a></p>
                                     <p class="text-muted"><a href="/list">सरान्श</a></p>
             
                                     
