@@ -180,7 +180,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 	
 	function ondragend() {
 		var m = marker.getLatLng();
-		console.log(m);
+		//console.log(m);
 		coordinates.value =  m.lat.toFixed(7) + ',' + m.lng.toFixed(7);
 	}
 	

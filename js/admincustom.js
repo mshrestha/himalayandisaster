@@ -131,6 +131,7 @@ function package_location_autocomplete() {
                 },
                 success: function(data) {
                     console.log(data);
+                    console.log('Gets here');
                     response($.map(data, function(item) {
                         return {            
                             label: item.help_call_name + ", " + item.help_call_location + " (" + item.help_call_id + ")",

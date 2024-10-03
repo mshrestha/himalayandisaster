@@ -123,7 +123,8 @@
   <?php
         //List for Help Requests starts here
     $whereConditionHelp =' where created_at > DATE_SUB(NOW(), INTERVAL 3 DAY)';
-    $query = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
+    $orderBy = 'ORDER BY `updated_at` DESC';
+    $query = "select * from ". $tableName['helpCall'] . $whereConditionHelp . $orderBy;	
     
     $result = $mysqli->query($query);
 
@@ -152,6 +153,7 @@
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
     <div class="col-lg-6 px-0">
       <h1 class="display-4">Travel Situation Report</h1>
+      <h5>As of <?php echo date("H:i A,  M d,  Y "); ?></h5>
       <p class="lead my-3">The content of this Report is a time bound summary of the individual reports that have been added by the community collective on the interactive map at htt://sitrep.nepalnow.travel . Please come back to to this page from time to time, or visit the map to see the ground situation.</p>
     </div>
   </div>
@@ -197,7 +199,7 @@
 
                 
                 <div class="border-bottom report-list">
-                <h6><?php echo date('h:i A  d/m/Y  ', strtotime($report['created_at'])); ?> 
+                <h6><?php echo date('h:i A  d M, Y  ', strtotime($report['updated_at'])); ?> 
                     <span class="badge <?php if($report['help_call_status'] == 'Verified'):?>  text-bg-success <?php else: ?>text-bg-warning <?php endif; ?>"><?php echo $report['help_call_status']; ?></span>
                 </h6>
                 <?php if($report['help_call_file']): ?>
