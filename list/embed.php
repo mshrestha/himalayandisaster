@@ -144,8 +144,7 @@
 
   <div class="row g-8">
     <div class="col-md-12">
-    <a href="/"><img src="/images/nepalnow.png"></a>      
-    <h1 class="display-4">Travel Situation Report</h1>
+    
     <h5>As of <?php echo date("H:i A,  M d,  Y "); ?></h5>
       <article class="blog-post">
         
