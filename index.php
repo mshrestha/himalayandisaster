@@ -14,6 +14,7 @@ include("includes/header.php");
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
+
 <?php 
     $newPackageID = generatePackageId();
     $suggestLocation = '28.4719709,84.9678058';
@@ -245,7 +246,7 @@ include("includes/header.php");
 
                     <div class="form-group" style="margin-top: 20px;">
                         <label class="form-label-control">Lat Lng *</label>
-                        <input type="text" name="lat_lng" id="help_call_latlng" class="form-control" autocomplete="off" onkeydown="return false;" placeholder="Select location on map" required>
+                        <input readonly type="text" name="lat_lng" id="help_call_latlng" class="form-control" autocomplete="off" onkeydown="return false;" placeholder="Select location on map" required >
                         <small class="text-danger">Select location on map</small>
                     </div>
                 </div>
@@ -336,7 +337,7 @@ include("includes/footer.php");
         var lng = b[1];
         var warehouse= b[3];
         var type = b[4];
-        console.log(b);
+        
         var icon = L.mapbox.marker.icon({
             'marker-size':'medium',  
             'marker-color': 'orange'
