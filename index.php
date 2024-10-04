@@ -70,7 +70,7 @@ include("includes/header.php");
     }
 
     //List for Help Requests starts here
-    $whereConditionHelp =' where updated_at > DATE_SUB(NOW(), INTERVAL 3 DAY)';
+    $whereConditionHelp =' where updated_at > DATE_SUB(NOW(), INTERVAL 2 DAY)';
     $qur2 = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
     $resultHelp= mysql_query($qur2);
     $helpAddressPoints = '';

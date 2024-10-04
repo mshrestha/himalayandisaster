@@ -131,7 +131,7 @@
   <body>
   <?php
         //List for Help Requests starts here
-    $whereConditionHelp =' where created_at > DATE_SUB(NOW(), INTERVAL 3 DAY)';
+    $whereConditionHelp =' where created_at > DATE_SUB(NOW(), INTERVAL 2 DAY)';
     $orderBy = 'ORDER BY `updated_at` DESC';
     $query = "select * from ". $tableName['helpCall'] . $whereConditionHelp . $orderBy;	
     
