@@ -200,7 +200,7 @@
         <hr>
         <?php showReport($row, 'Trails'); ?>
         
-        <hr>
+        
         <h3 class="display-5 link-body-emphasis mb-1">
         
         Others</h3>

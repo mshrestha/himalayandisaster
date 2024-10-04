@@ -246,7 +246,8 @@ include("includes/header.php");
 
                     <div class="form-group" style="margin-top: 20px;">
                         <label class="form-label-control">Lat Lng *</label>
-                        <input readonly type="text" name="lat_lng" id="help_call_latlng" class="form-control" autocomplete="off" onkeydown="return false;" placeholder="Select location on map" required >
+                        <input required type="text" name="lat_lng" id="help_call_latlng" class="form-control readonly" >
+                        
                         <small class="text-danger">Select location on map</small>
                     </div>
                 </div>
@@ -297,34 +298,7 @@ include("includes/footer.php");
     var markers = new L.MarkerClusterGroup();
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
     
-    for (var i = 0; i < addressPoints.length; i++) {
-        
-        var a = addressPoints[i];
-        
-        var title = a[2];
-        var lat = a[0];
-        var lng = a[1];
-        var warehouse= a[3];
-        var date= a[4];
-        
-
-        if(
-            ($.trim(lat) != "" && $.trim(lng) != "")
-            &&
-            (decimal.test(lat) && decimal.test(lng) )
-          )
-        {
-            var marker = L.marker(new L.LatLng(lat, lng),  {
-                icon: L.mapbox.marker.icon({'marker-size':'medium',  'marker-color': '1087bf'}),
-                title: title 
-            });
-            marker.bindPopup(title+ '<br>By ' + warehouse + '<br> On ' + date);
-            markers.addLayer(marker);
-            markers.on("click", function(e){
-                $("#mission-detail-div").fadeOut();
-            });
-        }
-    }   
+       
     
 
     //For Help Markers
@@ -401,7 +375,7 @@ include("includes/footer.php");
         }
     }
     
-    map.addLayer(markers);
+    
     map.addLayer(helpMarkers);
 
     $('#openHelpBtn').on('click',function(){
@@ -414,6 +388,7 @@ include("includes/footer.php");
             var latlng = event.target.getLatLng();
 
             $('#help_call_latlng').val(latlng.lat + ', ' + latlng.lng);
+            console.log('Event Triggered');
         });
 
         let geoCoderOptions = {
@@ -504,7 +479,10 @@ include("includes/footer.php");
             }
         })
     });
-    
+    $(".readonly").on('keydown paste focus mousedown', function(e){
+        if(e.keyCode != 9) // ignore tab
+            e.preventDefault();
+    });
 </script>
 
 
