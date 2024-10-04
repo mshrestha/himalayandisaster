@@ -184,7 +184,11 @@
         <hr>
         <?php showReport($row, 'Trails'); ?>
 
+        <h3 class="display-5 link-body-emphasis mb-1">
         
+        Others</h3>
+        <hr>
+        <?php showReport($row, 'Others'); ?>
         
         <?php function showReport($row, $type){ ?>
         <?php foreach ($row as $report): ?>
