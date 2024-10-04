@@ -72,6 +72,7 @@ include("includes/header.php");
     //List for Help Requests starts here
     $whereConditionHelp =' where updated_at > DATE_SUB(NOW(), INTERVAL 2 DAY)';
     $qur2 = "select * from ". $tableName['helpCall'] . $whereConditionHelp;	
+    
     $resultHelp= mysql_query($qur2);
     $helpAddressPoints = '';
     
@@ -93,7 +94,7 @@ include("includes/header.php");
                     $location = 'Location #'.$row['help_call_id'];
                 }                     
             } 
-            $timestamp = date('Y-m-d - h:i A', strtotime($row['created_at']));
+            $timestamp = date('Y-m-d - h:i A', strtotime($row['updated_at']));
             if ($row['help_call_latlng'] != ''){
                 if($row['help_call_file'] == ''){
                     $helpAddressPoints .= '['.$row['help_call_latlng'].', "<a target=_blank href='. $config['homeUrl'] . '/helpDetail.php?id='.$row['help_call_id'].'>'.$location.' </a><br />'. $timestamp .'<br />'. $row['help_call_status'] .'<br />'.str_replace(array("\r", "\n"), '', addslashes(preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $row['help_call_other_needs']))).'","'. $row['help_call_name']. '", "'. $row['help_call_needs'] . '", "'. $row['help_call_status'] .'"]';
