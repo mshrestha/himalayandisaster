@@ -189,6 +189,7 @@
         Others</h3>
         <hr>
         <?php showReport($row, 'Others'); ?>
+        <?php showReport($row, 'Attractions'); ?>
         
         <?php function showReport($row, $type){ ?>
         <?php foreach ($row as $report): ?>

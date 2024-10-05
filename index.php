@@ -252,7 +252,7 @@ include("includes/header.php");
                     </div>
                 </div>
             </div>
-
+            <input type="hidden" name="verifySubmission" value="1" />
             <input type="submit" value="SUBMIT" class="blackbtn" />
         </form>
       </div>

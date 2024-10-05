@@ -14,6 +14,8 @@ if(isset($_POST["help-type"])){
 	$address = mysqli_real_escape_string($mysqli, $_POST['location']);
 	$phone = mysqli_real_escape_string($mysqli, $_POST['phonenumber']);
 	$latlng = mysqli_real_escape_string($mysqli, $_POST['lat_lng']);
+	$verifySubmission = mysqli_real_escape_string($mysqli, $_POST['verifySubmission']);
+
 	$help_file = null;
 	$error = 0;
 
@@ -57,7 +59,10 @@ if(isset($_POST["help-type"])){
 		
 		
 		}else{
-		$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`, `help_call_file`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng', '$help_file')";
+			if($verifySubmission == "1"){
+				$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`, `help_call_file`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng', '$help_file')";
+			}
+		
 		}
 		
 		$result = mysqli_query($mysqli, $qur) or die($qur. " " . mysqli_error());
