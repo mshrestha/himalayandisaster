@@ -131,8 +131,11 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 							<?php } else{echo "<td> Verified </td>";} ?>
 
 							<td><a href="<?php echo $config['adminUrl']. '/editHelp.php?id='.$row['help_call_id'];?>">
-                        <button type="button" class="btn btn-xs btn-success">Edit</button>
-                        </a> </td></tr>
+								<button type="button" class="btn btn-xs btn-success">Edit</button></a>
+								<a href="<?php echo $config['homeUrl']. '/controller/helpController.php?action=remove&id='.$row['help_call_id'];?>" onclick="return confirm('Are you sure you want to delete this item?');">
+								<button type="button" class="btn btn-xs btn-warning"><i class="fa fa-minus"></i>   Delete</button>
+								</a>
+                         	</td></tr>
 						<?php endwhile;?>
 
 						<?php }

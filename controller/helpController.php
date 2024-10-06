@@ -116,6 +116,12 @@ elseif($_GET["action"]){
 		mysqli_query($mysqli, $qur) or die($qur . " " . mysqli_error());
 		logMsg("Entry Verified",1);
 	}
+	if($action=="remove"){
+		$qur = "DELETE FROM ". $tableName['helpCall'] . "  where help_call_id='$id'";
+		mysqli_query($mysqli, $qur) or die($qur . " " . mysqli_error());
+		logMsg("Entry $id Deleted",1);
+	}
+
 	// redirectPage( $_SERVER['HTTP_REFERER'] );
 	redirectPage( $config['adminUrl'].'/helpRequests.php' );
 }
