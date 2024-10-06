@@ -117,7 +117,7 @@ elseif($_GET["action"]){
 		logMsg("Entry Verified",1);
 	}
 	// redirectPage( $_SERVER['HTTP_REFERER'] );
-	redirectPage( $config['homeUrl'] );
+	redirectPage( $config['adminUrl'].'/helpRequests.php' );
 }
 function arrayToString($ary){
 	$string = "";
