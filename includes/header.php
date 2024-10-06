@@ -11,7 +11,7 @@
   gtag('config', 'G-2DE48WJDRB');
 </script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Himalayan Disaster</title>
+	<title>Nepal Now Situation Mapping</title>
 	
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="author" content="Kazi Studios" />
