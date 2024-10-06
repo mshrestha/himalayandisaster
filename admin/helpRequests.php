@@ -116,7 +116,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 							$whereCondition .=" WHERE help_call_status = 'Not verified'";
 						}
 
-						$qur = "select * from ". $tableName['helpCall'] . $whereCondition . " order by help_call_id ASC  LIMIT 50" . $offset;
+						$qur = "select * from ". $tableName['helpCall'] . $whereCondition . " order by help_call_id DESC  LIMIT 50" . $offset;
 						
 						$result= mysql_query($qur);
 
