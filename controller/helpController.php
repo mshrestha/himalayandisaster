@@ -59,7 +59,7 @@ if(isset($_POST["help-type"])){
 		
 		
 		}else{
-			if($verifySubmission == "1"){
+			if(preg_match('/^\s*-?\d{1,3}\.\d+,\s*\d{1,3}\.\d+\s*$/', $latlng)){
 				$qur = "Insert into " . $tableName['helpCall'] . " (`help_call_name`, `help_call_needs`, `help_call_phone`, `help_call_location`, `help_call_other_needs`, `help_call_status`, `help_call_latlng`, `help_call_file`) VALUES ('$name', '$needString','$phone','$address','$desc','$status', '$latlng', '$help_file')";
 			}
 		

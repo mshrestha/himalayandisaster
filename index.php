@@ -120,12 +120,13 @@ include("includes/header.php");
                 <div class="col-md-4">
                     <div class="panel panel-profile">
                         <div class="panel-heading text-center bg-info" id="panel-heading">
-                            <h3 class="ng-binding page-title-heading">NepalNow Travel Situation Report</h3>
+                        <a href="https://nepalnow.travel"><img src="/images/nepalnow.png" width="200px"></a>    
+                            <h3 class="ng-binding page-title-heading">Situation Report</h3>
                             
                         </div>
                         <div class="list-justified-container" id="wcontainer">
                             <ul class="list-justified text-center">
-
+                                
                                 <li id="openHelpBtn" class="btn">
                                     <p class="size-h3">REPORT</p>
                                     <p class="text-muted">रिपोर्त गर्नुहोस</p>
@@ -299,7 +300,7 @@ include("includes/footer.php");
     var decimal=  /^[-+]?[0-9]+\.[0-9]+$/;
     
        
-    
+    map.attributionControl.addAttribution('Powered by <a href="http://kazistudios.com", class="your_class">Kazi Studios</a>');
 
     //For Help Markers
     var helpMarkers = new L.MarkerClusterGroup();
