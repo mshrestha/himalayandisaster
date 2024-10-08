@@ -129,17 +129,17 @@ include("includes/header.php");
                                 
                                 <li id="openHelpBtn" class="btn">
                                     <p class="size-h3">REPORT</p>
-                                    <p class="text-muted">रिपोर्त गर्नुहोस</p>
+                                    
                                 </li>
                                 <li class="btn" id="about-link">
                                     <p class="size-h3">ABOUT</p>
-                                    <p class="text-muted">हाम्रो बारेमा</p>
+                                    
                                     
                                 </li>
                                 <li class="btn" id="about-link">
                                     
                                     <p class="size-h3"><a href="/list">Summary</a></p>
-                                    <p class="text-muted"><a href="/list">सरान्श</a></p>
+                                    
             
                                     
                                 </li>
