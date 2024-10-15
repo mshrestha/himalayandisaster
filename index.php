@@ -224,6 +224,11 @@ include("includes/header.php");
                             </div>
                             <div>
                                 <label class="form-label-control">
+                                    <input name="needType[]" type="radio" class="form-group" value="Weather" required /> Weather
+                                </label>
+                            </div>
+                            <div>
+                                <label class="form-label-control">
                                     <input name="needType[]" type="radio" class="form-group" value="Others" required /> Others
                                 </label>
                             </div>
@@ -349,7 +354,15 @@ include("includes/footer.php");
                 iconSize: [50, 50],
                 iconAnchor: [25, 50]
             });
-        } else if (type == 'Others') {
+
+            
+        } else if (type == 'Weather') {
+            icon = L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/128/6474/6474704.png',
+                iconSize: [50, 50],
+                iconAnchor: [25, 50]
+            });
+        }  else if (type == 'Others') {
             icon = L.icon({
                 iconUrl: 'https://cdn-icons-png.flaticon.com/256/10036/10036401.png',
                 iconSize: [50, 50],
