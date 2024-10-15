@@ -50,6 +50,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 						<label><input name="needType[]" type="radio" class="form-group" value="Attractions" <?php if ($row['help_call_needs'] == 'Attractions'){echo "checked"; } ?> /> Attractions </label>
 						<label><input name="needType[]" type="radio" class="form-group" value="Accomodations" <?php if ($row['help_call_needs'] == 'Accomodations'){echo "checked"; } ?> /> Accomodations </label>
 						<label><input name="needType[]" type="radio" class="form-group" value="Flights" <?php if ($row['help_call_needs'] == 'Flights'){echo "checked"; } ?> /> Flights </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Weather" <?php if ($row['help_call_needs'] == 'Weather'){echo "checked"; } ?> /> Weather </label>
 						<label><input name="needType[]" type="radio" class="form-group" value="Others" <?php if ($row['help_call_needs'] == 'Others'){echo "checked"; } ?> /> Others </label>
 						
 						<p>

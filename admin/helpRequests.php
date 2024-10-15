@@ -38,6 +38,7 @@ $offset = " OFFSET " . intval(($page - 1 ) * 50);
 						<label><input name="needType[]" type="radio" class="form-group" value="Attractions" /> Attractions </label>
 						<label><input name="needType[]" type="radio" class="form-group" value="Accomodations" /> Accomodations </label>
 						<label><input name="needType[]" type="radio" class="form-group" value="Flights" /> Flights </label>
+						<label><input name="needType[]" type="radio" class="form-group" value="Weather" /> Weather </label>
 						<label><input name="needType[]" type="radio" class="form-group" value="Others" /> Others </label>
 						
 						<p>
