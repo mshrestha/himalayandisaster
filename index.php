@@ -185,12 +185,12 @@ include("includes/header.php");
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Phone Number / फोन नम्बर *</label>
+                        <label class="form-label-control">Contact / सम्पर्क *</label>
                         <input type="text" name="phonenumber" class="form-control" required />
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label-control">Location & Status / स्थान र स्थिति *</label>
+                        <label class="form-label-control">Title / स्शीर्षक *</label>
                         <input type="text" name="location" class="form-control" required />
                     </div>
                     
@@ -396,8 +396,8 @@ include("includes/footer.php");
         $('#myModal').modal({show:true});
         //For modal window markers
         var sideMap = L.mapbox.map('side-map', 'mapbox.satellite', { zoomControl: false }).setView([27.68814328468732, 85.3184506743254], 14);
-        var marker = L.marker([27.68814328468732, 85.3184506743254], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
-
+        var marker = L.marker([27.68291410084715, 85.31793325310693], { icon: L.mapbox.marker.icon({'marker-color': '#1087bf'}), draggable: true }).addTo(sideMap);
+        marker.bindPopup("<b>Drag this marker to your location</b>").openPopup();
         marker.on('dragend', function(event) {
             var latlng = event.target.getLatLng();
 
